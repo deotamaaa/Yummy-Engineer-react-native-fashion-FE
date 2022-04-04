@@ -1,5 +1,5 @@
-import React from 'react'
-import { View, StyleSheet, Dimensions, ScrollView } from 'react-native'
+import React, { useRef } from 'react'
+import { View, StyleSheet, Dimensions } from 'react-native'
 import Animated, { multiply } from 'react-native-reanimated'
 import { interpolateColor, onScrollEvent, useValue } from 'react-native-redash'
 
@@ -36,6 +36,7 @@ const slides = [
 ]
 
 const Onboarding = () => {
+	const scroll = useRef<Animated.ScrollView>(null);
 	const x = useValue(0);
 	// UseScroll event
 	const onScroll = onScrollEvent({ x });
@@ -47,6 +48,7 @@ const Onboarding = () => {
 		<View style={styles.container}>
 			<Animated.View style={[styles.slider, { backgroundColor }]}>
 				<Animated.ScrollView
+					ref={scroll}
 					horizontal
 					snapToInterval={width}
 					decelerationRate="fast"
@@ -72,6 +74,13 @@ const Onboarding = () => {
 					{slides.map(({ subtitle, description }, index) =>
 						<Subslide
 							key={index}
+							onPress={() => {
+								if (scroll.current) {
+									scroll.current
+										.getNode()
+										.scrollTo({ x: width * (index + 1), animated: true });
+								}
+							}}
 							last={index === slides.length - 1}
 							{...{ subtitle, description }} />
 					)}
