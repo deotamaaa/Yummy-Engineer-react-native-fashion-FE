@@ -6,6 +6,7 @@ import { interpolateColor, onScrollEvent, useValue } from 'react-native-redash'
 import Slide, { SLIDE_HEIGHT } from './Slide'
 import Subslide from './Subslide'
 import Dot from './Dot'
+import { Routes, StackNavigationProps } from '../../components/Navigation'
 
 const BORDER_RADIUS = 75
 const { width } = Dimensions.get('window')
@@ -60,7 +61,7 @@ const slides = [
 	},
 ]
 
-const Onboarding = () => {
+const Onboarding = ({ navigation }: StackNavigationProps<Routes, "Onboarding">) => {
 	const scroll = useRef<Animated.ScrollView>(null)
 	const x = useValue(0)
 	// UseScroll event
@@ -113,20 +114,25 @@ const Onboarding = () => {
 							transform: [{ translateX: multiply(x, -1) }],
 						}}
 					>
-						{slides.map(({ subtitle, description }, index) => (
-							<Subslide
-								key={index}
-								onPress={() => {
-									if (scroll.current) {
-										scroll.current
-											.getNode()
-											.scrollTo({ x: width * (index + 1), animated: true })
-									}
-								}}
-								last={index === slides.length - 1}
-								{...{ subtitle, description }}
-							/>
-						))}
+						{slides.map(({ subtitle, description }, index) => {
+							const last = index === slides.length - 1;
+							return (
+								<Subslide
+									key={index}
+									onPress={() => {
+										if (last) {
+											navigation.navigate('Welcome');
+										} else {
+											scroll.current
+												?.getNode()
+												.scrollTo({ x: width * (index + 1), animated: true })
+										}
+									}}
+									last={index === slides.length - 1}
+									{...{ subtitle, description }}
+								/>
+							)
+						})}
 					</Animated.View>
 				</View>
 			</View>
