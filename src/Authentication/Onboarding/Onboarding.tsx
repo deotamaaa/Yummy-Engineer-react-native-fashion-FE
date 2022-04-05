@@ -61,6 +61,8 @@ const slides = [
 	},
 ]
 
+export const assets = slides.map(slide => slide.picture.src);
+
 const Onboarding = ({ navigation }: StackNavigationProps<Routes, "Onboarding">) => {
 	const scroll = useRef<Animated.ScrollView>(null)
 	const x = useValue(0)
