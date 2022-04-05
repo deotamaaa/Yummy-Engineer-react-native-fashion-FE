@@ -17,6 +17,7 @@
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/native": "^5.x",
     "@react-navigation/stack": "^5.x",
+    "@shopify/restyle": "^2.0.0",
     "eslint": "^8.12.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-react-native-wcandillon": "^3.8.0",
