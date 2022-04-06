@@ -16,6 +16,7 @@ const theme = createTheme({
     xl: 40,
   },
   borderRadii: {
+    noRadius: 0,
     s: 4,
     m: 10,
     l: 25,

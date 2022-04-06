@@ -40,7 +40,7 @@ const Container = ({ children, footer }: ContainerProps) => {
         />
         <Box
           borderRadius='xl'
-          borderTopLeftRadius={0}
+          borderTopLeftRadius='noRadius'
           backgroundColor="white"
           flex={1}
         >
