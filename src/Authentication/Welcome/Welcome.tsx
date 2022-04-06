@@ -1,6 +1,7 @@
 import React from 'react'
 import { Dimensions, Image, StyleSheet } from 'react-native'
 import { Button } from '../../components'
+import { Routes, StackNavigationProps } from '../../components/Navigation'
 import theme, { Box, Text } from '../../components/Theme'
 
 const { width } = Dimensions.get('window')
@@ -10,9 +11,10 @@ const picture = {
   height: 5074,
 }
 export const assets = [picture.src]
-const Welcome = () => {
+
+const Welcome = ({ navigation }: StackNavigationProps<Routes, 'Welcome'>) => {
   return (
-    <Box flex={1} backgroundColor='white'>
+    <Box flex={1} backgroundColor="white">
       <Box
         flex={1}
         borderBottomRightRadius="xl"
@@ -42,12 +44,29 @@ const Welcome = () => {
           right={0}
           bottom={0}
         />
-        <Box backgroundColor='white' justifyContent='space-evenly' alignItems='center' padding='xl' borderTopLeftRadius='xl' flex={1}>
-          <Text variant='title1'>Let's get started</Text>
-          <Text variant='body'>Login to your account or signup for the first time!</Text>
-          <Button variant='primary' label='Have an account? Login' onPress={() => null} />
+        <Box
+          backgroundColor="white"
+          justifyContent="space-evenly"
+          alignItems="center"
+          padding="xl"
+          borderTopLeftRadius="xl"
+          flex={1}
+        >
+          <Text variant="title1">Let's get started</Text>
+          <Text variant="body">
+            Login to your account or signup for the first time!
+          </Text>
+          <Button
+            variant="primary"
+            label="Have an account? Login"
+            onPress={() => navigation.navigate('Login')}
+          />
           <Button label="Create account, it's free!" onPress={() => null} />
-          <Button variant="transparent" label="Forgot Password?" onPress={() => null} />
+          <Button
+            variant="transparent"
+            label="Forgot Password?"
+            onPress={() => null}
+          />
         </Box>
       </Box>
     </Box>
