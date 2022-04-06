@@ -14,7 +14,7 @@ const usePromiseAll = (
   cb: () => void
 ) =>
   useEffect(() => {
-    ; (async () => {
+    ;(async () => {
       await Promise.all(promises)
       cb()
     })()

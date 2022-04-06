@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react'
 import { Dimensions, Image, StyleSheet } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import theme, { Box } from './Theme'
 
 export const assets = [require('../components/assets/patterns/1.png')]
@@ -9,15 +10,20 @@ const { width } = Dimensions.get('window')
 const height = width * aspectRatio
 
 interface ContainerProps {
-  children: ReactNode,
-  footer: ReactNode,
+  children: ReactNode
+  footer: ReactNode
 }
 
 const Container = ({ children, footer }: ContainerProps) => {
+  const insets = useSafeAreaInsets()
   return (
     <Box flex={1} backgroundColor="title">
-      <Box backgroundColor='white'>
-        <Box borderBottomLeftRadius="xl" overflow='hidden' height={height * 0.61}>
+      <Box backgroundColor="white">
+        <Box
+          borderBottomLeftRadius="xl"
+          overflow="hidden"
+          height={height * 0.61}
+        >
           <Image
             source={assets[0]}
             style={{
@@ -28,7 +34,7 @@ const Container = ({ children, footer }: ContainerProps) => {
           />
         </Box>
       </Box>
-      <Box flex={1} overflow='hidden'>
+      <Box flex={1} overflow="hidden">
         <Image
           source={assets[0]}
           style={{
@@ -39,18 +45,19 @@ const Container = ({ children, footer }: ContainerProps) => {
           }}
         />
         <Box
-          borderRadius='xl'
-          borderTopLeftRadius='noRadius'
+          borderRadius="xl"
+          borderTopLeftRadius="noRadius"
           backgroundColor="white"
           flex={1}
         >
           {children}
         </Box>
       </Box>
-      <Box height={200} backgroundColor='title'>
+      <Box backgroundColor="title" paddingTop="m">
         {footer}
+        <Box height={insets.bottom} />
       </Box>
-    </Box >
+    </Box>
   )
 }
 

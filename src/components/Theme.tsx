@@ -6,7 +6,7 @@ const theme = createTheme({
     title: '#0c0d34',
     body: 'rgba(12,13,52, 0.7)',
     button: '#0c0d34',
-    white: "white",
+    white: 'white',
     slideGrey: 'rgba(12,13,52, 0.05)',
   },
   spacing: {
@@ -39,19 +39,19 @@ const theme = createTheme({
       fontSize: 24,
       lineHeight: 30,
       fontFamily: 'SFProText-Semibold',
-      color: "title"
+      color: 'title',
     },
     body: {
       fontSize: 16,
       lineHeight: 24,
       fontFamily: 'SFProText-Regular',
-      color: "body"
-    }
+      color: 'body',
+    },
   },
-  breakpoints: {}
-});
+  breakpoints: {},
+})
 
-export type Theme = typeof theme;
-export const Box = createBox<Theme>();
-export const Text = createText<Theme>();
-export default theme;
+export type Theme = typeof theme
+export const Box = createBox<Theme>()
+export const Text = createText<Theme>()
+export default theme

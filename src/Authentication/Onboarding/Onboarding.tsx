@@ -12,160 +12,162 @@ const BORDER_RADIUS = 75
 const { width } = Dimensions.get('window')
 
 const slides = [
-	{
-		title: 'Relaxed',
-		subtitle: 'Find Your Outfits',
-		description: `Confused about your outfite? Don't worry! Find the best outfit here!`,
-		color: '#BFEAF5',
-		picture: {
-			src: require("../../../assets/1.png"),
-			width: 2513,
-			height: 3583,
-		}
-	},
-	{
-		title: 'Playful',
-		subtitle: 'Hear it First, Wear it First',
-		description:
-			'Hating the clothes in your wardrobe? Explore hundreds of outfit ideas',
-		color: '#BEECC4',
-		picture: {
-			src: require("../../../assets/2.png"),
-			width: 2791,
-			height: 3744,
-		}
-	},
-	{
-		title: 'Excentric',
-		subtitle: 'Your Style, Your Way',
-		description:
-			'Create your individual & uniqe style and look amazing everyday',
-		color: '#FFE4D9',
-		picture: {
-			src: require("../../../assets/3.png"),
-			width: 2738,
-			height: 3244,
-		}
-	},
-	{
-		title: 'Funky',
-		subtitle: 'Looks Good, Feel Good',
-		description:
-			'Discover the latest trends in fashion and explore your personality',
-		color: '#847E94',
-		picture: {
-			src: require("../../../assets/4.png"),
-			width: 1757,
-			height: 2551,
-		}
-	},
+  {
+    title: 'Relaxed',
+    subtitle: 'Find Your Outfits',
+    description: `Confused about your outfite? Don't worry! Find the best outfit here!`,
+    color: '#BFEAF5',
+    picture: {
+      src: require('../../../assets/1.png'),
+      width: 2513,
+      height: 3583,
+    },
+  },
+  {
+    title: 'Playful',
+    subtitle: 'Hear it First, Wear it First',
+    description:
+      'Hating the clothes in your wardrobe? Explore hundreds of outfit ideas',
+    color: '#BEECC4',
+    picture: {
+      src: require('../../../assets/2.png'),
+      width: 2791,
+      height: 3744,
+    },
+  },
+  {
+    title: 'Excentric',
+    subtitle: 'Your Style, Your Way',
+    description:
+      'Create your individual & uniqe style and look amazing everyday',
+    color: '#FFE4D9',
+    picture: {
+      src: require('../../../assets/3.png'),
+      width: 2738,
+      height: 3244,
+    },
+  },
+  {
+    title: 'Funky',
+    subtitle: 'Looks Good, Feel Good',
+    description:
+      'Discover the latest trends in fashion and explore your personality',
+    color: '#847E94',
+    picture: {
+      src: require('../../../assets/4.png'),
+      width: 1757,
+      height: 2551,
+    },
+  },
 ]
 
-export const assets = slides.map(slide => slide.picture.src);
+export const assets = slides.map((slide) => slide.picture.src)
 
-const Onboarding = ({ navigation }: StackNavigationProps<Routes, "Onboarding">) => {
-	const scroll = useRef<Animated.ScrollView>(null)
-	const x = useValue(0)
-	// UseScroll event
-	const onScroll = onScrollEvent({ x })
-	const backgroundColor = interpolateColor(x, {
-		inputRange: slides.map((_, i) => i * width),
-		outputRange: slides.map((slide) => slide.color),
-	}) as any
+const Onboarding = ({
+  navigation,
+}: StackNavigationProps<Routes, 'Onboarding'>) => {
+  const scroll = useRef<Animated.ScrollView>(null)
+  const x = useValue(0)
+  // UseScroll event
+  const onScroll = onScrollEvent({ x })
+  const backgroundColor = interpolateColor(x, {
+    inputRange: slides.map((_, i) => i * width),
+    outputRange: slides.map((slide) => slide.color),
+  }) as any
 
-	return (
-		<View style={styles.container}>
-			<Animated.View style={[styles.slider, { backgroundColor }]}>
-				<Animated.ScrollView
-					//@ts-ignore
-					ref={scroll}
-					horizontal
-					snapToInterval={width}
-					decelerationRate="fast"
-					showsHorizontalScrollIndicator={false}
-					bounces={false}
-					{...{ onScroll }}
-				>
-					{slides.map(({ title, picture }, index) => (
-						<Slide key={index} right={!!(index % 2)} {...{ title, picture }} />
-					))}
-				</Animated.ScrollView>
-			</Animated.View>
+  return (
+    <View style={styles.container}>
+      <Animated.View style={[styles.slider, { backgroundColor }]}>
+        <Animated.ScrollView
+          //@ts-ignore
+          ref={scroll}
+          horizontal
+          snapToInterval={width}
+          decelerationRate="fast"
+          showsHorizontalScrollIndicator={false}
+          bounces={false}
+          {...{ onScroll }}
+        >
+          {slides.map(({ title, picture }, index) => (
+            <Slide key={index} right={!!(index % 2)} {...{ title, picture }} />
+          ))}
+        </Animated.ScrollView>
+      </Animated.View>
 
-			{/* Footer */}
+      {/* Footer */}
 
-			<View style={styles.footer}>
-				<Animated.View
-					style={{ ...StyleSheet.absoluteFillObject, backgroundColor }}
-				/>
-				<View style={styles.footerContent}>
-					<View style={styles.pagination}>
-						{slides.map((_, index) => (
-							<Dot
-								key={index}
-								currentIndex={divide(x, width)}
-								{...{ index, x }}
-							/>
-						))}
-					</View>
-					<Animated.View
-						style={{
-							flex: 1,
-							flexDirection: 'row',
-							width: width * slides.length,
-							transform: [{ translateX: multiply(x, -1) }],
-						}}
-					>
-						{slides.map(({ subtitle, description }, index) => {
-							const last = index === slides.length - 1;
-							return (
-								<Subslide
-									key={index}
-									onPress={() => {
-										if (last) {
-											navigation.navigate('Welcome');
-										} else {
-											scroll.current
-												?.getNode()
-												.scrollTo({ x: width * (index + 1), animated: true })
-										}
-									}}
-									last={index === slides.length - 1}
-									{...{ subtitle, description }}
-								/>
-							)
-						})}
-					</Animated.View>
-				</View>
-			</View>
-		</View>
-	)
+      <View style={styles.footer}>
+        <Animated.View
+          style={{ ...StyleSheet.absoluteFillObject, backgroundColor }}
+        />
+        <View style={styles.footerContent}>
+          <View style={styles.pagination}>
+            {slides.map((_, index) => (
+              <Dot
+                key={index}
+                currentIndex={divide(x, width)}
+                {...{ index, x }}
+              />
+            ))}
+          </View>
+          <Animated.View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              width: width * slides.length,
+              transform: [{ translateX: multiply(x, -1) }],
+            }}
+          >
+            {slides.map(({ subtitle, description }, index) => {
+              const last = index === slides.length - 1
+              return (
+                <Subslide
+                  key={index}
+                  onPress={() => {
+                    if (last) {
+                      navigation.navigate('Welcome')
+                    } else {
+                      scroll.current
+                        ?.getNode()
+                        .scrollTo({ x: width * (index + 1), animated: true })
+                    }
+                  }}
+                  last={index === slides.length - 1}
+                  {...{ subtitle, description }}
+                />
+              )
+            })}
+          </Animated.View>
+        </View>
+      </View>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: 'white',
-	},
-	slider: {
-		height: SLIDE_HEIGHT,
-		borderBottomRightRadius: BORDER_RADIUS,
-	},
-	footer: {
-		flex: 1,
-	},
-	footerContent: {
-		flex: 1,
-		backgroundColor: 'white',
-		borderTopLeftRadius: BORDER_RADIUS,
-	},
-	pagination: {
-		...StyleSheet.absoluteFillObject,
-		height: BORDER_RADIUS,
-		flexDirection: 'row',
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  slider: {
+    height: SLIDE_HEIGHT,
+    borderBottomRightRadius: BORDER_RADIUS,
+  },
+  footer: {
+    flex: 1,
+  },
+  footerContent: {
+    flex: 1,
+    backgroundColor: 'white',
+    borderTopLeftRadius: BORDER_RADIUS,
+  },
+  pagination: {
+    ...StyleSheet.absoluteFillObject,
+    height: BORDER_RADIUS,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 })
 
 export default Onboarding

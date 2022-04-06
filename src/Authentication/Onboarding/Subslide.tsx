@@ -1,25 +1,30 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { Button } from '../../components';
+import { Button } from '../../components'
 
 import { Text } from '../../components/Theme'
 
 interface SubslideProps {
-  subtitle: string;
-  description: string;
-  last?: boolean;
-  onPress: () => void;
+  subtitle: string
+  description: string
+  last?: boolean
+  onPress: () => void
 }
 
 const Subslide = ({ subtitle, description, last, onPress }: SubslideProps) => {
   return (
     <View style={styles.container}>
-      <Text variant='title2' style={styles.subtitle}>{subtitle}</Text>
-      <Text variant='body' style={styles.description}>{description}</Text>
+      <Text variant="title2" style={styles.subtitle}>
+        {subtitle}
+      </Text>
+      <Text variant="body" style={styles.description}>
+        {description}
+      </Text>
       <Button
-        label={last ? "Let's get started" : "Next"}
-        variant={last ? "primary" : "default"}
-        {... { onPress }} />
+        label={last ? "Let's get started" : 'Next'}
+        variant={last ? 'primary' : 'default'}
+        {...{ onPress }}
+      />
     </View>
   )
 }
@@ -27,14 +32,14 @@ const Subslide = ({ subtitle, description, last, onPress }: SubslideProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: 40,
   },
   subtitle: {
     color: '#0c0d34',
     marginBottom: 12,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   description: {
     color: '#0c0d34',
@@ -42,4 +47,4 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
 })
-export default Subslide;
+export default Subslide
