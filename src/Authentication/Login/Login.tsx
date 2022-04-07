@@ -6,11 +6,7 @@ import { Box } from '../../components/Theme'
 import TextInput from '../components/Form/TextInput'
 import Checkbox from '../components/Form/Checkbox'
 
-const emailValidator = (email: string) => {
-  const re =
-    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  return re.test(String(email).toLowerCase())
-}
+import { useForm } from 'react-hook-form'
 
 const Login = () => {
   const footer = (
@@ -39,20 +35,17 @@ const Login = () => {
           Welcome Back
         </Text>
         <Text variant="body" textAlign="center">
-          Use credential below to login
+          Input your credential below to continue.
         </Text>
-        <TextInput
-          placeholder="Enter your Email"
-          icon="mail"
-          validator={emailValidator}
-        />
-        <TextInput
-          placeholder="Enter your password"
-          icon="lock"
-          validator={(password: string) => password.length > 5}
-        />
+
+        <Text variant="tagName">Email</Text>
+        <TextInput placeholder="Example@email.com" icon="mail" />
+
+        <Text variant="tagName">Password</Text>
+        <TextInput placeholder="Your password" icon="lock" />
+
         <Box flexDirection="row" justifyContent="space-between">
-          <Checkbox label="remember me" />
+          <Checkbox label="Remember me" />
           <Button onPress={() => null} variant="transparent">
             <Text color="primary">Forgot Password?</Text>
           </Button>
