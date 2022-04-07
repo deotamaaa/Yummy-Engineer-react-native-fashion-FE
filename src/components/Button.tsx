@@ -30,15 +30,17 @@ const Button = ({ variant, label, onPress, children }: ButtonProps) => {
     variant === 'primary'
       ? theme.colors.primary
       : variant === 'transparent'
-        ? 'transparent'
-        : theme.colors.slideGrey
+      ? 'transparent'
+      : theme.colors.slideGrey
   const color = variant === 'primary' ? theme.colors.white : theme.colors.button
   return (
     <RectButton
       style={[styles.container, { backgroundColor }]}
       {...{ onPress }}
     >
-      {children ? (children) : (
+      {children ? (
+        children
+      ) : (
         <Text style={[styles.label, { color }]}>{label}</Text>
       )}
     </RectButton>
