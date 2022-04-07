@@ -10,10 +10,14 @@ import { Feather as Icon } from '@expo/vector-icons'
 interface TextInputProps extends RNTextInputProps {
   placeholder: string
   icon: string
+  touched?: boolean
+  error?: string
 }
 const SIZE = theme.borderRadii.m * 2
 
-const TextInput = ({ icon, placeholder }: TextInputProps) => {
+const TextInput = ({ icon, placeholder, touched, error, ...props }: TextInputProps) => {
+  const reColor = !touched ? "black" : (error ? "danger" : "primary")
+  const color = theme.colors[reColor]
   return (
     <Box
       flexDirection="row"
@@ -25,27 +29,28 @@ const TextInput = ({ icon, placeholder }: TextInputProps) => {
       marginBottom="s"
     >
       <Box padding="m">
-        <Icon name={icon} size={16} />
+        <Icon name={icon} size={16} {...{ color }} />
       </Box>
       <Box flex={1}>
         <RNTextInput
           placeholder={placeholder}
           underlineColorAndroid="transparent"
           placeholderTextColor='#999'
+          {...props}
         />
       </Box>
       {
-        (false) && (
+        (touched) && (
           <Box
             borderRadius="m"
             justifyContent="center"
             alignItems="center"
             height={SIZE}
             width={SIZE}
-            backgroundColor={true ? 'primary' : 'danger'}
+            backgroundColor={!error ? 'primary' : 'danger'}
           >
             <Icon
-              name={true ? 'check' : 'x'}
+              name={!error ? 'check' : 'x'}
               color="white"
               size={14}
             />
