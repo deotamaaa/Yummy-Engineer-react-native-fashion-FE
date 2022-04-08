@@ -22,12 +22,12 @@ interface FormData {
   passwordConfirm: string
 }
 
-const Signup = ({ navigation }: StackNavigationProps<Routes, 'Login'>) => {
+const Signup = ({ navigation }: StackNavigationProps<Routes, 'Signup'>) => {
   const footer = (
     <Footer
       title="Already have an account?"
       action="Log in Here"
-      onPress={() => navigation.navigate('Signup')}
+      onPress={() => navigation.navigate('Login')}
     />
   )
 
@@ -80,6 +80,7 @@ const Signup = ({ navigation }: StackNavigationProps<Routes, 'Login'>) => {
         />
         {errors.email && <Text color="danger">{errors.email?.message}</Text>}
 
+        {/* PASSWORD */}
         <Text variant="tagName">Password</Text>
         <Controller
           control={control}
@@ -108,25 +109,35 @@ const Signup = ({ navigation }: StackNavigationProps<Routes, 'Login'>) => {
           <Text color="danger">{errors.password?.message}</Text>
         )}
 
-        {/* <Controller
+        {/* CONFIRM PASSWORD */}
+        <Text variant="tagName">Confirm Password</Text>
+        <Controller
           control={control}
           rules={{
             required: true,
           }}
-          name="remember"
-          render={({ field: { value } }) => (
-            <Box flexDirection="row" justifyContent="space-between">
-              <Checkbox
-                label="Remember me"
-                isChecked={value}
-                onChange={(value) => setValue('remember', value)}
-              />
-              <Button onPress={() => null} variant="transparent">
-                <Text color="primary">Forgot Password?</Text>
-              </Button>
-            </Box>
+          name="passwordConfirm"
+          render={({
+            field: { onChange, onBlur, value },
+            fieldState: { isTouched, error },
+          }) => (
+            <TextInput
+              placeholder="Confirm Your password"
+              icon="lock"
+              onChangeText={(value) => onChange(value)}
+              onBlur={onBlur}
+              value={value}
+              secureTextEntry={true}
+              error={error?.message}
+              touched={isTouched}
+              autoCapitalize="none"
+            />
           )}
-        ></Controller> */}
+        />
+        {errors.password && (
+          <Text color="danger">{errors.passwordConfirm?.message}</Text>
+        )}
+
       </Box>
 
       <Box alignItems="center">
