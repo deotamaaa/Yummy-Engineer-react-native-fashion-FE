@@ -25,20 +25,6 @@ const Login = () => {
   const footer = (
     <>
       <SocialIcon />
-      <Box alignItems="center">
-        <Button
-          label=""
-          variant="transparent"
-          onPress={() => alert('Pressed!')}
-        >
-          <Box flexDirection="row" justifyContent="center">
-            <Text color="white">Don't have an account?</Text>
-            <Text color="primary" marginLeft="s">
-              Sign Up Here
-            </Text>
-          </Box>
-        </Button>
-      </Box>
     </>
   )
 
