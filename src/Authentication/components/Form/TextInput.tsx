@@ -15,8 +15,14 @@ interface TextInputProps extends RNTextInputProps {
 }
 const SIZE = theme.borderRadii.m * 2
 
-const TextInput = ({ icon, placeholder, touched, error, ...props }: TextInputProps) => {
-  const reColor = !touched ? "black" : (error ? "danger" : "primary")
+const TextInput = ({
+  icon,
+  placeholder,
+  touched,
+  error,
+  ...props
+}: TextInputProps) => {
+  const reColor = !touched ? 'black' : error ? 'danger' : 'primary'
   const color = theme.colors[reColor]
   return (
     <Box
@@ -35,30 +41,24 @@ const TextInput = ({ icon, placeholder, touched, error, ...props }: TextInputPro
         <RNTextInput
           placeholder={placeholder}
           underlineColorAndroid="transparent"
-          placeholderTextColor='#999'
+          placeholderTextColor="#999"
           {...props}
         />
       </Box>
-      {
-        (touched) && (
-          <Box
-            borderRadius="m"
-            justifyContent="center"
-            alignItems="center"
-            height={SIZE}
-            width={SIZE}
-            backgroundColor={!error ? 'primary' : 'danger'}
-            marginRight='m'
-          >
-            <Icon
-              name={!error ? 'check' : 'x'}
-              color="white"
-              size={14}
-            />
-          </Box>
-        )
-      }
-    </Box >
+      {touched && (
+        <Box
+          borderRadius="m"
+          justifyContent="center"
+          alignItems="center"
+          height={SIZE}
+          width={SIZE}
+          backgroundColor={!error ? 'primary' : 'danger'}
+          marginRight="m"
+        >
+          <Icon name={!error ? 'check' : 'x'} color="white" size={14} />
+        </Box>
+      )}
+    </Box>
   )
 }
 

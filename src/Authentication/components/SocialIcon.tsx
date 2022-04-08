@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react'
 import Svg, { Path } from 'react-native-svg'
-import Button from '../../components/Button'
-import theme, { Box, Text } from '../../components/Theme'
+import theme, { Box } from '../../components/Theme'
 
 const SIZE = theme.borderRadii.xl
 
@@ -51,7 +50,7 @@ const Icon = ({ children }: SocialIconProps) => {
   return (
     <Box
       marginHorizontal="m"
-      marginVertical='m'
+      marginVertical="m"
       backgroundColor="white"
       width={SIZE}
       height={SIZE}
@@ -66,8 +65,8 @@ const Icon = ({ children }: SocialIconProps) => {
 
 const SocialIcon = () => {
   return (
-    <Box flexDirection="column" height={180}>
-      <Box flexDirection='row' justifyContent="center" alignContent="center" >
+    <Box flexDirection="column" height={100}>
+      <Box flexDirection="row" justifyContent="center" alignContent="center">
         <Icon>
           <Google />
         </Icon>
@@ -77,18 +76,6 @@ const SocialIcon = () => {
         <Icon>
           <Instagram />
         </Icon>
-      </Box>
-      <Box alignItems="center">
-        <Button
-          label=""
-          variant="transparent"
-          onPress={() => alert('Pressed!')}
-        >
-          <Text color="white">Don't have an account?</Text>
-          <Text color="primary">
-            Sign Up Here
-          </Text>
-        </Button>
       </Box>
     </Box>
   )

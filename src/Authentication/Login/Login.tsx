@@ -1,6 +1,5 @@
 import React from 'react'
 
-import SocialIcon from '../components/SocialIcon'
 import { Button, Container, Text } from '../../components'
 import { Box } from '../../components/Theme'
 import TextInput from '../components/Form/TextInput'
@@ -9,6 +8,8 @@ import Checkbox from '../components/Form/Checkbox'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
+import Footer from '../components/Footer'
+import { Routes, StackNavigationProps } from '../../components/Navigation'
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -21,11 +22,13 @@ interface FormData {
   remember: boolean
 }
 
-const Login = () => {
+const Login = ({ navigation }: StackNavigationProps<Routes, 'Login'>) => {
   const footer = (
-    <>
-      <SocialIcon />
-    </>
+    <Footer
+      title="Don't have an account?"
+      action="Sign Up Here"
+      onPress={() => navigation.navigate('Signup')}
+    />
   )
 
   const {
