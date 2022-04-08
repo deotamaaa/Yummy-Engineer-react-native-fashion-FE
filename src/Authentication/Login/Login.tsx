@@ -72,6 +72,7 @@ const Login = () => {
               value={value}
               error={error?.message}
               touched={isTouched}
+              autoCapitalize="none"
             />
           )}
         />
@@ -97,6 +98,7 @@ const Login = () => {
               secureTextEntry={true}
               error={error?.message}
               touched={isTouched}
+              autoCapitalize="none"
             />
           )}
         />

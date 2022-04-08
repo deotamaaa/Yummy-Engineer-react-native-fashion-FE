@@ -5,6 +5,8 @@ import { Routes } from '../components/Navigation'
 import Onboarding, { assets as onBoardingAssets } from './Onboarding'
 import Welcome, { assets as welcomeAssets } from './Welcome'
 import Login from '../Authentication/Login/Login'
+import Signup from '../Authentication/Signup/Signup'
+import ForgotPassword from '../Authentication/ForgotPassword/ForgotPassword'
 
 export const assets = [...onBoardingAssets, ...welcomeAssets]
 
@@ -15,6 +17,8 @@ export const AuthenticationNavigator = () => {
       <AuthenticationStack.Screen name="Onboarding" component={Onboarding} />
       <AuthenticationStack.Screen name="Welcome" component={Welcome} />
       <AuthenticationStack.Screen name="Login" component={Login} />
+      <AuthenticationStack.Screen name="Signup" component={Signup} />
+      <AuthenticationStack.Screen name="ForgotPassword" component={ForgotPassword} />
     </AuthenticationStack.Navigator>
   )
 }
