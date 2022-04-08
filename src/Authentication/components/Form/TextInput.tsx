@@ -48,6 +48,7 @@ const TextInput = ({ icon, placeholder, touched, error, ...props }: TextInputPro
             height={SIZE}
             width={SIZE}
             backgroundColor={!error ? 'primary' : 'danger'}
+            marginRight='m'
           >
             <Icon
               name={!error ? 'check' : 'x'}

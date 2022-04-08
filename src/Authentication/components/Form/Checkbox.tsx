@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { Box, Text } from '../../../components/Theme'
 
@@ -7,20 +7,21 @@ import { RectButton } from 'react-native-gesture-handler'
 
 interface CheckboxProps {
   label: string
+  isChecked: boolean
+  onChange: (value: boolean) => void
 }
 
-const Checkbox = ({ label }: CheckboxProps) => {
-  const [checked, setChecked] = useState(false)
+const Checkbox = ({ label, onChange, isChecked }: CheckboxProps) => {
   return (
     <RectButton
-      onPress={() => setChecked((c) => !c)}
+      onPress={() => onChange(!isChecked)}
       style={{ justifyContent: 'center' }}
     >
       <Box flexDirection="row" alignItems="center">
         <Box
           alignItems="center"
           borderRadius="s"
-          backgroundColor={checked ? 'primary' : 'white'}
+          backgroundColor={isChecked ? 'primary' : 'white'}
           borderWidth={1}
           borderColor="primary"
           height={20}
