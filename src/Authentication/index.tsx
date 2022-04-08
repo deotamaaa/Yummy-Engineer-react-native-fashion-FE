@@ -7,6 +7,7 @@ import Welcome, { assets as welcomeAssets } from './Welcome'
 import Login from '../Authentication/Login/Login'
 import Signup from '../Authentication/Signup/Signup'
 import ForgotPassword from '../Authentication/ForgotPassword/ForgotPassword'
+import ChangedPasswordSuccess from '../Authentication/ChangedPasswordSuccess/ChangedPasswordSuccess'
 
 export const assets = [...onBoardingAssets, ...welcomeAssets]
 
@@ -21,6 +22,10 @@ export const AuthenticationNavigator = () => {
       <AuthenticationStack.Screen
         name="ForgotPassword"
         component={ForgotPassword}
+      />
+      <AuthenticationStack.Screen
+        name="ChangedPasswordSuccess"
+        component={ChangedPasswordSuccess}
       />
     </AuthenticationStack.Navigator>
   )

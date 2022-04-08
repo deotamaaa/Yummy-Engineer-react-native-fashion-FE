@@ -9,8 +9,6 @@ import * as Yup from 'yup'
 import { Box } from '../../components/Theme'
 import TextInput from '../components/Form/TextInput'
 
-
-
 const ForgotPasswordSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
 })
@@ -19,7 +17,9 @@ interface FormData {
   email: string
 }
 
-const ForgotPassword = ({ navigation }: StackNavigationProps<Routes, 'ForgotPassword'>) => {
+const ForgotPassword = ({
+  navigation,
+}: StackNavigationProps<Routes, 'ForgotPassword'>) => {
   const footer = (
     <Footer
       title="Don't work?"
@@ -27,7 +27,6 @@ const ForgotPassword = ({ navigation }: StackNavigationProps<Routes, 'ForgotPass
       onPress={() => Linking.openURL('https://www.google.com')}
     />
   )
-
 
   const {
     control,
@@ -40,12 +39,12 @@ const ForgotPassword = ({ navigation }: StackNavigationProps<Routes, 'ForgotPass
     },
     resolver: yupResolver(ForgotPasswordSchema),
   })
-  const onSubmit = (data: FormData) => console.log(data)
+  const onSubmit = () => navigation.navigate('ChangedPasswordSuccess')
 
   return (
     <>
       <Container {...{ footer }}>
-        <Box padding="xl" justifyContent='center' flex={1}>
+        <Box padding="xl" justifyContent="center" flex={1}>
           <Text variant="title1" textAlign="center" marginBottom="s">
             Forgot Password
           </Text>
@@ -77,7 +76,7 @@ const ForgotPassword = ({ navigation }: StackNavigationProps<Routes, 'ForgotPass
           />
           {errors.email && <Text color="danger">{errors.email?.message}</Text>}
 
-          <Box alignItems="center" marginTop='m'>
+          <Box alignItems="center" marginTop="m">
             <Button
               variant="primary"
               label="Reset Password"
@@ -85,7 +84,6 @@ const ForgotPassword = ({ navigation }: StackNavigationProps<Routes, 'ForgotPass
             />
           </Box>
         </Box>
-
       </Container>
     </>
   )

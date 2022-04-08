@@ -13,7 +13,9 @@ import { Routes, StackNavigationProps } from '../../components/Navigation'
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string().min(6, 'Too short').required('Required'),
-  passwordConfirm: Yup.string().equals([Yup.ref('password')], "'Password didn't match!").required('Required'),
+  passwordConfirm: Yup.string()
+    .equals([Yup.ref('password')], "'Password didn't match!")
+    .required('Required'),
 })
 
 interface FormData {
@@ -137,7 +139,6 @@ const Signup = ({ navigation }: StackNavigationProps<Routes, 'Signup'>) => {
         {errors.password && (
           <Text color="danger">{errors.passwordConfirm?.message}</Text>
         )}
-
       </Box>
 
       <Box alignItems="center">
