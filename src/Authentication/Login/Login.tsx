@@ -122,7 +122,10 @@ const Login = ({ navigation }: StackNavigationProps<Routes, 'Login'>) => {
                 isChecked={value}
                 onChange={(value) => setValue('remember', value)}
               />
-              <Button onPress={() => null} variant="transparent">
+              <Button
+                onPress={() => navigation.navigate('ForgotPassword')}
+                variant="transparent"
+              >
                 <Text color="primary">Forgot Password?</Text>
               </Button>
             </Box>
