@@ -48,7 +48,7 @@ const Signup = ({ navigation }: StackNavigationProps<Routes, 'Signup'>) => {
   const onSubmit = (data: FormData) => console.log(data)
 
   return (
-    <Container {...{ footer }}>
+    <Container pattern={1}{...{ footer }}>
       <Box padding="xl">
         <Text variant="title1" textAlign="center" marginBottom="s">
           Create Account

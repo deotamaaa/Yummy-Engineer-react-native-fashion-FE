@@ -31,7 +31,6 @@ const ForgotPassword = ({
   const {
     control,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm<FormData>({
     defaultValues: {
@@ -43,7 +42,7 @@ const ForgotPassword = ({
 
   return (
     <>
-      <Container {...{ footer }}>
+      <Container pattern={2}{...{ footer }}>
         <Box padding="xl" justifyContent="center" flex={1}>
           <Text variant="title1" textAlign="center" marginBottom="s">
             Forgot Password

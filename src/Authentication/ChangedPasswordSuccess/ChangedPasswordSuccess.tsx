@@ -12,6 +12,7 @@ const ChangedPasswordSuccess = ({
   return (
     <>
       <Container
+        pattern={1}
         footer={
           <Box flexDirection="row" justifyContent="center">
             <CloseButton onPress={() => navigation.pop()} />

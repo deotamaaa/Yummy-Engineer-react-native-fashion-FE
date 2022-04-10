@@ -47,7 +47,7 @@ const Login = ({ navigation }: StackNavigationProps<Routes, 'Login'>) => {
   const onSubmit = (data: FormData) => console.log(data)
 
   return (
-    <Container {...{ footer }}>
+    <Container pattern={0}{...{ footer }}>
       <Box padding="xl">
         <Text variant="title1" textAlign="center" marginBottom="s">
           Welcome Back
