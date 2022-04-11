@@ -44,7 +44,7 @@ const Login = ({ navigation }: StackNavigationProps<Routes, 'Login'>) => {
     },
     resolver: yupResolver(LoginSchema),
   })
-  const onSubmit = (data: FormData) => console.log(data)
+  const onSubmit = navigation.navigate('Home')
 
   return (
     <Container pattern={0}{...{ footer }}>
