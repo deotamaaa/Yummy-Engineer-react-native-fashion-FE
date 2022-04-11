@@ -45,7 +45,7 @@ const Signup = ({ navigation }: StackNavigationProps<Routes, 'Signup'>) => {
     },
     resolver: yupResolver(LoginSchema),
   })
-  const onSubmit = navigation.navigate('Home')
+  const onSubmit = () => true
 
   return (
     <Container pattern={1}{...{ footer }}>

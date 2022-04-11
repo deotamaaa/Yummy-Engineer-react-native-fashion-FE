@@ -14,10 +14,6 @@ export type AppRoutes = {
   Home: undefined
 }
 
-export type HomeRoutes = {
-  OutfitIdeas: undefined
-}
-
 export type Routes = {
   Onboarding: undefined
   Welcome: undefined
@@ -25,4 +21,8 @@ export type Routes = {
   Signup: undefined
   ForgotPassword: undefined
   ChangedPasswordSuccess: undefined
+}
+
+export type HomeRoutes = {
+  OutfitIdeas: undefined
 }

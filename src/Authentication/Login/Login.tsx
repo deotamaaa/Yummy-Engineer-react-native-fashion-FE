@@ -9,7 +9,13 @@ import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import Footer from '../components/Footer'
-import { Routes, StackNavigationProps } from '../../components/Navigation'
+import {
+  HomeRoutes,
+  Routes,
+  StackNavigationProps,
+} from '../../components/Navigation'
+import { CompositeNavigationProp } from '@react-navigation/native'
+import { DrawerNavigationProp } from '@react-navigation/drawer'
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -22,7 +28,14 @@ interface FormData {
   remember: boolean
 }
 
-const Login = ({ navigation }: StackNavigationProps<Routes, 'Login'>) => {
+interface LoginProps {
+  navigation: CompositeNavigationProp<
+    StackNavigationProps<Routes, 'Login'>,
+    DrawerNavigationProp<HomeRoutes, 'OutfitIdeas'>
+  >
+}
+
+const Login = ({ navigation }: LoginProps) => {
   const footer = (
     <Footer
       title="Don't have an account?"
@@ -44,10 +57,10 @@ const Login = ({ navigation }: StackNavigationProps<Routes, 'Login'>) => {
     },
     resolver: yupResolver(LoginSchema),
   })
-  const onSubmit = navigation.navigate('Home')
+  const onSubmit = () => navigation.navigate("Home")
 
   return (
-    <Container pattern={0}{...{ footer }}>
+    <Container pattern={0} {...{ footer }}>
       <Box padding="xl">
         <Text variant="title1" textAlign="center" marginBottom="s">
           Welcome Back
