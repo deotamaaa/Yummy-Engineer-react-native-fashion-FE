@@ -1,13 +1,13 @@
 import React from 'react'
 import { Button, Container, RoundedIconButton, Text } from '../../components'
-import { Routes, StackNavigationProps } from '../../components/Navigation'
+import { AuthNavigationProps } from '../../components/Navigation'
 import { Box } from '../../components/Theme'
 import { Feather as Icon } from '@expo/vector-icons'
 
 const SIZE = 80
 const ChangedPasswordSuccess = ({
   navigation,
-}: StackNavigationProps<Routes, 'ChangedPasswordSuccess'>) => {
+}: AuthNavigationProps<'ChangedPasswordSuccess'>) => {
   return (
     <>
       <Container
@@ -15,11 +15,12 @@ const ChangedPasswordSuccess = ({
         footer={
           <Box flexDirection="row" justifyContent="center">
             <RoundedIconButton
-              backgroundColor='white'
-              color='black'
-              name='x'
+              backgroundColor="white"
+              color="black"
+              name="x"
               size={60}
-              onPress={() => navigation.pop()} />
+              onPress={() => navigation.pop()}
+            />
           </Box>
         }
       >
@@ -29,7 +30,7 @@ const ChangedPasswordSuccess = ({
             style={{ height: SIZE, width: SIZE, borderRadius: SIZE / 2 }}
             justifyContent="center"
             alignItems="center"
-            marginBottom='m'
+            marginBottom="m"
           >
             <Text textAlign="center" color="white">
               <Icon name="check" size={32} />

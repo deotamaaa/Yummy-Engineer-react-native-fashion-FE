@@ -6,7 +6,7 @@ import { interpolateColor, onScrollEvent, useValue } from 'react-native-redash'
 import Slide, { SLIDE_HEIGHT } from './Slide'
 import Subslide from './Subslide'
 import Dot from './Dot'
-import { Routes, StackNavigationProps } from '../../components/Navigation'
+import { AuthNavigationProps } from '../../components/Navigation'
 
 const BORDER_RADIUS = 75
 const { width } = Dimensions.get('window')
@@ -63,9 +63,7 @@ const slides = [
 
 export const assets = slides.map((slide) => slide.picture.src)
 
-const Onboarding = ({
-  navigation,
-}: StackNavigationProps<Routes, 'Onboarding'>) => {
+const Onboarding = ({ navigation }: AuthNavigationProps<'Onboarding'>) => {
   const scroll = useRef<Animated.ScrollView>(null)
   const x = useValue(0)
   // UseScroll event

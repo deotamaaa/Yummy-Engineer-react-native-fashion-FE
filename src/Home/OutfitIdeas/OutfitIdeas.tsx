@@ -4,8 +4,8 @@ import { View } from 'react-native'
 const OutfitIdeas = () => {
   return (
     <>
-      <View style={{ flex: 1, backgroundColor: 'lightblue' }}>
-      </View></>
+      <View style={{ flex: 1, backgroundColor: 'lightblue' }}></View>
+    </>
   )
 }
 

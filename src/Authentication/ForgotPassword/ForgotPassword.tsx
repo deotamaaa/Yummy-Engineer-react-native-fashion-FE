@@ -3,7 +3,7 @@ import React from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { Linking } from 'react-native'
 import { Button, Container, Text } from '../../components'
-import { Routes, StackNavigationProps } from '../../components/Navigation'
+import { AuthNavigationProps } from '../../components/Navigation'
 import Footer from '../components/Footer'
 import * as Yup from 'yup'
 import { Box } from '../../components/Theme'
@@ -19,7 +19,7 @@ interface FormData {
 
 const ForgotPassword = ({
   navigation,
-}: StackNavigationProps<Routes, 'ForgotPassword'>) => {
+}: AuthNavigationProps<'ForgotPassword'>) => {
   const footer = (
     <Footer
       title="Don't work?"
@@ -42,7 +42,7 @@ const ForgotPassword = ({
 
   return (
     <>
-      <Container pattern={2}{...{ footer }}>
+      <Container pattern={2} {...{ footer }}>
         <Box padding="xl" justifyContent="center" flex={1}>
           <Text variant="title1" textAlign="center" marginBottom="s">
             Forgot Password

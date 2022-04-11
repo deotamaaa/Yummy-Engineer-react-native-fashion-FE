@@ -11,6 +11,7 @@ const theme = createTheme({
     white: 'white',
     slideGrey: 'rgba(12,13,52, 0.05)',
     darkGrey: '#8a8d90',
+    secondary: '#0C0D34',
   },
   spacing: {
     s: 8,

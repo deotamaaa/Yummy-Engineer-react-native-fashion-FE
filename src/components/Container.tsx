@@ -7,7 +7,7 @@ export const assets = [
   require('../components/assets/patterns/1.png'),
   require('../components/assets/patterns/2.png'),
   require('../components/assets/patterns/3.png'),
-] as const;
+] as const
 
 const aspectRatio = 750 / 1125
 const { width } = Dimensions.get('window')

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dimensions, Image, StyleSheet } from 'react-native'
 import { Button } from '../../components'
-import { Routes, StackNavigationProps } from '../../components/Navigation'
+import { AuthNavigationProps } from '../../components/Navigation'
 import theme, { Box, Text } from '../../components/Theme'
 
 const { width } = Dimensions.get('window')
@@ -12,7 +12,7 @@ const picture = {
 }
 export const assets = [picture.src]
 
-const Welcome = ({ navigation }: StackNavigationProps<Routes, 'Welcome'>) => {
+const Welcome = ({ navigation }: AuthNavigationProps<'Welcome'>) => {
   return (
     <Box flex={1} backgroundColor="white">
       <Box
@@ -53,7 +53,7 @@ const Welcome = ({ navigation }: StackNavigationProps<Routes, 'Welcome'>) => {
           flex={1}
         >
           <Text variant="title1">Let's get started</Text>
-          <Text variant="body" textAlign='center'>
+          <Text variant="body" textAlign="center">
             Login to your account or signup for the first time!
           </Text>
           <Button
@@ -61,7 +61,10 @@ const Welcome = ({ navigation }: StackNavigationProps<Routes, 'Welcome'>) => {
             label="Have an account? Login"
             onPress={() => navigation.navigate('Login')}
           />
-          <Button label="Create account, it's free!" onPress={() => navigation.navigate('Signup')} />
+          <Button
+            label="Create account, it's free!"
+            onPress={() => navigation.navigate('Signup')}
+          />
           <Button
             variant="transparent"
             label="Forgot Password?"

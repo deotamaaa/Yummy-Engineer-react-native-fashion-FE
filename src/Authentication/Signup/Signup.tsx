@@ -8,7 +8,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import Footer from '../components/Footer'
-import { Routes, StackNavigationProps } from '../../components/Navigation'
+import { AuthNavigationProps } from '../../components/Navigation'
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -24,7 +24,7 @@ interface FormData {
   passwordConfirm: string
 }
 
-const Signup = ({ navigation }: StackNavigationProps<Routes, 'Signup'>) => {
+const Signup = ({ navigation }: AuthNavigationProps<'Signup'>) => {
   const footer = (
     <Footer
       title="Already have an account?"
@@ -48,7 +48,7 @@ const Signup = ({ navigation }: StackNavigationProps<Routes, 'Signup'>) => {
   const onSubmit = () => true
 
   return (
-    <Container pattern={1}{...{ footer }}>
+    <Container pattern={1} {...{ footer }}>
       <Box padding="xl">
         <Text variant="title1" textAlign="center" marginBottom="s">
           Create Account
