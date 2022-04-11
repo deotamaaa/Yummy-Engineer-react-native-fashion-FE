@@ -53,7 +53,7 @@ const Welcome = ({ navigation }: StackNavigationProps<Routes, 'Welcome'>) => {
           flex={1}
         >
           <Text variant="title1">Let's get started</Text>
-          <Text variant="body">
+          <Text variant="body" textAlign='center'>
             Login to your account or signup for the first time!
           </Text>
           <Button
@@ -61,11 +61,11 @@ const Welcome = ({ navigation }: StackNavigationProps<Routes, 'Welcome'>) => {
             label="Have an account? Login"
             onPress={() => navigation.navigate('Login')}
           />
-          <Button label="Create account, it's free!" onPress={() => null} />
+          <Button label="Create account, it's free!" onPress={() => navigation.navigate('Signup')} />
           <Button
             variant="transparent"
             label="Forgot Password?"
-            onPress={() => null}
+            onPress={() => navigation.navigate('ForgotPassword')}
           />
         </Box>
       </Box>

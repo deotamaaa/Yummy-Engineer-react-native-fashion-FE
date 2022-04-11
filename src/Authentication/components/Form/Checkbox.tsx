@@ -3,7 +3,7 @@ import React from 'react'
 import { Box, Text } from '../../../components/Theme'
 
 import { Feather as Icon } from '@expo/vector-icons'
-import { RectButton } from 'react-native-gesture-handler'
+import { BorderlessButton } from 'react-native-gesture-handler'
 
 interface CheckboxProps {
   label: string
@@ -13,7 +13,7 @@ interface CheckboxProps {
 
 const Checkbox = ({ label, onChange, isChecked }: CheckboxProps) => {
   return (
-    <RectButton
+    <BorderlessButton
       onPress={() => onChange(!isChecked)}
       style={{ justifyContent: 'center' }}
     >
@@ -33,7 +33,7 @@ const Checkbox = ({ label, onChange, isChecked }: CheckboxProps) => {
         </Box>
         <Text variant="body">{label}</Text>
       </Box>
-    </RectButton>
+    </BorderlessButton>
   )
 }
 

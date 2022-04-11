@@ -1,9 +1,8 @@
 import React from 'react'
-import { Button, Container, Text } from '../../components'
+import { Button, Container, RoundedIconButton, Text } from '../../components'
 import { Routes, StackNavigationProps } from '../../components/Navigation'
 import { Box } from '../../components/Theme'
 import { Feather as Icon } from '@expo/vector-icons'
-import CloseButton from '../../components/CloseButton'
 
 const SIZE = 80
 const ChangedPasswordSuccess = ({
@@ -15,7 +14,12 @@ const ChangedPasswordSuccess = ({
         pattern={1}
         footer={
           <Box flexDirection="row" justifyContent="center">
-            <CloseButton onPress={() => navigation.pop()} />
+            <RoundedIconButton
+              backgroundColor='white'
+              color='black'
+              name='x'
+              size={60}
+              onPress={() => navigation.pop()} />
           </Box>
         }
       >
@@ -32,10 +36,10 @@ const ChangedPasswordSuccess = ({
             </Text>
           </Box>
           <Text variant="title1" textAlign="center" marginBottom="s">
-            Forgot Password
+            Your password was succesfully changed
           </Text>
           <Text variant="body" textAlign="center" marginBottom="l">
-            Enter your email to continue.
+            Go back to login screen
           </Text>
           <Box alignItems="center" marginTop="m">
             <Button
