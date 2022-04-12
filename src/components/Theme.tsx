@@ -56,6 +56,12 @@ const theme = createTheme({
       fontFamily: 'SFProText-Bold',
       color: 'black',
     },
+    button: {
+      fontSize: 16,
+      fontFamily: 'SFProText-Regular',
+      color: 'black',
+      textAlign: "center"
+    },
   },
   breakpoints: {},
 })

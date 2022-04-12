@@ -8,10 +8,11 @@ import OutfitIdeas from './OutfitIdeas'
 const Drawer = createDrawerNavigator<HomeRoutes>()
 export const HomeNavigator = () => {
   return (
-    <Drawer.Navigator drawerContent={DrawerContent} drawerStyle={{
-      width: DRAWER_WIDTH,
-
-    }}>
+    <Drawer.Navigator
+      drawerContent={() => <DrawerContent />}
+      drawerStyle={{
+        width: DRAWER_WIDTH,
+      }}>
       <Drawer.Screen name="OutfitIdeas" component={OutfitIdeas} />
     </Drawer.Navigator>
   )
