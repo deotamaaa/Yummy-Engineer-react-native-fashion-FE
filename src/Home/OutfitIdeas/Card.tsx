@@ -6,9 +6,10 @@ import {
   mix,
   mixColor,
   usePanGestureHandler,
-  withSpring,
 } from 'react-native-redash'
 import { Box } from '../../components/Theme'
+
+import { useSpring } from './Animations'
 
 const { width: wWidth } = Dimensions.get('window')
 const width = wWidth * 0.75
@@ -16,24 +17,26 @@ const height = width * (425 / 294)
 const borderRadius = 24
 
 interface CardProps {
-  position: number
+  position: Animated.Node<number>
+  onSwipe: () => void
 }
 
-const Card = ({ position }: CardProps) => {
+const Card = ({ position, onSwipe }: CardProps) => {
   const { gestureHandler, translation, velocity, state } =
     usePanGestureHandler()
   const backgroundColor = mixColor(position, '#C9E9E7', '#74BCB8')
   const translateYOffset = mix(position, 0, -45)
   const scale = mix(position, 1, 0.95)
-  const translateX = withSpring({
+  const translateX = useSpring({
     value: translation.x,
     velocity: velocity.x,
     state,
-    snapPoints: [-width, 0, width],
+    snapPoints: [-wWidth, 0, wWidth],
+    onSnap: ([x]) => x !== 0 ?? onSwipe(),
   })
   const translateY = add(
     translateYOffset,
-    withSpring({
+    useSpring({
       value: translation.y,
       velocity: velocity.y,
       state,

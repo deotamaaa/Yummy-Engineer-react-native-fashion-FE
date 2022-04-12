@@ -23,7 +23,7 @@ const DrawerItem = ({ icon, color, screen, label }: DrawerItemProps) => {
           backgroundColor={color}
           color={'white'}
         />
-        <Text variant='button' color='secondary' marginLeft='m'>{label}</Text>
+        <Text variant='button' marginLeft='m'>{label}</Text>
       </Box>
     </RectButton >
   )

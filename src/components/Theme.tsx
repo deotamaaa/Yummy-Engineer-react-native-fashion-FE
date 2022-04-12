@@ -13,7 +13,6 @@ const theme = createTheme({
     lightGrey: '#FAFAFA',
     darkGrey: '#8a8d90',
     secondary: '#0C0D34',
-
     cyan: '#2CB9B0',
     lightCyan: '#E7F9F7',
     darkBlue: '#0C0D34',
