@@ -6,7 +6,7 @@ import { assets as authenticationAssets, AuthenticationNavigator } from './src/A
 import { LoadAssets, theme } from './src/components'
 
 import { createStackNavigator } from '@react-navigation/stack'
-import { HomeNavigator } from './src/Home'
+import { HomeNavigator, assets as homeAssets } from './src/Home'
 import { AppRoutes } from './src/components/Navigation'
 
 
@@ -16,7 +16,7 @@ const fonts = {
   'SFProText-Regular': require('./assets/fonts/SF-Pro-Text-Regular.otf'),
 }
 
-const assets = [...authenticationAssets]
+const assets = [...authenticationAssets, ...homeAssets]
 
 const AppStack = createStackNavigator<AppRoutes>()
 

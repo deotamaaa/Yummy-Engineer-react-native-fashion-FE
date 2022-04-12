@@ -10,6 +10,7 @@ const theme = createTheme({
     button: '#0c0d34',
     white: 'white',
     slideGrey: 'rgba(12,13,52, 0.05)',
+    lightGrey: '#FAFAFA',
     darkGrey: '#8a8d90',
     secondary: '#0C0D34',
   },

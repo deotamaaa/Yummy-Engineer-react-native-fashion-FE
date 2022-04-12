@@ -1,10 +1,10 @@
 import React from 'react'
 import { Dimensions, Image } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { RoundedIconButton } from '../../components'
+import Header from '../../components/Header'
 import theme, { Box, Text } from '../../components/Theme'
 import DrawerItem, { DrawerItemProps } from './DrawerItem'
 
+export const assets = [require('../Drawer/assets/3.png')]
 const aspectRatio = 750 / 1125
 const { width } = Dimensions.get('window')
 export const DRAWER_WIDTH = width * 0.8
@@ -50,7 +50,6 @@ const items: DrawerItemProps[] = [
 ]
 
 const Drawer = () => {
-  const insets = useSafeAreaInsets();
   return (
     <Box flex={1}>
       <Box flex={0.2} backgroundColor="white">
@@ -62,25 +61,18 @@ const Drawer = () => {
           bottom={0}
           borderBottomRightRadius="xl"
           backgroundColor="secondary"
-          flexDirection='row'
-          justifyContent='space-between'
-          paddingHorizontal='m'
-          style={{ paddingTop: insets.top }}
         >
-          <RoundedIconButton
-            size={25}
-            name='x'
-            color='white'
-            backgroundColor='secondary'
-            onPress={() => true}
-          />
-          <Text color='white'>My Profile</Text>
-          <RoundedIconButton
-            size={25}
-            name='shopping-bag'
-            color='white'
-            backgroundColor='secondary'
-            onPress={() => true}
+          <Header
+            title='PROFILE MENU'
+            left={{
+              icon: 'x',
+              onPress: () => true,
+            }}
+            right={{
+              icon: 'shopping-bag',
+              onPress: () => true,
+            }}
+            dark
           />
         </Box>
       </Box>
@@ -122,7 +114,7 @@ const Drawer = () => {
         height={height * 0.35}
       >
         <Image
-          source={require('../../components/assets/patterns/1.png')}
+          source={assets[0]}
           style={{
             width: DRAWER_WIDTH,
             height: height,
