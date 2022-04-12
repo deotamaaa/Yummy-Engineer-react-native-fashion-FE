@@ -1,4 +1,4 @@
-import { createBox, createText, createTheme } from '@shopify/restyle'
+import { createBox, createText, createTheme, useTheme } from '@shopify/restyle'
 
 const theme = createTheme({
   colors: {
@@ -13,6 +13,16 @@ const theme = createTheme({
     lightGrey: '#FAFAFA',
     darkGrey: '#8a8d90',
     secondary: '#0C0D34',
+
+    cyan: '#2CB9B0',
+    lightCyan: '#E7F9F7',
+    darkBlue: '#0C0D34',
+    orange: '#FE5E33',
+    yellow: '#FFC641',
+    pink: '#FF87A2',
+    darkPink: '#FF0058',
+    violet: '#442CB9',
+    lightBlue: '#BFEAF5',
   },
   spacing: {
     s: 8,

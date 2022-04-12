@@ -1,3 +1,4 @@
+import { DrawerActions, useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { Dimensions, Image } from 'react-native'
 import Header from '../../components/Header'
@@ -15,31 +16,31 @@ const items: DrawerItemProps[] = [
     icon: 'zap',
     label: 'Outfit Ideas',
     screen: 'OutfitIdeas',
-    color: 'primary',
+    color: 'orange',
   },
   {
     icon: 'heart',
     label: 'Favorites Outfit',
     screen: 'FavoritesOutfit',
-    color: 'primary',
+    color: 'pink',
   },
   {
     icon: 'user',
     label: 'Edit Profile',
     screen: 'EditProfile',
-    color: 'primary',
+    color: 'darkPink',
   },
   {
     icon: 'clock',
     label: 'Transactions History',
     screen: 'TransactionsHistory',
-    color: 'primary',
+    color: 'lightBlue',
   },
   {
     icon: 'settings',
     label: 'Notification Settings',
     screen: 'NotificationSettings',
-    color: 'primary',
+    color: 'darkBlue',
   },
   {
     icon: 'log-out',
@@ -50,6 +51,7 @@ const items: DrawerItemProps[] = [
 ]
 
 const Drawer = () => {
+  const navigation = useNavigation();
   return (
     <Box flex={1}>
       <Box flex={0.2} backgroundColor="white">
@@ -66,7 +68,7 @@ const Drawer = () => {
             title='PROFILE MENU'
             left={{
               icon: 'x',
-              onPress: () => true,
+              onPress: () => navigation.dispatch(DrawerActions.closeDrawer()),
             }}
             right={{
               icon: 'shopping-bag',
