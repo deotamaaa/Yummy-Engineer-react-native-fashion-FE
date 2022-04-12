@@ -36,7 +36,7 @@ const categories = [
 const Categories = () => {
   return (
     <View>
-      <ScrollView horizontal>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {categories.map(category => (
           <Category key={category.id} category={category} />
         ))}
