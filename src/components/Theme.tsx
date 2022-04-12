@@ -1,4 +1,4 @@
-import { createBox, createText, createTheme, useTheme } from '@shopify/restyle'
+import { createBox, createText, createTheme } from '@shopify/restyle'
 
 const theme = createTheme({
   colors: {

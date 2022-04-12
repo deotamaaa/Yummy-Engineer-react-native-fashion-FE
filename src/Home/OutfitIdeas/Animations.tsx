@@ -41,8 +41,8 @@ export const useSpring = ({
     mass: 1,
     stiffness: 64,
     overshootClamping: useValue(0),
-    restSpeedThreshold: useValue(0.01),
-    restDisplacementThreshold: useValue(0.01),
+    restSpeedThreshold: useValue(0.1),
+    restDisplacementThreshold: useValue(0.1),
   }
 
   return block([

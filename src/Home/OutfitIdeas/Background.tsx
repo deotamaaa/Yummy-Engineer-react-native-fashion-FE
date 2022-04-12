@@ -3,10 +3,6 @@ import React from 'react'
 import { View, StyleSheet, Image } from 'react-native'
 import { Box } from '../../components/Theme'
 
-interface BackgroundProps {
-
-}
-
 const Background = () => {
   const theme = useTheme();
   return (

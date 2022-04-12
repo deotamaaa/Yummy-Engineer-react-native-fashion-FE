@@ -1,4 +1,3 @@
-import { useTheme } from '@shopify/restyle'
 import React from 'react'
 import { RectButton } from 'react-native-gesture-handler'
 import { RoundedIcon } from '../../components'
@@ -12,7 +11,6 @@ export interface DrawerItemProps {
 }
 
 const DrawerItem = ({ icon, color, screen, label }: DrawerItemProps) => {
-  const theme = useTheme();
   return (
     <RectButton>
       <Box flexDirection="row" alignItems='center' padding='m'>
