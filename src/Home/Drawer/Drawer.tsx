@@ -51,7 +51,7 @@ const items: DrawerItemProps[] = [
 ]
 
 const Drawer = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation()
   return (
     <Box flex={1}>
       <Box flex={0.2} backgroundColor="white">
@@ -65,7 +65,7 @@ const Drawer = () => {
           backgroundColor="secondary"
         >
           <Header
-            title='PROFILE MENU'
+            title="PROFILE MENU"
             left={{
               icon: 'x',
               onPress: () => navigation.dispatch(DrawerActions.closeDrawer()),
@@ -89,23 +89,29 @@ const Drawer = () => {
           backgroundColor="white"
           borderBottomRightRadius="xl"
           borderTopLeftRadius="xl"
-          justifyContent='center'
-          padding='l'
+          justifyContent="center"
+          padding="l"
         >
           <Box
-            position='absolute'
+            position="absolute"
             top={-theme.spacing.xl}
-            backgroundColor='primary'
-            alignSelf='center'
+            backgroundColor="primary"
+            alignSelf="center"
             width={100}
             height={100}
             style={{ borderRadius: 50 }}
           />
-          <Box marginVertical='s'>
-            <Text variant='title1' textAlign='center'>Young Key</Text>
-            <Text variant='body' textAlign='center'>youngkey@email.com</Text>
+          <Box marginVertical="s">
+            <Text variant="title1" textAlign="center">
+              Young Key
+            </Text>
+            <Text variant="body" textAlign="center">
+              youngkey@email.com
+            </Text>
           </Box>
-          {items.map(item => (<DrawerItem key={item.screen} {...item} />))}
+          {items.map((item) => (
+            <DrawerItem key={item.screen} {...item} />
+          ))}
         </Box>
       </Box>
 
