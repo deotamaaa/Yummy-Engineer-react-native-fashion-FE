@@ -1,29 +1,48 @@
-import { useTheme } from '@shopify/restyle'
-import React from 'react'
-import { Dimensions, View } from 'react-native'
+import React, { useState } from 'react'
+import { RoundedIcon, BorderlessTap } from '../../components'
 import { Box } from '../../components/Theme'
 
-const { width: wWidth } = Dimensions.get('window')
 
 interface OutfitProps {
   outfit: {
     color: string
     aspectRatio: number
     id: number
+    selected: boolean
   }
   width: number
 }
 
-const Outfit = ({
-  outfit: { color: backgroundColor,
-    aspectRatio },
-  width,
-}: OutfitProps) => {
+const Outfit = ({ outfit, width }: OutfitProps) => {
+  const [selected, setSelected] = useState(false)
   return (
-    <Box borderRadius='m'
-      marginBottom='m'
-      style={{ backgroundColor, width, height: width * aspectRatio }}
-    ></Box>
+    <BorderlessTap
+      onPress={() => {
+        setSelected((prev) => !prev)
+        outfit.selected = !outfit.selected
+      }}
+    >
+      <Box
+        borderRadius="m"
+        marginBottom="m"
+        alignItems="flex-end"
+        padding="m"
+        style={{
+          backgroundColor: outfit.color,
+          width,
+          height: width * outfit.aspectRatio,
+        }}
+      >
+        {selected && (
+          <RoundedIcon
+            name="check"
+            backgroundColor="primary"
+            color="white"
+            size={24}
+          />
+        )}
+      </Box>
+    </BorderlessTap>
   )
 }
 

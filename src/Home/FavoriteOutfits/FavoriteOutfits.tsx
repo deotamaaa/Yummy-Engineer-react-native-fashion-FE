@@ -1,17 +1,17 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { Dimensions } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
+import { Transition, Transitioning, TransitioningView } from 'react-native-reanimated'
 import { Header } from '../../components'
 import { HomeNavigationProps } from '../../components/Navigation'
 import theme, { Box } from '../../components/Theme'
-
 
 import Footer from './Footer'
 import Outfit from './Outfit'
 
 const { width: wWidth } = Dimensions.get('window')
 
-const outfits = [
+const defaultOutfits = [
   {
     id: 1,
     color: '#BFEAF5',
@@ -65,8 +65,12 @@ const outfits = [
 const FavoritesOutfits = ({
   navigation,
 }: HomeNavigationProps<'FavoriteOutfits'>) => {
-
-  const width = (wWidth - theme.spacing.m * 2 - theme.spacing.s) / 2
+  const transition = <Transition.Change interpolation='easeInOut' />
+  const left = useRef<TransitioningView>(null)
+  const right = useRef<TransitioningView>(null)
+  const [outfits, setOutfits] = useState(defaultOutfits)
+  const width = (wWidth - theme.spacing.m * 3) / 2
+  const [footerHeight, setFooterHeight] = useState(0)
 
   return (
     <Box flex={1} backgroundColor="white">
@@ -75,26 +79,60 @@ const FavoritesOutfits = ({
         left={{ icon: 'menu', onPress: () => navigation.openDrawer() }}
         right={{ icon: 'shopping-bag', onPress: () => true }}
       />
-      <ScrollView contentContainerStyle={{ paddingHorizontal: theme.spacing.m }}>
-        <Box flexDirection="row">
-          <Box marginRight='s'>
-            {outfits
-              .filter((_, i) => i % 2 !== 0)
-              .map((outfit) => (
-                <Outfit key={outfit.id} outfit={outfit} width={width} />
-              ))}
+      <Box flex={1}>
+        <ScrollView
+          contentContainerStyle={{
+            paddingHorizontal: theme.spacing.m,
+            paddingBottom: footerHeight,
+          }}
+        >
+          <Box flexDirection="row">
+            <Box marginRight="s">
+              <Transitioning.View ref={left}  {...{ transition }}>
+                {outfits
+                  .filter((_, i) => i % 2 !== 0)
+                  .map((outfit) => (
+                    <Outfit key={outfit.id} outfit={outfit} width={width} />
+                  ))}
+              </Transitioning.View>
+            </Box>
+            <Box>
+              <Transitioning.View ref={right}  {...{ transition }}>
+                {outfits
+                  .filter((_, i) => i % 2 === 0)
+                  .map((outfit) => (
+                    <Outfit
+                      key={outfit.id}
+                      outfit={outfit}
+                      width={width}
+                    />
+                  ))}
+              </Transitioning.View>
+            </Box>
           </Box>
-          <Box>
-            {outfits
-              .filter((_, i) => i % 2 === 0)
-              .map((outfit) => (
-                <Outfit key={outfit.id} outfit={outfit} width={width} />
-              ))}
-          </Box>
-        </Box>
-      </ScrollView >
-      <Footer label="Add to Favorites" onPress={() => true} />
-    </Box >
+        </ScrollView>
+      </Box>
+      <Box
+        position="absolute"
+        bottom={0}
+        left={0}
+        right={0}
+        onLayout={({
+          nativeEvent: {
+            layout: { height },
+          },
+        }) => setFooterHeight(height)}
+      >
+        <Footer
+          label="Add to Favorites"
+          onPress={() => {
+            left.current?.animateNextTransition()
+            right.current?.animateNextTransition()
+            setOutfits(outfits.filter((outfit) => !outfit.selected))
+          }}
+        />
+      </Box>
+    </Box>
   )
 }
 
