@@ -3,7 +3,7 @@ import { Header, Text } from '../../components'
 import { HomeNavigationProps } from '../../components/Navigation'
 import { Box } from '../../components/Theme'
 
-import Graph, { DataPoint } from './Graph'
+import Graph, { DataPoint } from './Graph/Graph'
 
 const data = [
   {
