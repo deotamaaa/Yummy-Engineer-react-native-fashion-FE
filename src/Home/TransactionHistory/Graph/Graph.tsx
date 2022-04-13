@@ -3,30 +3,33 @@ import React from 'react'
 import { Dimensions } from 'react-native'
 import { theme } from '../../../components'
 import { Box } from '../../../components/Theme'
+
 import Underlay from './Underlay'
+import { lerp } from './Helper'
 
 const { width: wWidth } = Dimensions.get('window')
 const aspectRatio = 195 / 305
-const lerp = (v0: number, v1: number, t: number) => (1 - t) * v0 + t * v1
 
 export interface DataPoint {
   date: number
   value: number
   color: keyof Theme['colors']
+  id: number
 }
 
 interface GraphProps {
   data: DataPoint[]
 }
 
-const MARGIN = 'xl'
-
 const Graph = ({ data }: GraphProps) => {
-  const canvasWidth = wWidth - theme.spacing.m * 2
+  const canvasWidth = wWidth - theme.spacing.m * 3
   const canvasHeight = canvasWidth * aspectRatio
 
-  const width = canvasWidth - theme.spacing.xl
-  const height = canvasHeight - theme.spacing.xl
+  // const width = canvasWidth - theme.spacing.xl
+  // const height = canvasHeight - theme.spacing.xl
+
+  const width = canvasWidth - 24
+  const height = canvasHeight - 24
 
   const values = data.map((point) => point.value)
   const dates = data.map((point) => point.date)
@@ -39,7 +42,7 @@ const Graph = ({ data }: GraphProps) => {
   const maxY = Math.max(...values)
 
   return (
-    <Box paddingBottom="xl" paddingLeft="s" marginTop="xl">
+    <Box paddingBottom="xl" paddingLeft="m" marginTop="xl">
       <Underlay dates={dates} minY={minY} maxY={maxY} step={step} />
       <Box width={width} height={height}>
         {data.map((point, i) => {
@@ -49,6 +52,7 @@ const Graph = ({ data }: GraphProps) => {
           return (
             <Box
               key={point.date}
+              key={point.id}
               position="absolute"
               left={i * step}
               width={step}

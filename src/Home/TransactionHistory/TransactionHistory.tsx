@@ -8,13 +8,13 @@ import Graph, { DataPoint } from './Graph/Graph'
 const data = [
   {
     date: new Date('2021-05-10').getTime(),
-    value: 139.42,
+    value: 60,
     color: 'primary',
     id: 1,
   },
   {
     date: new Date('2021-06-10').getTime(),
-    value: 0,
+    value: 200,
     color: 'yellow',
     id: 2,
   },
@@ -32,7 +32,7 @@ const data = [
   },
   {
     date: new Date('2021-09-10').getTime(),
-    value: 0,
+    value: 180,
     color: 'pink',
     id: 5,
   },
@@ -64,7 +64,10 @@ const TransactionHistory = ({
             <Text color='white'>All Time</Text>
           </Box>
         </Box>
-        <Graph data={data} />
+        <Graph
+          //@ts-ignore
+          data={data}
+        />
       </Box>
     </Box>
   )
