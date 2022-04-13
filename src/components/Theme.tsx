@@ -3,6 +3,7 @@ import { createBox, createText, createTheme } from '@shopify/restyle'
 const theme = createTheme({
   colors: {
     primary: '#2cb9b0',
+    primaryLight: '#E7F9F7',
     black: '#000',
     title: '#0c0d34',
     body: 'rgba(12,13,52, 0.7)',
@@ -72,6 +73,12 @@ const theme = createTheme({
       color: 'black',
       textAlign: "center"
     },
+    header: {
+      fontSize: 12,
+      lineHeight: 24,
+      fontFamily: "SFProText-Semibold",
+      color: 'secondary',
+    }
   },
   breakpoints: {},
 })
