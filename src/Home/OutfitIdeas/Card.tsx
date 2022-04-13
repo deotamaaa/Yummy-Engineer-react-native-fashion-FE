@@ -13,7 +13,7 @@ const height = width * (425 / 294)
 const borderRadius = 24
 
 interface CardProps {
-  position: Animated.Adaptable<number>
+  position: Animated.Node<number>
   onSwipe: () => void
   source: ImageRequireSource
   step: number
@@ -40,6 +40,7 @@ const Card = ({ position, onSwipe, source, step }: CardProps) => {
   })
   const translateY = add(
     translateYOffset,
+    //@ts-ignore
     useSpring({
       value: translation.y,
       velocity: velocity.y,
@@ -55,12 +56,13 @@ const Card = ({ position, onSwipe, source, step }: CardProps) => {
     >
       <PanGestureHandler {...gestureHandler}>
         <Animated.View
+          //@ts-ignore
           style={{
             backgroundColor,
             width,
             height,
             borderRadius,
-            transform: [{ translateX }, { translateY }, { scale }],
+            transform: [{ translateY }, { translateX }, { scale }],
             overflow: 'hidden',
           }}
         >

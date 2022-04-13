@@ -13,9 +13,9 @@ import Animated, {
 import { snapPoint, useClock, useValue } from 'react-native-redash'
 
 interface WithSpringParams {
-  value: Animated.Adaptable<number>;
-  velocity: Animated.Adaptable<number>;
-  state: Animated.Adaptable<State>;
+  value: Animated.Node<number>;
+  velocity: Animated.Node<number>;
+  state: Animated.Node<State>;
   snapPoints: number[];
   onSnap?: (values: readonly number[]) => void;
 }
