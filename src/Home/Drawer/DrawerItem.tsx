@@ -6,17 +6,26 @@ import { RoundedIcon } from '../../components'
 import { HomeRoutes } from '../../components/Navigation'
 import { Box, Theme, Text } from '../../components/Theme'
 
-export interface DrawerItemProps {
+interface BaseDrawerItem {
   icon: string
   color: keyof Theme['colors']
-  screen: keyof HomeRoutes
   label: string
 }
 
-const DrawerItem = ({ icon, color, screen, label }: DrawerItemProps) => {
+interface ScreenDrawerItem extends BaseDrawerItem {
+  screen: keyof HomeRoutes
+}
+
+interface OnPressDrawerItem extends BaseDrawerItem {
+  onPress: (navigation: ReturnType<typeof useNavigation>) => void
+}
+
+export type DrawerItemProps = ScreenDrawerItem | OnPressDrawerItem
+
+const DrawerItem = ({ icon, color, label, ...props }: DrawerItemProps) => {
   const navigation = useNavigation<DrawerNavigationProp<HomeRoutes, "OutfitIdeas">>()
   return (
-    <RectButton onPress={() => navigation.navigate(screen)}>
+    <RectButton onPress={() => props.screen ? navigation.navigate(props.screen) : props.onPress(navigation)}>
       <Box flexDirection="row" alignItems='center' padding='m'>
         <RoundedIcon
           iconRatio={0.5}
