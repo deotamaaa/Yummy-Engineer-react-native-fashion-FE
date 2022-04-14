@@ -1,11 +1,17 @@
 import React from 'react'
+import { Dimensions, Image, StyleSheet } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { Header, Text } from '../../components'
 import { HomeNavigationProps } from '../../components/Navigation'
-import { Box } from '../../components/Theme'
+import { Box, makeStyles, Theme } from '../../components/Theme'
+import TopCurve from './TopCurve'
 
 import Graph, { DataPoint } from './Graph/Graph'
 import Transaction from './Transaction'
+
+const startDate = new Date('2021-05-10').getTime();
+const numberOfMonths = 6;
+const footerHeight = Dimensions.get('window').width / 3.3
 
 const data: DataPoint[] = [
   {
@@ -49,6 +55,7 @@ const data: DataPoint[] = [
 const TransactionHistory = ({
   navigation,
 }: HomeNavigationProps<'TransactionHistory'>) => {
+  const styles = useStyles();
   return (
     <Box flex={1} backgroundColor="white">
       <Header
@@ -56,7 +63,7 @@ const TransactionHistory = ({
         left={{ icon: 'menu', onPress: () => navigation.openDrawer() }}
         right={{ icon: 'share', onPress: () => true }}
       />
-      <Box padding='l'>
+      <Box flex={1} padding='l'>
         <Box flexDirection='row' justifyContent='space-between' alignItems='flex-end'>
           <Box>
             <Text variant='header' color='black' opacity={0.3}>TOTAL SPENT</Text>
@@ -66,18 +73,37 @@ const TransactionHistory = ({
             <Text color='white'>All Time</Text>
           </Box>
         </Box>
-        <Graph
-          //@ts-ignore
-          data={data}
-        />
-        <ScrollView>
+        <Graph data={data} startDate={startDate} numberOfMonths={numberOfMonths} />
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollView}>
           {data.map((transaction) => (
             <Transaction key={transaction.id} transaction={transaction} />
           ))}
         </ScrollView>
       </Box>
-    </Box>
+      <TopCurve {...{ footerHeight }} />
+      <Box
+        position='absolute'
+        left={0}
+        right={0}
+        bottom={0}
+        height={footerHeight}
+      >
+        <Image style={styles.footer} source={require('../../components/assets/patterns/3.png')} />
+      </Box>
+    </Box >
   )
 }
+
+const useStyles = makeStyles((theme: Theme) => ({
+  footer: {
+    ...StyleSheet.absoluteFillObject,
+    width: undefined,
+    height: undefined,
+    borderTopLeftRadius: theme.borderRadii.xl,
+  },
+  scrollView: {
+    paddingBottom: footerHeight,
+  },
+}));
 
 export default TransactionHistory

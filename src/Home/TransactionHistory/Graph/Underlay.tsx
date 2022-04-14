@@ -4,11 +4,9 @@ import theme, { Box, Text } from '../../../components/Theme'
 
 import 'intl'
 import 'intl/locale-data/jsonp/en'
-import { format } from 'date-fns'
 
 import { lerp } from './Helper'
-
-const formatter = (date: Date) => format(date, 'MMM')
+import moment from 'moment'
 
 const ROW_HEIGHT = 30
 
@@ -17,9 +15,12 @@ interface UnderlayProps {
   minY: number
   maxY: number
   step: number
+  startDate: number;
+  numberOfMonths: number;
 }
 
-const Underlay = ({ dates, minY, maxY, step }: UnderlayProps) => {
+const Underlay = ({ minY, maxY, step, startDate, numberOfMonths, }: UnderlayProps) => {
+  const minDate = moment(startDate);
   return (
     <Box style={StyleSheet.absoluteFill}>
       <Box flex={1} justifyContent="space-between">
@@ -43,13 +44,14 @@ const Underlay = ({ dates, minY, maxY, step }: UnderlayProps) => {
         })}
       </Box>
       <Box marginLeft="m" marginTop='s' height={theme.spacing.l} flexDirection="row">
-        {dates.map((date, index) => (
-          <Box width={step}>
-            <Text key={index} color="darkGrey" textAlign="center">
-              {formatter(new Date(date))}
-            </Text>
-          </Box>
-        ))}
+        {new Array(numberOfMonths)
+          .fill(0)
+          .map((_, i) => minDate.clone().add(i, 'month'))
+          .map((date, index) => (
+            <Box width={step} key={index}>
+              <Text textAlign="center">{date.format('MMM')}</Text>
+            </Box>
+          ))}
       </Box>
     </Box>
   )

@@ -5,6 +5,7 @@ import { Box, Theme } from '../../../components/Theme'
 
 import Underlay from './Underlay'
 import { lerp } from './Helper'
+import moment from 'moment'
 
 const { width: wWidth } = Dimensions.get('window')
 const aspectRatio = 195 / 305
@@ -18,36 +19,40 @@ export interface DataPoint {
 
 interface GraphProps {
   data: DataPoint[]
+  startDate: number;
+  numberOfMonths: number;
 }
 
-const Graph = ({ data }: GraphProps) => {
+const Graph = ({ data, startDate, numberOfMonths }: GraphProps) => {
+
   const canvasWidth = wWidth - theme.spacing.m * 3
   const canvasHeight = canvasWidth * aspectRatio
-
-  // const width = canvasWidth - theme.spacing.xl
-  // const height = canvasHeight - theme.spacing.xl
 
   const width = canvasWidth - 24
   const height = canvasHeight - 24
 
   const values = data.map((point) => point.value)
   const dates = data.map((point) => point.date)
-  const step = canvasWidth / data.length
-
-  // const minX = Math.min(...dates)
-  // const maxX = Math.max(...dates)
+  const step = canvasWidth / numberOfMonths
 
   const minY = Math.min(...values)
   const maxY = Math.max(...values)
 
   return (
     <Box paddingBottom="xl" paddingLeft="l" marginTop="xl">
-      <Underlay dates={dates} minY={minY} maxY={maxY} step={step} />
+      <Underlay
+        dates={dates}
+        minY={minY}
+        maxY={maxY}
+        startDate={startDate}
+        numberOfMonths={numberOfMonths}
+        step={step}
+      />
       <Box width={width} height={height}>
-        {data.map((point, i) => {
-          if (point.value === 0) {
-            return null
-          }
+        {data.map((point) => {
+          const i = Math.round(
+            moment.duration(moment(point.date).diff(moment(startDate))).asMonths(),
+          );
           return (
             <Box
               key={point.id}
