@@ -86,7 +86,10 @@ const theme = createTheme({
       color: 'secondary',
     }
   },
-  breakpoints: {},
+  breakpoints: {
+    phone: 0,
+    tablet: 768,
+  },
 })
 
 export type Theme = typeof theme
