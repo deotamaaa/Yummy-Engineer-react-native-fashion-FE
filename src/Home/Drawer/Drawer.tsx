@@ -115,7 +115,7 @@ const Drawer = () => {
             </Text>
           </Box>
           {items.map((item) => (
-            <DrawerItem key={item.screen} {...item} />
+            <DrawerItem key={item.icon} {...item} />
           ))}
         </Box>
       </Box>

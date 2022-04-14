@@ -23,10 +23,17 @@ interface OnPressDrawerItem extends BaseDrawerItem {
 export type DrawerItemProps = ScreenDrawerItem | OnPressDrawerItem
 
 const DrawerItem = ({ icon, color, label, ...props }: DrawerItemProps) => {
-  const navigation = useNavigation<DrawerNavigationProp<HomeRoutes, "OutfitIdeas">>()
+  const navigation =
+    useNavigation<DrawerNavigationProp<HomeRoutes, 'OutfitIdeas'>>()
   return (
-    <RectButton onPress={() => props.screen ? navigation.navigate(props.screen) : props.onPress(navigation)}>
-      <Box flexDirection="row" alignItems='center' padding='m'>
+    <RectButton
+      onPress={() =>
+        'screen' in props
+          ? navigation.navigate(props.screen)
+          : props.onPress(navigation)
+      }
+    >
+      <Box flexDirection="row" alignItems="center" padding="m">
         <RoundedIcon
           iconRatio={0.5}
           name={icon}
@@ -34,9 +41,11 @@ const DrawerItem = ({ icon, color, label, ...props }: DrawerItemProps) => {
           backgroundColor={color}
           color={'white'}
         />
-        <Text variant='button' marginLeft='m'>{label}</Text>
+        <Text variant="button" marginLeft="m">
+          {label}
+        </Text>
       </Box>
-    </RectButton >
+    </RectButton>
   )
 }
 
