@@ -56,6 +56,11 @@ const theme = createTheme({
       fontFamily: 'SFProText-Semibold',
       color: 'title',
     },
+    title3: {
+      fontSize: 16,
+      fontFamily: 'SFProText-Semibold',
+      color: 'secondary',
+    },
     body: {
       fontSize: 16,
       lineHeight: 24,

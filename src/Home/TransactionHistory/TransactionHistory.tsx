@@ -1,14 +1,16 @@
 import React from 'react'
+import { ScrollView } from 'react-native-gesture-handler'
 import { Header, Text } from '../../components'
 import { HomeNavigationProps } from '../../components/Navigation'
 import { Box } from '../../components/Theme'
 
 import Graph, { DataPoint } from './Graph/Graph'
+import Transaction from './Transaction'
 
-const data = [
+const data: DataPoint[] = [
   {
     date: new Date('2021-05-10').getTime(),
-    value: 60,
+    value: 60.03,
     color: 'primary',
     id: 1,
   },
@@ -39,7 +41,7 @@ const data = [
   {
     date: new Date('2021-10-10').getTime(),
     value: 190.9,
-    color: 'primary',
+    color: 'darkBlue',
     id: 6,
   },
 ]
@@ -68,6 +70,11 @@ const TransactionHistory = ({
           //@ts-ignore
           data={data}
         />
+        <ScrollView>
+          {data.map((transaction) => (
+            <Transaction key={transaction.id} transaction={transaction} />
+          ))}
+        </ScrollView>
       </Box>
     </Box>
   )

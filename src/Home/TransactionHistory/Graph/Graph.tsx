@@ -1,8 +1,7 @@
-import { Theme } from '@react-navigation/native'
 import React from 'react'
 import { Dimensions } from 'react-native'
 import { theme } from '../../../components'
-import { Box } from '../../../components/Theme'
+import { Box, Theme } from '../../../components/Theme'
 
 import Underlay from './Underlay'
 import { lerp } from './Helper'
@@ -42,7 +41,7 @@ const Graph = ({ data }: GraphProps) => {
   const maxY = Math.max(...values)
 
   return (
-    <Box paddingBottom="xl" paddingLeft="m" marginTop="xl">
+    <Box paddingBottom="xl" paddingLeft="l" marginTop="xl">
       <Underlay dates={dates} minY={minY} maxY={maxY} step={step} />
       <Box width={width} height={height}>
         {data.map((point, i) => {
@@ -51,7 +50,6 @@ const Graph = ({ data }: GraphProps) => {
           }
           return (
             <Box
-              key={point.date}
               key={point.id}
               position="absolute"
               left={i * step}
