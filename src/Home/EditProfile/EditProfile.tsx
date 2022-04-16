@@ -4,6 +4,8 @@ import { Header } from '../../components'
 import theme, { Box, Text } from '../../components/Theme'
 
 import Tabs from './Tabs'
+import Configuration from './Configuration'
+import PersonalInfo from './PersonalInfo'
 
 const tabs = [
   { id: 'configuration', title: 'Configuration' },
@@ -54,6 +56,8 @@ const EditProfile = () => {
         </Box>
       </Box>
       <Tabs tabs={tabs}>
+        <Configuration />
+        <PersonalInfo />
       </Tabs>
     </Box>
   )

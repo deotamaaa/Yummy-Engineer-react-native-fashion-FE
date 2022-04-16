@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { Children, ReactNode, useState } from 'react'
 import { Dimensions } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
-import Animated from 'react-native-reanimated'
+import Animated, { multiply } from 'react-native-reanimated'
 import { mix, useTransition } from 'react-native-redash'
 import { Text } from '../../components'
 import theme, { Box } from '../../components/Theme'
@@ -15,15 +15,16 @@ interface Tab {
 
 interface TabsProps {
   tabs: Tab[]
+  children: ReactNode
 }
 
-const Tabs = ({ tabs }: TabsProps) => {
+const Tabs = ({ tabs, children }: TabsProps) => {
   const [index, setIndex] = useState(0)
   const selectedTab = tabs[index]
   const transition = useTransition(index, { duration: 400 })
   const translateX = mix(transition, width * 0.25 - 5, width * 0.75)
   return (
-    <Box>
+    <Box flex={1}>
       <Box flexDirection="row">
         {tabs.map((tab, i) => (
           <RectButton
@@ -47,7 +48,7 @@ const Tabs = ({ tabs }: TabsProps) => {
             width: 10,
             height: 10,
             borderRadius: 5,
-            transform: [{ translateX }]
+            transform: [{ translateX }],
           }}
         />
         <Box
@@ -59,6 +60,20 @@ const Tabs = ({ tabs }: TabsProps) => {
           style={{ borderRadius: 5 }}
         />
       </Box>
+      <Animated.View
+        style={{
+          flex: 1,
+          width: width * tabs.length,
+          flexDirection: 'row',
+          transform: [{ translateX: multiply(-width, transition) }],
+        }}
+      >
+        {Children.map(children, (child, index) => (
+          <Box flex={1} key={index} width={width} >
+            {child}
+          </Box>
+        ))}
+      </Animated.View>
     </Box>
   )
 }
