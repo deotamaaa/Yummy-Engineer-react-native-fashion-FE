@@ -1,4 +1,3 @@
-import { CheckBoxProps } from '@react-native-community/checkbox'
 import React, { useState } from 'react'
 import Button from '../../components/Button'
 import theme, { Box } from '../../components/Theme'
@@ -8,7 +7,7 @@ interface CheckboxGroupProps {
   radio?: boolean
 }
 
-const CheckboxGroup = ({ options, radio }: CheckBoxProps) => {
+const CheckboxGroup = ({ options, radio }: CheckboxGroupProps) => {
   const [selectedValues, setSelectedValues] = useState<string[]>([])
   return (
     <Box flexDirection="row" flexWrap='wrap'>
@@ -31,7 +30,7 @@ const CheckboxGroup = ({ options, radio }: CheckBoxProps) => {
                 }
                 setSelectedValues([...selectedValues])
               }
-            }} //@ts-ignore
+            }}
             label={label}
             style={{
               width: 'auto',

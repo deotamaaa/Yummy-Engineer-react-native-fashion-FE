@@ -3,6 +3,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { Box, Text } from '../../components/Theme'
 
 import CheckboxGroup from './CheckboxGroup'
+import RoundedCheckboxGroup from './RoundedCheckboxGroup'
 
 const outfitType = [
   { value: 'men', label: 'For men' },
@@ -37,9 +38,11 @@ const Configuration = () => {
         <Text paddingBottom='m' variant='body'>What type of outfit you wear?</Text>
         <CheckboxGroup options={outfitType} radio />
         <Text paddingBottom='m' variant='body'>What is your Favorite Color?</Text>
-        <CheckboxGroup options={colors} valueIsColor radio />
+        <RoundedCheckboxGroup options={colors} valueIsColor />
+        <Text paddingBottom='m' variant='body'>What is your prefered Sizes?</Text>
+        <RoundedCheckboxGroup options={sizes} />
         <Text paddingBottom='m' variant='body'>What is your prefered Brands?</Text>
-        <CheckboxGroup options={prefferedBrands} radio />
+        <CheckboxGroup options={prefferedBrands} />
       </Box>
     </ScrollView>
   )
