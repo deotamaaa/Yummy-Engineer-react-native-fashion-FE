@@ -35,4 +35,5 @@ export type HomeRoutes = {
   TransactionHistory: undefined
   EditProfile: undefined
   NotificationSettings: undefined
+  Settings: undefined
 }

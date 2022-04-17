@@ -55,7 +55,7 @@ const EditProfile = () => {
           </Text>
         </Box>
       </Box>
-      <Tabs tabs={tabs}>
+      <Tabs tabs={tabs} >
         <Configuration />
         <PersonalInfo />
       </Tabs>
