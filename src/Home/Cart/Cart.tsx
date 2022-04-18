@@ -1,16 +1,26 @@
 import React from 'react'
-import { Dimensions } from 'react-native';
+import { Dimensions } from 'react-native'
 import { PanGestureHandler } from 'react-native-gesture-handler'
-import Animated from 'react-native-reanimated'
+import Animated, { useAnimatedGestureHandler, useAnimatedStyle, useSharedValue } from 'react-native-reanimated'
+import { snapPoint, translate, withSpring } from 'react-native-redash'
 import theme, { Box } from '../../components/Theme'
 
-const { width } = Dimensions.get('window');
-const height = (682 * width) / 375;
+const { width } = Dimensions.get('window')
+const height = (682 * width) / 375
 
 const Cart = () => {
+  const translateY = useSharedValue(0);
+  const onGestureEvent = useAnimatedGestureHandler({
+    onActive: ({ translationY }) => {
+      translateY.value = translationY
+    }
+  })
+  const style = useAnimatedStyle(() => ({
+    transform: [{ translateY: translateY.value }]
+  }))
   return (
     <Box flex={1} backgroundColor="secondary">
-      <PanGestureHandler      >
+      <PanGestureHandler onGestureEvent={onGestureEvent}>
         <Animated.View
           style={[
             {
@@ -23,7 +33,7 @@ const Cart = () => {
               borderBottomRightRadius: theme.borderRadii.xl,
               borderBottomLeftRadius: theme.borderRadii.xl,
             },
-            // style,
+            style,
           ]}
         />
       </PanGestureHandler>
