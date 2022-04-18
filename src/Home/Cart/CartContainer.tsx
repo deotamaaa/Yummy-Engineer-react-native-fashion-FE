@@ -21,6 +21,7 @@ const snapPoints = [(height - minHeight), 0,]
 
 const Cart = ({ children }: CartProps) => {
   const translateY = useSharedValue(0)
+  //@ts-ignore
   const onGestureEvent = useAnimatedGestureHandler<{ y?: number }>({
     onStart: (event, ctx) => {
       //@ts-ignore
@@ -30,6 +31,7 @@ const Cart = ({ children }: CartProps) => {
       //@ts-ignore
       translateY.value = clamp(
         ctx.y + translationY,
+        //@ts-ignore
         snapPoints[0],
         snapPoints[1]
       )

@@ -8,7 +8,7 @@ export interface RoundedIconProps {
   color: keyof Theme['colors']
   backgroundColor?: keyof Theme['colors']
   iconRatio: number
-  align: 'center' | 'flex-start' | 'flex-end'
+  align?: 'center' | 'flex-start' | 'flex-end'
 }
 
 const RoundedIcon = ({
