@@ -10,7 +10,7 @@ interface CheckboxGroupProps {
 const CheckboxGroup = ({ options, radio }: CheckboxGroupProps) => {
   const [selectedValues, setSelectedValues] = useState<string[]>([])
   return (
-    <Box flexDirection="row" flexWrap='wrap'>
+    <Box flexDirection="row" flexWrap="wrap">
       {options.map(({ label, value }) => {
         const index = selectedValues.indexOf(value)
         const isSelected = index !== -1

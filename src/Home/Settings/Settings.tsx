@@ -28,7 +28,10 @@ const Settings = ({ navigation }: HomeNavigationProps<'Settings'>) => {
             title="Stock Notifications"
             description="If the product you 💜 comes back in stock"
           />
-          <Notification title="New Stuff" description="Hear first, wear first" />
+          <Notification
+            title="New Stuff"
+            description="Hear first, wear first"
+          />
         </Box>
       </Box>
     </Content>

@@ -15,12 +15,18 @@ interface UnderlayProps {
   minY: number
   maxY: number
   step: number
-  startDate: number;
-  numberOfMonths: number;
+  startDate: number
+  numberOfMonths: number
 }
 
-const Underlay = ({ minY, maxY, step, startDate, numberOfMonths, }: UnderlayProps) => {
-  const minDate = moment(startDate);
+const Underlay = ({
+  minY,
+  maxY,
+  step,
+  startDate,
+  numberOfMonths,
+}: UnderlayProps) => {
+  const minDate = moment(startDate)
   return (
     <Box style={StyleSheet.absoluteFill}>
       <Box flex={1} justifyContent="space-between">
@@ -33,17 +39,25 @@ const Underlay = ({ minY, maxY, step, startDate, numberOfMonths, }: UnderlayProp
               height={ROW_HEIGHT}
               style={{ zIndex: -1, top: t === 0 ? 8 : t === 1 ? -8 : 0 }}
             >
-              <Box width={theme.spacing.xl} paddingRight='s'>
-                <Text color="darkGrey">
-                  {Math.round(lerp(minY, maxY, t))}
-                </Text>
+              <Box width={theme.spacing.xl} paddingRight="s">
+                <Text color="darkGrey">{Math.round(lerp(minY, maxY, t))}</Text>
               </Box>
-              <Box flex={1} height={1} backgroundColor="darkGrey" opacity={0.3} />
+              <Box
+                flex={1}
+                height={1}
+                backgroundColor="darkGrey"
+                opacity={0.3}
+              />
             </Box>
           )
         })}
       </Box>
-      <Box marginLeft="m" marginTop='s' height={theme.spacing.l} flexDirection="row">
+      <Box
+        marginLeft="m"
+        marginTop="s"
+        height={theme.spacing.l}
+        flexDirection="row"
+      >
         {new Array(numberOfMonths)
           .fill(0)
           .map((_, i) => minDate.clone().add(i, 'month'))

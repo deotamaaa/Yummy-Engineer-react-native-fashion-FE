@@ -6,8 +6,9 @@ export interface RoundedIconProps {
   name: string
   size: number
   color: keyof Theme['colors']
-  backgroundColor: keyof Theme['colors']
+  backgroundColor?: keyof Theme['colors']
   iconRatio: number
+  align: 'center' | 'flex-start' | 'flex-end'
 }
 
 const RoundedIcon = ({
@@ -15,13 +16,13 @@ const RoundedIcon = ({
   size,
   color,
   backgroundColor,
-  iconRatio
+  iconRatio,
 }: RoundedIconProps) => {
   const iconSize = size * iconRatio
   return (
     <Box
       borderRadius="xl"
-      justifyContent='center'
+      justifyContent="center"
       alignItems="center"
       height={size}
       width={size}
@@ -31,12 +32,12 @@ const RoundedIcon = ({
       <Text style={{ width: iconSize, height: iconSize }} {...{ color }}>
         <Icon size={iconSize} {...{ name, color }} />
       </Text>
-    </Box >
+    </Box>
   )
 }
 
 RoundedIcon.defaultProps = {
-  iconRatio: 0.7
+  iconRatio: 0.7,
 }
 
 export default RoundedIcon

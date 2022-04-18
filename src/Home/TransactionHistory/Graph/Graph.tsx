@@ -28,7 +28,7 @@ interface GraphProps {
 }
 
 const Graph = ({ data, startDate, numberOfMonths }: GraphProps) => {
-  const isFocused = useIsFocused();
+  const isFocused = useIsFocused()
   const transition = useTransition(isFocused, { duration: 650 })
 
   const canvasWidth = wWidth - theme.spacing.m * 3
@@ -54,9 +54,7 @@ const Graph = ({ data, startDate, numberOfMonths }: GraphProps) => {
         numberOfMonths={numberOfMonths}
         step={step}
       />
-      <View
-        style={{ width, height }}
-      >
+      <View style={{ width, height }}>
         {data.map((point) => {
           const i = Math.round(
             moment
@@ -75,10 +73,7 @@ const Graph = ({ data, startDate, numberOfMonths }: GraphProps) => {
               height={totalHeight}
               bottom={0}
               style={{
-                transform: [
-                  { translateY },
-                  { scaleY: transition }
-                ]
+                transform: [{ translateY }, { scaleY: transition }],
               }}
             >
               <Box

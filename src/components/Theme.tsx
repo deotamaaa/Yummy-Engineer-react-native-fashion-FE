@@ -1,5 +1,8 @@
 import { createBox, createText, createTheme, useTheme } from '@shopify/restyle'
-import { ImageStyle, TextStyle, ViewStyle } from 'react-native'
+import { Dimensions, ImageStyle, TextStyle, ViewStyle } from 'react-native'
+
+const { width } = Dimensions.get('window')
+export const aspectRatio = width / 375
 
 const theme = createTheme({
   colors: {
@@ -77,14 +80,14 @@ const theme = createTheme({
       fontSize: 16,
       fontFamily: 'SFProText-Regular',
       color: 'black',
-      textAlign: "center"
+      textAlign: 'center',
     },
     header: {
       fontSize: 12,
       lineHeight: 24,
-      fontFamily: "SFProText-Semibold",
+      fontFamily: 'SFProText-Semibold',
       color: 'secondary',
-    }
+    },
   },
   breakpoints: {
     phone: 0,
@@ -95,11 +98,11 @@ const theme = createTheme({
 export type Theme = typeof theme
 export const Box = createBox<Theme>()
 export const Text = createText<Theme>()
-type NamedStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | ImageStyle };
+type NamedStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | ImageStyle }
 export const makeStyles =
   <T extends NamedStyles<T>>(styles: (theme: Theme) => T) =>
-    () => {
-      const currentTheme = useTheme();
-      return styles(currentTheme);
-    };
+  () => {
+    const currentTheme = useTheme()
+    return styles(currentTheme)
+  }
 export default theme

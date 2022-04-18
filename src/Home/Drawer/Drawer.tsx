@@ -1,4 +1,8 @@
-import { CommonActions, DrawerActions, useNavigation } from '@react-navigation/native'
+import {
+  CommonActions,
+  DrawerActions,
+  useNavigation,
+} from '@react-navigation/native'
 import React from 'react'
 import { Dimensions, Image } from 'react-native'
 import Header from '../../components/Header'
@@ -45,12 +49,13 @@ const items: DrawerItemProps[] = [
   {
     icon: 'log-out',
     label: 'Logout',
-    onPress: (
-      navigation,
-    ) => navigation.dispatch(CommonActions.reset({
-      index: 0,
-      routes: [{ name: 'Authentication' }],
-    })),
+    onPress: (navigation) =>
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: 'Authentication' }],
+        })
+      ),
     color: 'secondary',
   },
 ]

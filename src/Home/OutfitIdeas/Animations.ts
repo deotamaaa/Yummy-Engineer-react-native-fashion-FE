@@ -13,11 +13,11 @@ import Animated, {
 import { snapPoint, useClock, useValue } from 'react-native-redash'
 
 interface WithSpringParams {
-  value: Animated.Node<number>;
-  velocity: Animated.Node<number>;
-  state: Animated.Node<State>;
-  snapPoints: number[];
-  onSnap?: (values: readonly number[]) => void;
+  value: Animated.Node<number>
+  velocity: Animated.Node<number>
+  state: Animated.Node<State>
+  snapPoints: number[]
+  onSnap?: (values: readonly number[]) => void
 }
 
 export const useSpring = ({
@@ -55,7 +55,10 @@ export const useSpring = ({
     cond(eq(gestureState, State.ACTIVE), [
       set(state.position, add(offset, value)),
       set(state.velocity, velocity),
-      set(config.toValue, snapPoint(state.position, state.velocity, snapPoints)),
+      set(
+        config.toValue,
+        snapPoint(state.position, state.velocity, snapPoints)
+      ),
       cond(
         eq(config.toValue, 0),
         [
@@ -67,7 +70,7 @@ export const useSpring = ({
           set(config.overshootClamping, 1),
           set(config.restSpeedThreshold, 100),
           set(config.restDisplacementThreshold, 100),
-        ],
+        ]
       ),
     ]),
     cond(eq(gestureState, State.END), [

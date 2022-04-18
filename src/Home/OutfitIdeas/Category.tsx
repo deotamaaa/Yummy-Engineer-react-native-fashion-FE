@@ -4,23 +4,21 @@ import { Text } from '../../components'
 import { Box } from '../../components/Theme'
 import BorderlessTap from '../../components/BorderlessTap'
 
-
-const INNER_RADIUS = 30;
-const OUTER_RADIUS = 34;
-
+const INNER_RADIUS = 30
+const OUTER_RADIUS = 34
 
 interface CategoryProps {
   category: {
-    id: string;
-    title: string;
-    color: string;
-  };
+    id: string
+    title: string
+    color: string
+  }
 }
 
 const Category = ({
-  category: { color: backgroundColor, title, },
+  category: { color: backgroundColor, title },
 }: CategoryProps) => {
-  const [selected, setSelected] = useState(false);
+  const [selected, setSelected] = useState(false)
   return (
     <BorderlessTap onPress={() => setSelected((prev) => !prev)}>
       <Box marginLeft="m" marginTop="s" alignItems="center">
@@ -30,18 +28,16 @@ const Category = ({
           justifyContent="center"
           alignItems="center"
         >
-          {
-            selected && (
-              <View
-                style={{
-                  ...StyleSheet.absoluteFillObject,
-                  borderRadius: OUTER_RADIUS,
-                  borderColor: backgroundColor,
-                  borderWidth: 1,
-                }}
-              />
-            )
-          }
+          {selected && (
+            <View
+              style={{
+                ...StyleSheet.absoluteFillObject,
+                borderRadius: OUTER_RADIUS,
+                borderColor: backgroundColor,
+                borderWidth: 1,
+              }}
+            />
+          )}
           <View
             style={{
               width: INNER_RADIUS * 2,
@@ -56,8 +52,7 @@ const Category = ({
         </Text>
       </Box>
     </BorderlessTap>
-  );
+  )
 }
-
 
 export default Category

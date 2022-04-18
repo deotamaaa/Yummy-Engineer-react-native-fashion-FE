@@ -1,16 +1,21 @@
-import moment from 'moment';
-import React from 'react';
-import { Text } from '../../components';
-import { Box } from '../../components/Theme';
-import { DataPoint } from './Graph';
+import moment from 'moment'
+import React from 'react'
+import { Text } from '../../components'
+import { Box } from '../../components/Theme'
+import { DataPoint } from './Graph'
 
 interface TransactionProps {
-  transaction: DataPoint;
+  transaction: DataPoint
 }
 
 const Transaction = ({ transaction }: TransactionProps) => {
   return (
-    <Box marginTop="l" flexDirection="row" justifyContent="space-between" alignItems="center">
+    <Box
+      marginTop="l"
+      flexDirection="row"
+      justifyContent="space-between"
+      alignItems="center"
+    >
       <Box>
         <Box flexDirection="row" alignItems="center" marginBottom="s">
           <Box
@@ -22,15 +27,17 @@ const Transaction = ({ transaction }: TransactionProps) => {
         </Box>
         <Box>
           <Text>{`${transaction.value} IDR - ${moment(transaction.date).format(
-            'DD MMMM,  YYYY',
+            'DD MMMM,  YYYY'
           )}`}</Text>
         </Box>
       </Box>
       <Box>
-        <Text color="secondary" variant='title3'>See more</Text>
+        <Text color="secondary" variant="title3">
+          See more
+        </Text>
       </Box>
     </Box>
-  );
-};
+  )
+}
 
-export default Transaction;
+export default Transaction

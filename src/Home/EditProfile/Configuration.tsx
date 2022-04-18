@@ -9,7 +9,7 @@ const outfitType = [
   { value: 'men', label: 'For men' },
   { value: 'women', label: 'For women' },
   { value: 'both', label: 'For both' },
-];
+]
 
 const prefferedBrands = [
   { value: 'adidas', label: 'Adidas' },
@@ -19,9 +19,15 @@ const prefferedBrands = [
   { value: 'billionaire-boys-club', label: 'Billionaire Boys Club' },
   { value: 'jordan', label: 'Jordan' },
   { value: 'le-coq-sportif', label: 'Le Coq Sportif' },
-];
+]
 
-const sizes = [{ value: 's' }, { value: 'm' }, { value: 'l' }, { value: 'xl' }, { value: 'xxl' }];
+const sizes = [
+  { value: 's' },
+  { value: 'm' },
+  { value: 'l' },
+  { value: 'xl' },
+  { value: 'xxl' },
+]
 
 const colors = [
   { value: '#0C0D34' },
@@ -29,19 +35,27 @@ const colors = [
   { value: '#50B9DE' },
   { value: '#00D99A' },
   { value: '#FE5E33' },
-];
+]
 
 const Configuration = () => {
   return (
     <ScrollView>
-      <Box padding='l'>
-        <Text paddingBottom='m' variant='body'>What type of outfit you wear?</Text>
+      <Box padding="l">
+        <Text paddingBottom="m" variant="body">
+          What type of outfit you wear?
+        </Text>
         <CheckboxGroup options={outfitType} radio />
-        <Text paddingBottom='m' variant='body'>What is your Favorite Color?</Text>
+        <Text paddingBottom="m" variant="body">
+          What is your Favorite Color?
+        </Text>
         <RoundedCheckboxGroup options={colors} valueIsColor />
-        <Text paddingBottom='m' variant='body'>What is your prefered Sizes?</Text>
+        <Text paddingBottom="m" variant="body">
+          What is your prefered Sizes?
+        </Text>
         <RoundedCheckboxGroup options={sizes} />
-        <Text paddingBottom='m' variant='body'>What is your prefered Brands?</Text>
+        <Text paddingBottom="m" variant="body">
+          What is your prefered Brands?
+        </Text>
         <CheckboxGroup options={prefferedBrands} />
       </Box>
     </ScrollView>

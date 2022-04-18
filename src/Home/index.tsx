@@ -19,7 +19,8 @@ export const HomeNavigator = () => {
       drawerContent={() => <DrawerContent />}
       drawerStyle={{
         width: DRAWER_WIDTH,
-      }}>
+      }}
+    >
       <Drawer.Screen name="OutfitIdeas" component={OutfitIdeas} />
       <Drawer.Screen name="FavoriteOutfits" component={FavoriteOutfits} />
       <Drawer.Screen name="TransactionHistory" component={TransactionHistory} />

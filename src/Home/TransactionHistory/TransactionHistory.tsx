@@ -9,8 +9,8 @@ import TopCurve from './TopCurve'
 import Graph, { DataPoint } from './Graph/Graph'
 import Transaction from './Transaction'
 
-const startDate = new Date('2021-05-10').getTime();
-const numberOfMonths = 6;
+const startDate = new Date('2021-05-10').getTime()
+const numberOfMonths = 6
 const footerHeight = Dimensions.get('window').width / 3.3
 
 const data: DataPoint[] = [
@@ -55,7 +55,7 @@ const data: DataPoint[] = [
 const TransactionHistory = ({
   navigation,
 }: HomeNavigationProps<'TransactionHistory'>) => {
-  const styles = useStyles();
+  const styles = useStyles()
   return (
     <Box flex={1} backgroundColor="white">
       <Header
@@ -63,18 +63,31 @@ const TransactionHistory = ({
         left={{ icon: 'menu', onPress: () => navigation.openDrawer() }}
         right={{ icon: 'share', onPress: () => true }}
       />
-      <Box flex={1} padding='l'>
-        <Box flexDirection='row' justifyContent='space-between' alignItems='flex-end'>
+      <Box flex={1} padding="l">
+        <Box
+          flexDirection="row"
+          justifyContent="space-between"
+          alignItems="flex-end"
+        >
           <Box>
-            <Text variant='header' color='black' opacity={0.3}>TOTAL SPENT</Text>
-            <Text variant='title2'>$619,69</Text>
+            <Text variant="header" color="black" opacity={0.3}>
+              TOTAL SPENT
+            </Text>
+            <Text variant="title2">$619,69</Text>
           </Box>
-          <Box backgroundColor='primary' borderRadius='l' padding='s'>
-            <Text color='white'>All Time</Text>
+          <Box backgroundColor="primary" borderRadius="l" padding="s">
+            <Text color="white">All Time</Text>
           </Box>
         </Box>
-        <Graph data={data} startDate={startDate} numberOfMonths={numberOfMonths} />
-        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollView}>
+        <Graph
+          data={data}
+          startDate={startDate}
+          numberOfMonths={numberOfMonths}
+        />
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.scrollView}
+        >
           {data.map((transaction) => (
             <Transaction key={transaction.id} transaction={transaction} />
           ))}
@@ -82,15 +95,18 @@ const TransactionHistory = ({
       </Box>
       <TopCurve {...{ footerHeight }} />
       <Box
-        position='absolute'
+        position="absolute"
         left={0}
         right={0}
         bottom={0}
         height={footerHeight}
       >
-        <Image style={styles.footer} source={require('../../components/assets/patterns/3.png')} />
+        <Image
+          style={styles.footer}
+          source={require('../../components/assets/patterns/3.png')}
+        />
       </Box>
-    </Box >
+    </Box>
   )
 }
 
@@ -104,6 +120,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   scrollView: {
     paddingBottom: footerHeight,
   },
-}));
+}))
 
 export default TransactionHistory

@@ -34,7 +34,7 @@ const Content = ({ children }: ContentProp) => {
       <Svg
         viewBox={[0, 10, viewBox.width, viewBox.height].join(' ')}
         width={width}
-        height='450'
+        height="450"
       >
         <Path fill={theme.colors.white} d={d} />
       </Svg>

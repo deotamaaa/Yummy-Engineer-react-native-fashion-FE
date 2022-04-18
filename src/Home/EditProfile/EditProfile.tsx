@@ -10,7 +10,7 @@ import PersonalInfo from './PersonalInfo'
 const tabs = [
   { id: 'configuration', title: 'Configuration' },
   { id: 'info', title: 'Personal Info' },
-];
+]
 
 const EditProfile = () => {
   const navigation = useNavigation()
@@ -55,7 +55,7 @@ const EditProfile = () => {
           </Text>
         </Box>
       </Box>
-      <Tabs tabs={tabs} >
+      <Tabs tabs={tabs}>
         <Configuration />
         <PersonalInfo />
       </Tabs>

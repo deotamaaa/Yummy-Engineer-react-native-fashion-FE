@@ -1,7 +1,11 @@
 import React, { useRef, useState } from 'react'
 import { Dimensions } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import { Transition, Transitioning, TransitioningView } from 'react-native-reanimated'
+import {
+  Transition,
+  Transitioning,
+  TransitioningView,
+} from 'react-native-reanimated'
 import { Header } from '../../components'
 import { HomeNavigationProps } from '../../components/Navigation'
 import theme, { Box } from '../../components/Theme'
@@ -68,8 +72,8 @@ const FavoritesOutfits = ({
 }: HomeNavigationProps<'FavoriteOutfits'>) => {
   const transition = (
     <Transition.Together>
-      <Transition.Out type='fade' durationMs={1000} />
-      <Transition.In type='fade' durationMs={1000} />
+      <Transition.Out type="fade" durationMs={1000} />
+      <Transition.In type="fade" durationMs={1000} />
     </Transition.Together>
   )
   const list = useRef<TransitioningView>(null)
@@ -104,17 +108,13 @@ const FavoritesOutfits = ({
                 {outfits
                   .filter((_, i) => i % 2 === 0)
                   .map((outfit) => (
-                    <Outfit
-                      key={outfit.id}
-                      outfit={outfit}
-                      width={width}
-                    />
+                    <Outfit key={outfit.id} outfit={outfit} width={width} />
                   ))}
               </Box>
             </Box>
           </Transitioning.View>
         </ScrollView>
-      </Box >
+      </Box>
       <TopCurve footerHeight={footerHeight} />
       <Box
         position="absolute"
@@ -136,7 +136,7 @@ const FavoritesOutfits = ({
           }}
         />
       </Box>
-    </Box >
+    </Box>
   )
 }
 

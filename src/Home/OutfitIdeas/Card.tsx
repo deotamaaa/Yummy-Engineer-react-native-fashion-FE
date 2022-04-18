@@ -1,7 +1,11 @@
 import React from 'react'
 import { Dimensions, ImageRequireSource, StyleSheet } from 'react-native'
 import { PanGestureHandler } from 'react-native-gesture-handler'
-import Animated, { add, Extrapolate, interpolate } from 'react-native-reanimated'
+import Animated, {
+  add,
+  Extrapolate,
+  interpolate,
+} from 'react-native-reanimated'
 import { mix, mixColor, usePanGestureHandler } from 'react-native-redash'
 import { Box } from '../../components/Theme'
 
@@ -36,7 +40,6 @@ const Card = ({ position, onSwipe, source, step }: CardProps) => {
     state,
     snapPoints: [-wWidth, 0, wWidth],
     onSnap: ([x]) => x !== 0 && onSwipe(),
-
   })
   const translateY = add(
     translateYOffset,
@@ -72,7 +75,7 @@ const Card = ({ position, onSwipe, source, step }: CardProps) => {
               ...StyleSheet.absoluteFillObject,
               width: undefined,
               height: undefined,
-              transform: [{ scale: imageScale }]
+              transform: [{ scale: imageScale }],
             }}
           />
         </Animated.View>

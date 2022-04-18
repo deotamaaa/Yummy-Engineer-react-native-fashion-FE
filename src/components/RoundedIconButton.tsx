@@ -1,5 +1,5 @@
 import React from 'react'
-import { BorderlessButton} from 'react-native-gesture-handler'
+import { BorderlessButton } from 'react-native-gesture-handler'
 import RoundedIcon, { RoundedIconProps } from './RoundedIcon'
 
 interface RoundedIconButtonProps extends RoundedIconProps {
@@ -16,7 +16,7 @@ const RoundedIconButton = ({ onPress, ...props }: RoundedIconButtonProps) => {
 }
 
 RoundedIconButton.defaultProps = {
-  iconRatio: 0.7
+  iconRatio: 0.7,
 }
 
 export default RoundedIconButton

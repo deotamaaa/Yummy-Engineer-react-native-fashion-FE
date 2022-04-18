@@ -1,8 +1,7 @@
 import React from 'react'
-import { View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-import Category from './Category';
-
+import { View } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
+import Category from './Category'
 
 const categories = [
   {
@@ -30,14 +29,13 @@ const categories = [
     title: 'Accessories',
     color: '#FFE8E9',
   },
-];
-
+]
 
 const Categories = () => {
   return (
     <View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {categories.map(category => (
+        {categories.map((category) => (
           <Category key={category.id} category={category} />
         ))}
       </ScrollView>

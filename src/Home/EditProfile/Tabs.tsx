@@ -69,7 +69,7 @@ const Tabs = ({ tabs, children }: TabsProps) => {
         }}
       >
         {Children.map(children, (child, index) => (
-          <Box flex={1} key={index} width={width} >
+          <Box flex={1} key={index} width={width}>
             {child}
           </Box>
         ))}

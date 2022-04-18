@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { RoundedIcon, BorderlessTap } from '../../components'
 import { Box } from '../../components/Theme'
 
-
 interface OutfitProps {
   outfit: {
     color: string
