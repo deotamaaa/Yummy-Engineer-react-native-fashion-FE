@@ -1,6 +1,6 @@
 import React from 'react'
 import { Header } from '../../components'
-import ContentFooter from '../../components/ContentFooter'
+import Content from '../../components/Content'
 import { HomeNavigationProps } from '../../components/Navigation'
 import { Box } from '../../components/Theme'
 
@@ -8,7 +8,7 @@ import Notification from './Notification'
 
 const Settings = ({ navigation }: HomeNavigationProps<'Settings'>) => {
   return (
-    <ContentFooter>
+    <Content>
       <Box flex={1} backgroundColor="white">
         <Header
           title="SETTINGS"
@@ -31,7 +31,7 @@ const Settings = ({ navigation }: HomeNavigationProps<'Settings'>) => {
           <Notification title="New Stuff" description="Hear first, wear first" />
         </Box>
       </Box>
-    </ContentFooter>
+    </Content>
   )
 }
 

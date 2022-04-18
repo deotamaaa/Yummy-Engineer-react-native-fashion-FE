@@ -36,4 +36,5 @@ export type HomeRoutes = {
   EditProfile: undefined
   NotificationSettings: undefined
   Settings: undefined
+  Cart: undefined
 }
