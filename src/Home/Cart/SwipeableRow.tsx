@@ -1,19 +1,21 @@
 import React, { ReactNode } from 'react'
 import { Dimensions, StyleSheet, View } from 'react-native'
 import { PanGestureHandler } from 'react-native-gesture-handler'
-import Animated, { useAnimatedGestureHandler, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated'
+import Animated, { runOnJS, useAnimatedGestureHandler, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated'
 import { snapPoint } from 'react-native-redash'
 import { theme } from '../../components'
 import { aspectRatio } from '../../components/Theme'
 
 interface SwipeableRowProps {
   children: ReactNode
+  onDelete: () => void
 }
 
 const { width } = Dimensions.get('window')
+const finalDestination = width
 const snapPoints = [-85 * aspectRatio, 0, width]
 
-const SwipeableRow = ({ children }: SwipeableRowProps) => {
+const SwipeableRow = ({ children, onDelete }: SwipeableRowProps) => {
   const translateX = useSharedValue(0)
   const onGestureEvent = useAnimatedGestureHandler<{ x: number }>({
     onStart: (_, ctx) => {
@@ -23,10 +25,18 @@ const SwipeableRow = ({ children }: SwipeableRowProps) => {
       translateX.value = translationX
     },
     onEnd: ({ velocityX }) => {
-      translateX.value = withSpring(snapPoint(translateX.value, velocityX, snapPoints), {
+      const dest = snapPoint(translateX.value, velocityX, snapPoints)
+      translateX.value = withSpring(
+        dest, {
         overshootClamping: true
-      })
-
+      },
+        () => {
+          if (dest === finalDestination) {
+            runOnJS(onDelete)()
+            translateX.value = 0
+          }
+        }
+      )
     }
   })
   const style = useAnimatedStyle(() => ({
