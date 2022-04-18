@@ -1,18 +1,46 @@
 import React from 'react'
-import { Box } from '../../components/Theme'
+import theme, { Box, Text } from '../../components/Theme'
+import SwipeableRow from './SwipeableRow'
 
 interface ItemProps { }
 
 const Item = () => {
   return (
-    <Box padding="m" flexDirection="row">
-      <Box
-        width={120}
-        height={120}
-        borderRadius="m"
-        backgroundColor="yellow"
-      ></Box>
-    </Box>
+    <SwipeableRow>
+
+      <Box padding="s" flexDirection="row">
+        <Box
+          width={120}
+          height={120}
+          borderRadius="m"
+          backgroundColor="yellow"
+          opacity={0.5}
+        />
+        <Box padding="m" flex={1}>
+          <Text variant="header">Size M, L</Text>
+          <Text variant="title3">Short Sleeve Organic Top</Text>
+          <Text variant="body" color="primary">
+            $430
+          </Text>
+        </Box>
+        <Box>
+          <Box
+            backgroundColor="secondary"
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: 30,
+              height: 30,
+              borderRadius: 15,
+            }}
+          >
+            <Text variant="header" color="white">
+              x2
+            </Text>
+          </Box>
+        </Box>
+      </Box >
+    </SwipeableRow>
   )
 }
 

@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import Svg, { Path } from 'react-native-svg'
 import { Header } from '../../components'
 import { HomeNavigationProps } from '../../components/Navigation'
-import theme, { aspectRatio, Box, Text } from '../../components/Theme'
+import theme, { aspectRatio, Box } from '../../components/Theme'
 import CartContainer from './CartContainer'
 import Item from './Item'
 
@@ -25,9 +25,10 @@ const Cart = ({ navigation }: HomeNavigationProps<'Cart'>) => {
         </Box>
       </Box>
       <Box
+        flex={1}
         style={{
           position: 'absolute',
-          bottom: -height,
+          top: 0,
           left: 0,
           right: 0,
           height,
@@ -39,6 +40,7 @@ const Cart = ({ navigation }: HomeNavigationProps<'Cart'>) => {
           borderBottomRightRadius: theme.borderRadii.xl,
           borderBottomLeftRadius: theme.borderRadii.xl,
         }}
+        contentContainerStyle={{ paddingVertical: 50 * aspectRatio }}
         showsVerticalScrollIndicator={false}
       >
         <Item />

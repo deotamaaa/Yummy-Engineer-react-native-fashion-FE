@@ -5,8 +5,9 @@ import Animated, {
   useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
+  withSpring,
 } from 'react-native-reanimated'
-import { snapPoint, withSpring, clamp } from 'react-native-redash'
+import { snapPoint, clamp } from 'react-native-redash'
 import theme, { aspectRatio, Box } from '../../components/Theme'
 
 interface CartProps {
@@ -16,12 +17,12 @@ interface CartProps {
 const { width } = Dimensions.get('window')
 const height = (730 * aspectRatio) / 1.125;
 const minHeight = 228 * aspectRatio;
-const snapPoints = [-(height - minHeight), 0]
+const snapPoints = [(height - minHeight), 0,]
 
 const Cart = ({ children }: CartProps) => {
   const translateY = useSharedValue(0)
   const onGestureEvent = useAnimatedGestureHandler<{ y?: number }>({
-    onStart: (_event, ctx) => {
+    onStart: (event, ctx) => {
       //@ts-ignore
       ctx.y = translateY.value
     },
