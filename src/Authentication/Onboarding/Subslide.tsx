@@ -21,10 +21,9 @@ const Subslide = ({ subtitle, description, last, onPress }: SubslideProps) => {
         {description}
       </Text>
       <Button
-        label={last ? "Let's get started" : 'Next'}
+        style={undefined} label={last ? "Let's get started" : 'Next'}
         variant={last ? 'primary' : 'default'}
-        {...{ onPress }}
-      />
+        {...{ onPress }} />
     </View>
   )
 }

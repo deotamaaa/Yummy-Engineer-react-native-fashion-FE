@@ -6,9 +6,11 @@ import { Box, Theme } from '../../../components/Theme'
 import Underlay from './Underlay'
 import { lerp } from './Helper'
 import moment from 'moment'
-import Animated, { divide, multiply, sub } from 'react-native-reanimated'
-import { useIsFocused } from '@react-navigation/native'
-import { useTransition } from 'react-native-redash'
+import Animated, { divide, multiply, sub, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
+import { useFocusEffect, useIsFocused } from '@react-navigation/native'
+import { useTiming } from 'react-native-redash'
+// import { useTransition } from 'react-native-redash'
+
 
 const { width: wWidth } = Dimensions.get('window')
 const aspectRatio = 195 / 305
@@ -29,8 +31,13 @@ interface GraphProps {
 
 const Graph = ({ data, startDate, numberOfMonths }: GraphProps) => {
   const isFocused = useIsFocused()
-  const transition = useTransition(isFocused, { duration: 650 })
+  // const transition = useTiming(isFocused, { duration: 650 })
+  const transition = useSharedValue(0)
 
+  useFocusEffect(() => {
+    transition.value = withTiming(1, { duration: 650 })
+    return () => (transition.value = 0)
+  })
   const canvasWidth = wWidth - theme.spacing.m * 3
   const canvasHeight = canvasWidth * aspectRatio
 
@@ -61,20 +68,27 @@ const Graph = ({ data, startDate, numberOfMonths }: GraphProps) => {
               .duration(moment(point.date).diff(moment(startDate)))
               .asMonths()
           )
+          if (point.value === 0) {
+            return null
+          }
           const totalHeight = lerp(0, height, point.value / maxY)
-          const currentHeight = multiply(totalHeight, transition)
-          const translateY = divide(sub(totalHeight, currentHeight), 2)
+          const style = useAnimatedStyle(() => {
+            const currentHeight = totalHeight * transition.value
+            const translateY = (totalHeight - currentHeight) / 2
+            return {
+              transform: [{ translateY }, { scaleY: transition.value }],
+            }
+          })
+
           return (
             <AnimatedBox
               key={point.id}
               position="absolute"
               left={i * step}
               width={step}
-              height={totalHeight}
+              height={lerp(0, height, point.value / maxY)}
               bottom={0}
-              style={{
-                transform: [{ translateY }, { scaleY: transition }],
-              }}
+              style={style}
             >
               <Box
                 backgroundColor={point.color}

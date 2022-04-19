@@ -1,4 +1,4 @@
-import { backgroundColor, BoxProps } from '@shopify/restyle'
+import { BoxProps } from '@shopify/restyle'
 import React, { ReactNode } from 'react'
 import { BorderlessButton } from 'react-native-gesture-handler'
 import { Box, Theme } from '../../components/Theme'
