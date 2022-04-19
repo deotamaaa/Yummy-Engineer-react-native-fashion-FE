@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Text } from '../../components/Theme'
+import theme, { Box, Text } from '../../components/Theme'
 import SwipeableRow from './SwipeableRow'
 
 interface ItemProps {

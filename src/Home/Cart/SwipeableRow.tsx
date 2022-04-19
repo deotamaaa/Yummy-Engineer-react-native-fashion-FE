@@ -1,11 +1,8 @@
-import React, { ReactNode, useRef } from 'react'
+import React, { ReactNode } from 'react'
 import { Dimensions, StyleSheet, View } from 'react-native'
 import { PanGestureHandler } from 'react-native-gesture-handler'
 import Animated, {
   runOnJS,
-  Transition,
-  Transitioning,
-  TransitioningView,
   useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
@@ -17,23 +14,16 @@ import { aspectRatio, Box, Text } from '../../components/Theme'
 import { LinearGradient } from 'expo-linear-gradient'
 
 interface SwipeableRowProps {
-  children: ReactNode
+  children?: ReactNode
   onDelete: () => void
+  height?: number
 }
 
 const { width } = Dimensions.get('window')
 const finalDestination = width
 const snapPoints = [-85 * aspectRatio, 0, width]
 
-const transition = (
-  <Transition.Together>
-    <Transition.Out type="fade" durationMs={1000} />
-    <Transition.In type="fade" durationMs={1000} />
-  </Transition.Together>
-)
-
-const SwipeableRow = ({ children, onDelete }: SwipeableRowProps) => {
-  const ref = useRef<TransitioningView>(null)
+const SwipeableRow = ({ children, onDelete, height }: SwipeableRowProps) => {
   const translateX = useSharedValue(0)
   //@ts-ignore
   const onGestureEvent = useAnimatedGestureHandler<{ x: number }>({
@@ -74,7 +64,7 @@ const SwipeableRow = ({ children, onDelete }: SwipeableRowProps) => {
   }))
 
   return (
-    <Transitioning.View ref={ref} transition={transition}>
+    <View>
       <Animated.View style={[StyleSheet.absoluteFillObject, deleteStyle]}>
         <LinearGradient
           style={StyleSheet.absoluteFill}
@@ -123,7 +113,7 @@ const SwipeableRow = ({ children, onDelete }: SwipeableRowProps) => {
       <PanGestureHandler onGestureEvent={onGestureEvent}>
         <Animated.View style={style}>{children}</Animated.View>
       </PanGestureHandler>
-    </Transitioning.View>
+    </View>
   )
 }
 

@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react'
-import { Dimensions, View } from 'react-native'
+import React, { FC, ReactNode } from 'react'
+import { View } from 'react-native'
 import { PanGestureHandler } from 'react-native-gesture-handler'
 import Animated, {
   useAnimatedGestureHandler,
@@ -9,15 +9,16 @@ import Animated, {
 } from 'react-native-reanimated'
 import { snapPoint, clamp } from 'react-native-redash'
 import theme, { aspectRatio, Box } from '../../components/Theme'
+import Checkout from './Checkout'
 
 interface CartProps {
   children: ReactNode
+  checkoutComponent: FC<{ minHeight: number }>
 }
 
-const { width } = Dimensions.get('window')
-const height = (730 * aspectRatio) / 1.125;
+const height = (830 * aspectRatio) / 1.125;
 const minHeight = 228 * aspectRatio;
-const snapPoints = [(height - minHeight), 0,]
+const snapPoints = [-(height - minHeight), 0,]
 
 const Cart = ({ children }: CartProps) => {
   const translateY = useSharedValue(0)
@@ -37,10 +38,11 @@ const Cart = ({ children }: CartProps) => {
       )
     },
     onEnd: ({ velocityY }) => {
-      const dest = snapPoint(translateY.value, velocityY, [
-        -(height - minHeight),
-        0,
-      ])
+      const dest = snapPoint(
+        translateY.value,
+        velocityY,
+        snapPoints
+      )
       translateY.value = withSpring(dest, { overshootClamping: true })
     },
   })
@@ -49,7 +51,8 @@ const Cart = ({ children }: CartProps) => {
     transform: [{ translateY: translateY.value }],
   }))
   return (
-    <Box flex={1} backgroundColor="secondary">
+    <Box flex={1}>
+      <Checkout minHeight={minHeight} />
       <PanGestureHandler onGestureEvent={onGestureEvent}>
         <Animated.View
           style={[
@@ -58,7 +61,7 @@ const Cart = ({ children }: CartProps) => {
               top: 0,
               left: 0,
               right: 0,
-              height,
+              height: height * 1,
               backgroundColor: 'white',
               overflow: 'hidden',
               borderBottomRightRadius: theme.borderRadii.xl,
