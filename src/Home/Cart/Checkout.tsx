@@ -48,7 +48,7 @@ interface LineItemProps {
   value: number
 }
 
-const LineItem = ({ label, value }) => {
+const LineItem = ({ label, value }: LineItemProps) => {
   return (
     <Box flexDirection='row' paddingVertical='m' >
       <Box flex={1}>

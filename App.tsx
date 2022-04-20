@@ -9,6 +9,9 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { HomeNavigator, assets as homeAssets } from './src/Home'
 import { AppRoutes } from './src/components/Navigation'
 
+import axios from 'axios'
+
+axios.defaults.baseURL = 'http://localhost:8000/api/';
 
 const fonts = {
   'SFProText-Bold': require('./assets/fonts/SF-Pro-Text-Bold.otf'),
