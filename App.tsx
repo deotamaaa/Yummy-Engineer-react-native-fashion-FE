@@ -11,7 +11,8 @@ import { AppRoutes } from './src/components/Navigation'
 
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://localhost:8000/api/';
+//Base url nya IP komputer
+axios.defaults.baseURL = 'http://192.168.100.31:8000/api/';
 
 const fonts = {
   'SFProText-Bold': require('./assets/fonts/SF-Pro-Text-Bold.otf'),

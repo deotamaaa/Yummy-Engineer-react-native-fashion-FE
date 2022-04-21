@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 
 import { Button, Container, Text } from '../../components'
 import { Box } from '../../components/Theme'
@@ -10,6 +10,7 @@ import * as Yup from 'yup'
 import Footer from '../components/Footer'
 import { AuthNavigationProps } from '../../components/Navigation'
 import { ScrollView } from 'react-native-gesture-handler'
+import axios from 'axios'
 
 const LoginSchema = Yup.object().shape({
   firstName: Yup.string().required('First name is required'),
@@ -17,8 +18,8 @@ const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Email is Required'),
   password: Yup.string().required('Password is Required').min(6, 'Too short'),
   passwordConfirm: Yup.string()
-    .required('Required')
-    .equals([Yup.ref('password')], "'Password didn't match!"),
+    .equals([Yup.ref('password')], "'Password didn't match!")
+    .required('Required'),
 })
 
 interface FormData {
@@ -43,16 +44,31 @@ const Signup = ({ navigation }: AuthNavigationProps<'Signup'>) => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    defaultValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      passwordConfirm: '',
-    },
     resolver: yupResolver(LoginSchema),
   })
-  const onSubmit = () => alert('Submitted')
+
+
+  const onSubmit = (data: FormData) => {
+    axios.post('register', {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      password: data.password,
+      passwordConfirm: data.passwordConfirm,
+    })
+    console.log(data, 'success register user')
+  }
+  // async (e: SyntheticEvent) => {
+
+  //   const response = await axios.post('http://localhost:8000/api/register', {
+  //     firstName: '',
+  //     lastName: '',
+  //     email: '',
+  //     password: '',
+  //     passwordConfirm: '',
+  //   })
+  //   console.log(response.data)
+  // }
 
   return (
     <Container pattern={1} {...{ footer }}>
@@ -66,6 +82,7 @@ const Signup = ({ navigation }: AuthNavigationProps<'Signup'>) => {
       </Box>
       <ScrollView>
         <Box paddingHorizontal='xl' paddingTop='l'>
+
           <Text variant="tagName">First Name</Text>
           <Controller
             name="firstName"
