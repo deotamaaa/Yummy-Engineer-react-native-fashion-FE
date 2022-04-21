@@ -48,8 +48,8 @@ const Signup = ({ navigation }: AuthNavigationProps<'Signup'>) => {
   })
 
 
-  const onSubmit = (data: FormData) => {
-    axios.post('register', {
+  const onSubmit = async (data: FormData) => {
+    await axios.post('register', {
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
@@ -58,18 +58,6 @@ const Signup = ({ navigation }: AuthNavigationProps<'Signup'>) => {
     })
     console.log(data, 'success register user')
   }
-  // async (e: SyntheticEvent) => {
-
-  //   const response = await axios.post('http://localhost:8000/api/register', {
-  //     firstName: '',
-  //     lastName: '',
-  //     email: '',
-  //     password: '',
-  //     passwordConfirm: '',
-  //   })
-  //   console.log(response.data)
-  // }
-
   return (
     <Container pattern={1} {...{ footer }}>
       <Box paddingHorizontal='xl' paddingTop='xl' >

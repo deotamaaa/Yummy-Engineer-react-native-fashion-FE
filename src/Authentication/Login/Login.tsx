@@ -11,6 +11,7 @@ import * as Yup from 'yup'
 import Footer from '../components/Footer'
 import { AuthNavigationProps } from '../../components/Navigation'
 import { CommonActions } from '@react-navigation/native'
+import axios from 'axios'
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -45,13 +46,22 @@ const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
     },
     resolver: yupResolver(LoginSchema),
   })
-  const onSubmit = () =>
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{ name: 'Home' }],
-      })
-    )
+
+  const onSubmit = async (data: FormData) => {
+    await axios.post('login', {
+      email: data.email,
+      password: data.password,
+    }).then(() => {
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: 'Home' }],
+        })
+      )
+    }).catch(() => alert('Invalid email or password'))
+  }
+
+
   return (
     <Container pattern={0} {...{ footer }}>
       <Box padding="xl">
