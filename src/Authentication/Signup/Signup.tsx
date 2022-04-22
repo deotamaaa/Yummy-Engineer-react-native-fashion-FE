@@ -47,7 +47,7 @@ const Signup = ({ navigation }: AuthNavigationProps<'Signup'>) => {
     resolver: yupResolver(LoginSchema),
   })
 
-
+  //TODO: Add validate email exist
   const onSubmit = async (data: FormData) => {
     await axios.post('register', {
       firstName: data.firstName,
@@ -55,6 +55,11 @@ const Signup = ({ navigation }: AuthNavigationProps<'Signup'>) => {
       email: data.email,
       password: data.password,
       passwordConfirm: data.passwordConfirm,
+    }).then((res) => {
+      if (res.status !== 200) {
+        console.log(res)
+      } else {
+      }
     })
     console.log(data, 'success register user')
   }
