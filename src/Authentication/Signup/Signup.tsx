@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from 'react'
+import React from 'react'
 
 import { Button, Container, Text } from '../../components'
 import { Box } from '../../components/Theme'
