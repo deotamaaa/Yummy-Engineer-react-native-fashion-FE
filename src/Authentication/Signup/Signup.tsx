@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Button, Container, Text } from '../../components'
 import { Box } from '../../components/Theme'
@@ -31,6 +31,8 @@ interface FormData {
 }
 
 const Signup = ({ navigation }: AuthNavigationProps<'Signup'>) => {
+  const [redirect, setRedirect] = useState(false)
+
   const footer = (
     <Footer
       title="Already have an account?"
@@ -47,25 +49,20 @@ const Signup = ({ navigation }: AuthNavigationProps<'Signup'>) => {
     resolver: yupResolver(LoginSchema),
   })
 
-  //TODO: Add validate email exist
-  const onSubmit = async (data: FormData) => {
-    await axios.post('register', {
+  const userSignUp = (data: FormData) => {
+    axios.post('register', {
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
       password: data.password,
       passwordConfirm: data.passwordConfirm,
-    }).then((res) => {
-      if (res.status !== 200) {
-        console.log(res)
-      } else {
-      }
     })
-    console.log(data, 'success register user')
+    navigation.navigate('Login')
   }
+
   return (
     <Container pattern={1} {...{ footer }}>
-      <Box paddingHorizontal='xl' paddingTop='xl' >
+      <Box paddingHorizontal="xl" paddingTop="xl">
         <Text variant="title1" textAlign="center" marginBottom="s">
           Create Account
         </Text>
@@ -74,8 +71,7 @@ const Signup = ({ navigation }: AuthNavigationProps<'Signup'>) => {
         </Text>
       </Box>
       <ScrollView>
-        <Box paddingHorizontal='xl' paddingTop='l'>
-
+        <Box paddingHorizontal="xl" paddingTop="l">
           <Text variant="tagName">First Name</Text>
           <Controller
             name="firstName"
@@ -99,7 +95,9 @@ const Signup = ({ navigation }: AuthNavigationProps<'Signup'>) => {
               />
             )}
           />
-          {errors.firstName && <Text color="danger">{errors.firstName?.message}</Text>}
+          {errors.firstName && (
+            <Text color="danger">{errors.firstName?.message}</Text>
+          )}
 
           <Text variant="tagName">Last Name</Text>
           <Controller
@@ -124,7 +122,9 @@ const Signup = ({ navigation }: AuthNavigationProps<'Signup'>) => {
               />
             )}
           />
-          {errors.lastName && <Text color="danger">{errors.lastName?.message}</Text>}
+          {errors.lastName && (
+            <Text color="danger">{errors.lastName?.message}</Text>
+          )}
 
           {/* Email */}
           <Text variant="tagName">Email</Text>
@@ -209,16 +209,17 @@ const Signup = ({ navigation }: AuthNavigationProps<'Signup'>) => {
           {errors.password && (
             <Text color="danger">{errors.passwordConfirm?.message}</Text>
           )}
-          <Box paddingVertical='m' alignItems="center">
+          <Box paddingVertical="m" alignItems="center">
             <Button
               variant="primary"
               label="Create an Account"
-              onPress={handleSubmit(onSubmit)}
-              style={undefined} />
+              onPress={handleSubmit(userSignUp)}
+              style={undefined}
+            />
           </Box>
         </Box>
       </ScrollView>
-    </Container >
+    </Container>
   )
 }
 
