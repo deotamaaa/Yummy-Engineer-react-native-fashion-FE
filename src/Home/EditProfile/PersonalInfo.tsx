@@ -3,6 +3,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { ScrollView } from 'react-native-gesture-handler'
 import TextInput from '../../Authentication/components/Form/TextInput'
 import { Box, Text } from '../../components/Theme'
+import { Button } from '../../components'
 
 const genders = [
   { value: 'male', label: 'Male' },
@@ -14,6 +15,8 @@ interface FormData {
   lastName: string
   email: string
 }
+
+const updateUser = () => true
 
 const PersonalInfo = () => {
   const [firstName, setFirstName] = useState('')
@@ -69,7 +72,7 @@ const PersonalInfo = () => {
               fieldState: { error },
             }) => (
               < TextInput
-                icon="lock"
+                icon="user"
                 defaultValue={lastName}
                 placeholder="Last Name"
                 autoCapitalize="none"
@@ -105,6 +108,20 @@ const PersonalInfo = () => {
           />
         </Box>
         {/* <CheckboxGroup options={genders} radio /> */}
+        <Box paddingVertical="m" alignItems="center">
+          <Button
+            variant="primary"
+            label="Update Profile"
+            onPress={handleSubmit(updateUser)}
+            style={{ width: '100%' }}
+          />
+          <Button
+            variant='transparent'
+            onPress={() => alert('Deleted')}
+          >
+            <Text variant='body' color='danger'>Delete Account</Text>
+          </Button>
+        </Box>
       </Box>
     </ScrollView>
   )

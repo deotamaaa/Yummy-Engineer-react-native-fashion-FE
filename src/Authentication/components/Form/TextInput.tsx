@@ -46,7 +46,7 @@ const TextInput = ({
           {...props}
         />
       </Box>
-      {touched === true && (
+      {touched && (
         <RoundedIcon
           name={!error ? 'check' : 'x'}
           size={SIZE}
