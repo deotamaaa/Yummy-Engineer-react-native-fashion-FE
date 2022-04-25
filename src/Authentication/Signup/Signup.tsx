@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { Button, Container, Text } from '../../components'
 import { Box } from '../../components/Theme'
@@ -10,7 +10,7 @@ import * as Yup from 'yup'
 import Footer from '../components/Footer'
 import { AuthNavigationProps } from '../../components/Navigation'
 import { ScrollView } from 'react-native-gesture-handler'
-import axios from 'axios'
+import { AuthContext } from '../../context/AuthContext'
 
 const LoginSchema = Yup.object().shape({
   firstName: Yup.string().required('First name is required'),
@@ -22,16 +22,17 @@ const LoginSchema = Yup.object().shape({
     .required('Required'),
 })
 
-interface FormData {
-  firstName: string
-  lastName: string
-  email: string
-  password: string
-  passwordConfirm: string
-}
+// interface FormData {
+//   firstName: string
+//   lastName: string
+//   email: string
+//   password: string
+//   passwordConfirm: string
+// }
 
 const Signup = ({ navigation }: AuthNavigationProps<'Signup'>) => {
-  const [redirect, setRedirect] = useState(false)
+
+  const { userSignUp, signUpError } = useContext(AuthContext)
 
   const footer = (
     <Footer
@@ -45,19 +46,22 @@ const Signup = ({ navigation }: AuthNavigationProps<'Signup'>) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm({
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      passwordConfirm: '',
+    },
     resolver: yupResolver(LoginSchema),
   })
 
-  const userSignUp = (data: FormData) => {
-    axios.post('register', {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      email: data.email,
-      password: data.password,
-      passwordConfirm: data.passwordConfirm,
-    })
-    navigation.navigate('Login')
+  const submitSignUp = async (data: any) => {
+    const signUpSuccess = await userSignUp(data);
+    if (signUpSuccess) {
+      navigation.navigate('Login');
+    }
   }
 
   return (
@@ -209,11 +213,14 @@ const Signup = ({ navigation }: AuthNavigationProps<'Signup'>) => {
           {errors.password && (
             <Text color="danger">{errors.passwordConfirm?.message}</Text>
           )}
+          {signUpError ? (
+            <Text style={{ color: 'red', alignSelf: 'stretch', fontSize: 13 }}>{signUpError}</Text>
+          ) : null}
           <Box paddingVertical="m" alignItems="center">
             <Button
               variant="primary"
               label="Create an Account"
-              onPress={handleSubmit(userSignUp)}
+              onPress={handleSubmit(submitSignUp)}
               style={undefined}
             />
           </Box>
