@@ -2,9 +2,9 @@ import React from 'react'
 import { Dimensions, ImageRequireSource, StyleSheet } from 'react-native'
 import { PanGestureHandler } from 'react-native-gesture-handler'
 import Animated, {
-  add,
   Extrapolate,
   interpolate,
+  runOnJS,
   useAnimatedGestureHandler,
   useAnimatedStyle,
   useDerivedValue,
@@ -13,8 +13,6 @@ import Animated, {
 } from 'react-native-reanimated'
 import { mix, mixColor, snapPoint } from 'react-native-redash'
 import { Box } from '../../components/Theme'
-
-import { useSpring } from './Animations' // delete later
 
 const { width: wWidth } = Dimensions.get('window')
 const width = wWidth * 0.75
@@ -35,6 +33,8 @@ const Card = ({ onSwipe, source, step, index, aIndex }: CardProps) => {
   const translateY = useSharedValue(0)
   const translateX = useSharedValue(0)
   const position = useDerivedValue(() => index * step - aIndex.value)
+
+  //@ts-ignore
   const onGestureEvent = useAnimatedGestureHandler<{ x: number; y: number }>({
     onStart: (_, ctx) => {
       ctx.x = translateX.value
@@ -54,7 +54,7 @@ const Card = ({ onSwipe, source, step, index, aIndex }: CardProps) => {
         restSpeedThreshold: dest === 0 ? 0.01 : 100,
         restDisplacementThreshold: dest === 0 ? 0.01 : 100,
       },
-        () => dest !== 0 && onSwipe())
+        () => dest !== 0 && runOnJS(onSwipe)())
     },
   })
 
@@ -70,37 +70,22 @@ const Card = ({ onSwipe, source, step, index, aIndex }: CardProps) => {
       },
     ],
   }))
-  const cardStyle = useAnimatedStyle(() => {
-    // const translateYOffset = mix(position.value, 0, -50)
-    // const translateX = useSpring({
-    //   value: translation.x,
-    //   velocity: velocity.x,
-    //   state,
-    //   snapPoints: [-wWidth, 0, wWidth],
-    //   onSnap: ([x]) => x !== 0 && onSwipe(),
-    // })
 
-    // const translateY = add(
-    //   translateYOffset,
-    //   //@ts-ignore
-    //   useSpring({
-    //     value: translation.y,
-    //     velocity: velocity.y,
-    //     state,
-    //     snapPoints: [0],
-    //   })
-    // )
+  const translateYOffset = mix(position.value, 0, -75);
+
+  const cardStyle = useAnimatedStyle(() => {
 
     const scale = mix(position.value, 1, 0.9)
     return {
       transform: [
-        { translateY: translateY.value },
+        { translateY: translateYOffset },
         { translateX: translateX.value },
         { scale },
       ],
       backgroundColor: mixColor(position.value, '#C9E9E7', '#74BCB8'),
     }
   })
+
   return (
     <Box
       style={StyleSheet.absoluteFill}
@@ -115,7 +100,6 @@ const Card = ({ onSwipe, source, step, index, aIndex }: CardProps) => {
               width,
               height,
               borderRadius,
-
               overflow: 'hidden',
             },
             cardStyle,

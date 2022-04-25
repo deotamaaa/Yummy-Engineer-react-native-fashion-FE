@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { Button, Container, Text } from '../../components'
 import { Box } from '../../components/Theme'
@@ -11,20 +11,16 @@ import * as Yup from 'yup'
 import Footer from '../components/Footer'
 import { AuthNavigationProps } from '../../components/Navigation'
 import { CommonActions } from '@react-navigation/native'
-import axios from 'axios'
+import { AuthContext } from '../../context/AuthContext'
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string().min(6, 'Too short').required('Required'),
 })
 
-interface FormData {
-  email: string
-  password: string
-  remember: boolean
-}
-
 const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
+  const { userLogIn, logInError } = useContext(AuthContext)
+  
   const footer = (
     <Footer
       title="Don't have an account?"
@@ -38,7 +34,7 @@ const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm({
     defaultValues: {
       email: '',
       password: '',
@@ -47,18 +43,17 @@ const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
     resolver: yupResolver(LoginSchema),
   })
 
-  const onSubmit = async (data: FormData) => {
-    await axios.post('login', {
-      email: data.email,
-      password: data.password,
-    }).then(() => {
+  const onSubmit = async (data: any) => {
+    const logInSuccess = await userLogIn(data);
+    console.log(logInSuccess)
+    if (logInSuccess) {
       navigation.dispatch(
         CommonActions.reset({
           index: 0,
           routes: [{ name: 'Home' }],
         })
       )
-    }).catch(() => alert('Invalid email or password'))
+    }
   }
 
 
@@ -124,6 +119,9 @@ const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
         {errors.password && (
           <Text color="danger">{errors.password?.message}</Text>
         )}
+        {logInError ? (
+          <Text style={{ color: 'red', alignSelf: 'stretch', fontSize: 13 }}>{signUpError}</Text>
+        ) : null}
 
         <Controller
           control={control}

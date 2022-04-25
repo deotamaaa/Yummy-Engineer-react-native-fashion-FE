@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 
 import { Button, Container, Text } from '../../components'
 import { Box } from '../../components/Theme'
@@ -22,16 +22,7 @@ const LoginSchema = Yup.object().shape({
     .required('Required'),
 })
 
-// interface FormData {
-//   firstName: string
-//   lastName: string
-//   email: string
-//   password: string
-//   passwordConfirm: string
-// }
-
 const Signup = ({ navigation }: AuthNavigationProps<'Signup'>) => {
-
   const { userSignUp, signUpError } = useContext(AuthContext)
 
   const footer = (

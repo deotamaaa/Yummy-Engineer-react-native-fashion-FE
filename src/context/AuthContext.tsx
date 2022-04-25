@@ -1,14 +1,19 @@
-import axios from 'axios';
+import axios from 'axios'
 import React, { createContext, ReactNode, useState } from 'react'
 
 export const AuthContext = createContext<any>({})
 
 interface SignUpForm {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  passwordConfirm: string;
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  passwordConfirm: string
+}
+
+interface LogInForm {
+  email: string
+  password: string
 }
 
 interface AuthProviderProps {
@@ -16,26 +21,42 @@ interface AuthProviderProps {
 }
 
 const AuthContextProvider = ({ children }: AuthProviderProps) => {
-  const [signUpError, setSignUpError] = useState('');
+  const [user, setUser] = useState(null)
+  const [signUpError, setSignUpError] = useState('')
+  const [logInError, setLogInError] = useState('')
 
   const userSignUp = async (data: SignUpForm) => {
-    await axios.post('/register', data)
+    await axios
+      .post('/register', data)
       .then((result) => {
         const userResponse = result.data
         return userResponse
-      }).catch((err) => {
+      })
+      .catch((err) => {
         setSignUpError(err.response.data.message)
       })
   }
 
-  const userLogIn = () => {
-
+  const userLogIn = async (data: LogInForm) => {
+    const { email, password } = data
+    let userResponse
+    await axios
+      .post('/login', { email, password })
+      .then((result) => {
+        userResponse = result.data
+        setUser(userResponse)
+      })
+      .catch((err) => {
+        setLogInError(err.response.data.message)
+      })
+    return userResponse
   }
   const userLogOut = () => { }
 
-
   return (
-    <AuthContext.Provider value={{ signUpError, userSignUp, userLogIn, userLogOut }}>
+    <AuthContext.Provider
+      value={{ user, signUpError, userSignUp, userLogIn, userLogOut }}
+    >
       {children}
     </AuthContext.Provider>
   )

@@ -3,10 +3,11 @@ import {
   DrawerActions,
   useNavigation,
 } from '@react-navigation/native'
-import React from 'react'
+import React, { useContext } from 'react'
 import { Dimensions, Image } from 'react-native'
 import Header from '../../components/Header'
 import theme, { Box, Text } from '../../components/Theme'
+import { AuthContext } from '../../context/AuthContext'
 import DrawerItem, { DrawerItemProps } from './DrawerItem'
 
 export const assets = [require('../Drawer/assets/3.png')]
@@ -61,6 +62,8 @@ const items: DrawerItemProps[] = [
 ]
 
 const Drawer = () => {
+  const { user } = useContext(AuthContext)
+
   const navigation = useNavigation()
   return (
     <Box flex={1}>
@@ -113,10 +116,10 @@ const Drawer = () => {
           />
           <Box marginVertical="s">
             <Text variant="title1" textAlign="center">
-              Young Key
+              {user?.firstName} {user?.lastName}
             </Text>
             <Text variant="body" textAlign="center">
-              youngkey@email.com
+              {user?.email}
             </Text>
           </Box>
           {items.map((item) => (
