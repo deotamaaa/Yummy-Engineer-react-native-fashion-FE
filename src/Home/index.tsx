@@ -10,6 +10,7 @@ import EditProfile from './EditProfile'
 import Settings from './Settings'
 import Cart from './Cart'
 import OutfitCatalog from './OutfitCatalog'
+import OutfitDetail from './OutfitCatalog/OutfitDetail'
 
 const Drawer = createDrawerNavigator<HomeRoutes>()
 
@@ -29,6 +30,7 @@ export const HomeNavigator = () => {
       <Drawer.Screen name="Settings" component={Settings} />
       <Drawer.Screen name="Cart" component={Cart} />
       <Drawer.Screen name="OutfitCatalog" component={OutfitCatalog} />
+      <Drawer.Screen name="OutfitDetail" component={OutfitDetail} />
     </Drawer.Navigator>
   )
 }

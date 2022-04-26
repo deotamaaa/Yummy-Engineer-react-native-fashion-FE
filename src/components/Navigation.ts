@@ -38,4 +38,5 @@ export type HomeRoutes = {
   Settings: undefined
   Cart: undefined
   OutfitCatalog: undefined
+  OutfitDetail: undefined
 }

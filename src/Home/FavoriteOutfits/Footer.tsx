@@ -1,5 +1,4 @@
 import React from 'react'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { Button } from '../../components'
 import { Box } from '../../components/Theme'
 
@@ -9,12 +8,11 @@ interface FooterProps {
 }
 
 const Footer = ({ label, onPress }: FooterProps) => {
-  const insets = useSafeAreaInsets()
   return (
-    <Box backgroundColor="secondary" padding="l" borderTopLeftRadius="xl">
-      <Box alignItems="center" style={{ paddingBottom: insets.bottom }}>
+    <Box backgroundColor="secondary">
+      <Box alignItems="center" >
         <Button variant="primary" {...{ label, onPress }} />
-      </Box>
+      </Box >
     </Box>
   )
 }
