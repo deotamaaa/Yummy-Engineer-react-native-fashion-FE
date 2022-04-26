@@ -47,15 +47,14 @@ const AuthContextProvider = ({ children }: AuthProviderProps) => {
         setUser(userResponse)
       })
       .catch((err) => {
-        setLogInError(err.response.data.message)
+        setLogInError(err.response.data)
       })
     return userResponse
   }
-  const userLogOut = () => { }
 
   return (
     <AuthContext.Provider
-      value={{ user, signUpError, userSignUp, userLogIn, userLogOut }}
+      value={{ user, logInError, signUpError, userSignUp, userLogIn }}
     >
       {children}
     </AuthContext.Provider>

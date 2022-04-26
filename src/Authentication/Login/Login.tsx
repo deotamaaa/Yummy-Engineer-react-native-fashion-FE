@@ -20,7 +20,7 @@ const LoginSchema = Yup.object().shape({
 
 const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
   const { userLogIn, logInError } = useContext(AuthContext)
-  
+
   const footer = (
     <Footer
       title="Don't have an account?"
@@ -44,8 +44,7 @@ const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
   })
 
   const onSubmit = async (data: any) => {
-    const logInSuccess = await userLogIn(data);
-    console.log(logInSuccess)
+    const logInSuccess = await userLogIn(data)
     if (logInSuccess) {
       navigation.dispatch(
         CommonActions.reset({
@@ -55,7 +54,6 @@ const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
       )
     }
   }
-
 
   return (
     <Container pattern={0} {...{ footer }}>
@@ -120,7 +118,9 @@ const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
           <Text color="danger">{errors.password?.message}</Text>
         )}
         {logInError ? (
-          <Text style={{ color: 'red', alignSelf: 'stretch', fontSize: 13 }}>{signUpError}</Text>
+          <Text style={{ color: 'red', alignSelf: 'stretch', fontSize: 13 }}>
+            {logInError}
+          </Text>
         ) : null}
 
         <Controller

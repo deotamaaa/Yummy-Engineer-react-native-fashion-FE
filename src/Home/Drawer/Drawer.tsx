@@ -3,6 +3,7 @@ import {
   DrawerActions,
   useNavigation,
 } from '@react-navigation/native'
+import axios from 'axios'
 import React, { useContext } from 'react'
 import { Dimensions, Image } from 'react-native'
 import Header from '../../components/Header'
@@ -30,6 +31,12 @@ const items: DrawerItemProps[] = [
     color: 'pink',
   },
   {
+    icon: 'layers',
+    label: 'Outfit Catalog',
+    screen: 'OutfitCatalog',
+    color: 'lightBlue',
+  },
+  {
     icon: 'user',
     label: 'Edit Profile',
     screen: 'EditProfile',
@@ -50,13 +57,20 @@ const items: DrawerItemProps[] = [
   {
     icon: 'log-out',
     label: 'Logout',
-    onPress: (navigation) =>
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [{ name: 'Authentication' }],
+    onPress: async (navigation) => {
+      await axios.post('logout', {})
+        .then(() => {
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [{ name: 'Authentication' }],
+            })
+          )
         })
-      ),
+        .catch((err) => {
+          console.log(err)
+        })
+    },
     color: 'secondary',
   },
 ]

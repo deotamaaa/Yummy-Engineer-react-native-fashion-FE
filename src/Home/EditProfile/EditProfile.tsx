@@ -1,11 +1,12 @@
 import { DrawerActions, useNavigation } from '@react-navigation/native'
-import React from 'react'
+import React, { useContext } from 'react'
 import { Header } from '../../components'
 import theme, { Box, Text } from '../../components/Theme'
 
 import Tabs from './Tabs'
 import Configuration from './Configuration'
 import PersonalInfo from './PersonalInfo'
+import { AuthContext } from '../../context/AuthContext'
 
 const tabs = [
   { id: 'configuration', title: 'Configuration' },
@@ -13,6 +14,7 @@ const tabs = [
 ]
 
 const EditProfile = () => {
+  const { user } = useContext(AuthContext)
   const navigation = useNavigation()
   return (
     <Box flex={1}>
@@ -48,10 +50,10 @@ const EditProfile = () => {
         />
         <Box marginVertical="m" style={{ marginTop: 50 + theme.spacing.m }}>
           <Text variant="title1" textAlign="center">
-            Young Key
+            {user?.firstName} {user?.lastName}
           </Text>
           <Text variant="body" textAlign="center">
-            youngkey@email.com
+            {user?.email}
           </Text>
         </Box>
       </Box>
