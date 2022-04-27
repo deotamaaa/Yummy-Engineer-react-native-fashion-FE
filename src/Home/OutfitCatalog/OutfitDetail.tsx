@@ -1,18 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Card, Paragraph, List, FAB } from 'react-native-paper'
-import { Button, Header } from '../../components'
+import { Header } from '../../components'
 import { HomeNavigationProps } from '../../components/Navigation'
 import { Box } from '../../components/Theme'
 import { AntDesign } from '@expo/vector-icons'
 import Size from './Size'
-import CatalogFooter from './CatalogFooter'
+import axios from 'axios'
 
-const OutfitDetail = ({ navigation }: HomeNavigationProps<'OutfitDetail'>) => {
+const OutfitDetail = ({ route, navigation }: HomeNavigationProps<'OutfitDetail'>) => {
   const [descriptionExpanded, setDescriptionExpanded] = useState(false)
   const [sizeExpanded, setSizeExpanded] = useState(false)
   const [favorite, setFavorite] = useState(false)
+  const { Id } = route.params
+
   const itemDetail = {
     id: 1,
     name: 'Bomber Super Cool',
@@ -46,6 +48,27 @@ const OutfitDetail = ({ navigation }: HomeNavigationProps<'OutfitDetail'>) => {
       'https://d29c1z66frfv6c.cloudfront.net/pub/media/catalog/product/large/b9e72b5c08407ad53bb0ab71a65f2db48e476c31_xxl-1.jpg',
   }
 
+  const [name, setName] = useState()
+  const [brand, setBrand] = useState()
+  const [image, setImage] = useState()
+  const [price, setPrice] = useState()
+  const [description, setDescription] = useState()
+  const [size, setSize] = useState([])
+
+  const getProduct = async () => {
+    const { data } = await axios.get(`/products/${Id}`)
+    setName(data.productName)
+    setBrand(data.productBrand)
+    setImage(data.productImage)
+    setPrice(data.productPrice)
+    setDescription(data.productDescription)
+    // console.log(data)
+  }
+
+  useEffect(() => {
+    getProduct()
+  }, [getProduct])
+
   return (
     <Box flex={1}>
       <Header
@@ -54,13 +77,13 @@ const OutfitDetail = ({ navigation }: HomeNavigationProps<'OutfitDetail'>) => {
       />
       <Card style={{ height: '100%' }}>
         <Card.Cover
-          source={{ uri: itemDetail.image }}
+          source={{ uri: image }}
           style={{ height: '50%' }}
         />
         <Card.Title
-          title={itemDetail.name}
+          title={name}
           titleStyle={styles.cardTitle}
-          subtitle={itemDetail.brand}
+          subtitle={brand}
           subtitleStyle={styles.cardSubtitle}
           right={() => (
             <TouchableOpacity>
@@ -75,7 +98,7 @@ const OutfitDetail = ({ navigation }: HomeNavigationProps<'OutfitDetail'>) => {
           rightStyle={{ marginRight: 32 }}
         />
         <Card.Content style={{ marginTop: 10 }}>
-          <Paragraph style={styles.cardPrice}>{itemDetail.price}</Paragraph>
+          <Paragraph style={styles.cardPrice}>{(price)}</Paragraph>
           <Size />
           <List.Accordion
             style={
@@ -91,7 +114,7 @@ const OutfitDetail = ({ navigation }: HomeNavigationProps<'OutfitDetail'>) => {
             onPress={() => setDescriptionExpanded(!descriptionExpanded)}
           >
             <Paragraph style={{ fontSize: 12, fontStyle: 'italic' }}>
-              {itemDetail.description}
+              {description}
             </Paragraph>
           </List.Accordion>
 
