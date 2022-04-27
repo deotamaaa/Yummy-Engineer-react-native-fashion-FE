@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { } from 'react'
 import { StyleSheet } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
@@ -6,12 +6,12 @@ import { Card, Paragraph } from 'react-native-paper'
 
 interface OutfitCatalogProps {
   outfit: {
-    id: number;
-    name: string;
-    size: string[];
-    brand: string;
-    price: string;
-    image: string;
+    productId: number,
+    productName: string,
+    productBrand: string,
+    productPrice: string,
+    productDescription: string,
+    productImage: string,
   },
   onPress: () => void;
 }
@@ -21,14 +21,14 @@ const OutfitCard = ({ outfit, onPress }: OutfitCatalogProps) => {
   return (
     <TouchableOpacity onPress={onPress} >
       <Card style={{ marginHorizontal: 16, marginVertical: 14, width: 170 }}>
-        <Card.Cover source={{ uri: outfit.image }} />
+        <Card.Cover source={{ uri: outfit.productImage }} />
         <Card.Title
-          title={outfit.name}
+          title={outfit.productName}
           titleStyle={styles.cardTitle}
-          subtitle={outfit.brand}
+          subtitle={outfit.productBrand}
         />
         <Card.Content>
-          <Paragraph>{outfit.price}</Paragraph>
+          <Paragraph>{outfit.productPrice}</Paragraph>
         </Card.Content>
       </Card>
     </TouchableOpacity>
