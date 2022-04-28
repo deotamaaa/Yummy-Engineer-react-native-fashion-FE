@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useCallback, useEffect, useState } from 'react'
-import { RefreshControl, ScrollView } from 'react-native'
+import { FlatList, RefreshControl } from 'react-native'
+import { Item } from 'react-native-paper/lib/typescript/components/Drawer/Drawer'
 import Header from '../../components/Header'
 import { HomeNavigationProps } from '../../components/Navigation'
 import { Box } from '../../components/Theme'
@@ -13,16 +14,11 @@ const wait = (timeout: any) => {
 }
 
 const OutfitCatalog = ({
-  navigation
+  navigation,
 }: HomeNavigationProps<'OutfitCatalog'>) => {
   const [product, getProduct] = useState([])
 
   const [refreshing, setRefreshing] = useState(false)
-
-  const onRefresh = useCallback(() => {
-    setRefreshing(true)
-    wait(2000).then(() => setRefreshing(false))
-  }, [])
 
   const getAllProduct = async () => {
     await axios
@@ -36,6 +32,11 @@ const OutfitCatalog = ({
       })
   }
 
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    wait(2000).then(() => (getAllProduct(), setRefreshing(false)))
+  }, [])
+
   useEffect(() => {
     getAllProduct()
   }, [])
@@ -45,30 +46,32 @@ const OutfitCatalog = ({
       <Header
         title="OUTFIT CATALOG"
         left={{ icon: 'menu', onPress: () => navigation.openDrawer() }}
-        right={{ icon: 'shopping-bag', onPress: () => true }}
       />
-      <ScrollView
-        showsVerticalScrollIndicator={false}
+      <FlatList
+        numColumns={2}
+        style={{
+          flexBasis: '100%',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          backgroundColor: 'white',
+        }}
+        data={product}
+        renderItem={({ item }) => (
+          <OutfitCard
+            key={item.productId}
+            outfit={item}
+            onPress={() =>
+              navigation.navigate('OutfitDetail', {
+                Id: item.productId,
+              })
+            }
+          />
+        )}
+        keyExtractor={(item: Product) => item.productId}
         refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh} />
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
-      >
-        <Box flexDirection="row" flexWrap="wrap" backgroundColor="lightGrey">
-          {product.map((p: Product) => (
-            <OutfitCard
-              key={p.productId}
-              outfit={p}
-              onPress={() =>
-                navigation.navigate('OutfitDetail', {
-                  Id: p.productId,
-                })
-              }
-            />
-          ))}
-        </Box>
-      </ScrollView>
+      />
     </Box>
   )
 }

@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet } from 'react-native'
+import { ScrollView, ScrollViewComponent, StyleSheet, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Card, Paragraph, List, FAB } from 'react-native-paper'
 import { Header } from '../../components'
 import { HomeNavigationProps } from '../../components/Navigation'
 import { Box } from '../../components/Theme'
 import { AntDesign } from '@expo/vector-icons'
-import Size from './Size'
 import axios from 'axios'
 
-const OutfitDetail = ({ route, navigation }: HomeNavigationProps<'OutfitDetail'>) => {
+const OutfitDetail = ({
+  route,
+  navigation,
+}: HomeNavigationProps<'OutfitDetail'>) => {
   const [descriptionExpanded, setDescriptionExpanded] = useState(false)
   const [sizeExpanded, setSizeExpanded] = useState(false)
   const [favorite, setFavorite] = useState(false)
@@ -62,7 +64,6 @@ const OutfitDetail = ({ route, navigation }: HomeNavigationProps<'OutfitDetail'>
     setImage(data.productImage)
     setPrice(data.productPrice)
     setDescription(data.productDescription)
-    // console.log(data)
   }
 
   useEffect(() => {
@@ -72,14 +73,11 @@ const OutfitDetail = ({ route, navigation }: HomeNavigationProps<'OutfitDetail'>
   return (
     <Box flex={1}>
       <Header
-        title="OUTFIT CATALOG"
+        title={String(name)}
         left={{ icon: 'arrow-left', onPress: () => navigation.goBack() }}
       />
       <Card style={{ height: '100%' }}>
-        <Card.Cover
-          source={{ uri: image }}
-          style={{ height: '50%' }}
-        />
+        <Card.Cover source={{ uri: image }} style={{ height: '50%' }} />
         <Card.Title
           title={name}
           titleStyle={styles.cardTitle}
@@ -90,7 +88,9 @@ const OutfitDetail = ({ route, navigation }: HomeNavigationProps<'OutfitDetail'>
               <AntDesign
                 name="heart"
                 style={favorite ? { color: 'red' } : { color: 'black' }}
-                onPress={() => favorite ? setFavorite(false) : setFavorite(true)}
+                onPress={() =>
+                  favorite ? setFavorite(false) : setFavorite(true)
+                }
                 size={24}
               />
             </TouchableOpacity>
@@ -98,8 +98,7 @@ const OutfitDetail = ({ route, navigation }: HomeNavigationProps<'OutfitDetail'>
           rightStyle={{ marginRight: 32 }}
         />
         <Card.Content style={{ marginTop: 10 }}>
-          <Paragraph style={styles.cardPrice}>{(price)}</Paragraph>
-          <Size />
+          <Paragraph style={styles.cardPrice}>{price}</Paragraph>
           <List.Accordion
             style={
               !descriptionExpanded
@@ -129,16 +128,13 @@ const OutfitDetail = ({ route, navigation }: HomeNavigationProps<'OutfitDetail'>
             expanded={sizeExpanded}
             onPress={() => setSizeExpanded(!sizeExpanded)}
           >
-            <List.Item
-              title={itemDetail.size[0]?.name}
-              description={itemDetail.size[0]?.quantity}
-            />
+            <List.Item title={'Size'} />
           </List.Accordion>
         </Card.Content>
       </Card>
       <FAB
         style={styles.fab}
-        color='white'
+        color="white"
         icon="cart"
         onPress={() => alert('anjay')}
       />

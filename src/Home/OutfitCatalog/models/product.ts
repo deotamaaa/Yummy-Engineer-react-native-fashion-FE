@@ -5,6 +5,10 @@ export class Product {
     public productBrand = '',
     public productPrice = '',
     public productDescription = '',
-    public productImage = ''
+    public productImage = '',
+    public sizes = [{
+      sizeId: 0,
+      sizeName: '',
+    }]
   ) { }
 }
