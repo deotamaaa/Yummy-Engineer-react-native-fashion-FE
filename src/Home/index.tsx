@@ -1,20 +1,20 @@
-import React from 'react'
-import { createDrawerNavigator } from '@react-navigation/drawer'
-import { HomeRoutes } from '../components/Navigation'
+import React from 'react';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { HomeRoutes } from '../components/Navigation';
 
-import DrawerContent, { DRAWER_WIDTH } from './Drawer/Drawer'
-import OutfitIdeas from './OutfitIdeas'
-import FavoriteOutfits from './FavoriteOutfits'
-import TransactionHistory from './TransactionHistory'
-import EditProfile from './EditProfile'
-import Settings from './Settings'
-import Cart from './Cart'
-import OutfitCatalog from './OutfitCatalog'
-import OutfitDetail from './OutfitCatalog/OutfitDetail'
+import DrawerContent, { DRAWER_WIDTH } from './Drawer/Drawer';
+import OutfitIdeas from './OutfitIdeas';
+import FavoriteOutfits from './FavoriteOutfits';
+import TransactionHistory from './TransactionHistory';
+import EditProfile from './EditProfile';
+import Settings from './Settings';
+import Cart from './Cart';
+import OutfitCatalog from './OutfitCatalog';
+import OutfitDetail from './OutfitCatalog/OutfitDetail';
 
-const Drawer = createDrawerNavigator<HomeRoutes>()
+const Drawer = createDrawerNavigator<HomeRoutes>();
 
-export { assets } from './Drawer'
+export { assets } from './Drawer';
 export const HomeNavigator = () => {
   return (
     <Drawer.Navigator
@@ -32,5 +32,5 @@ export const HomeNavigator = () => {
       <Drawer.Screen name="OutfitCatalog" component={OutfitCatalog} />
       <Drawer.Screen name="OutfitDetail" component={OutfitDetail} />
     </Drawer.Navigator>
-  )
-}
+  );
+};

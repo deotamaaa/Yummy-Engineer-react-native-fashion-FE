@@ -2,83 +2,77 @@ import {
   CommonActions,
   DrawerActions,
   useNavigation,
-} from '@react-navigation/native'
-import axios from 'axios'
-import React, { useContext } from 'react'
-import { Dimensions, Image } from 'react-native'
-import Header from '../../components/Header'
-import theme, { Box, Text } from '../../components/Theme'
-import { AuthContext } from '../../context/AuthContext'
-import DrawerItem, { DrawerItemProps } from './DrawerItem'
+} from '@react-navigation/native';
+import axios from 'axios';
+import React, { useContext } from 'react';
+import { Dimensions, Image } from 'react-native';
+import Header from '../../components/Header';
+import theme, { Box, Text } from '../../components/Theme';
+import { AuthContext } from '../../context/AuthContext';
+import DrawerItem, { DrawerItemProps } from './DrawerItem';
 
-export const assets = [require('../Drawer/assets/3.png')]
-const aspectRatio = 750 / 1125
-const { width } = Dimensions.get('window')
-export const DRAWER_WIDTH = width * 0.8
-const height = width * aspectRatio
-
-const items: DrawerItemProps[] = [
-  {
-    icon: 'zap',
-    label: 'Outfit Ideas',
-    screen: 'OutfitIdeas',
-    color: 'orange',
-  },
-  {
-    icon: 'heart',
-    label: 'Favorites Outfit',
-    screen: 'FavoriteOutfits',
-    color: 'pink',
-  },
-  {
-    icon: 'layers',
-    label: 'Outfit Catalog',
-    screen: 'OutfitCatalog',
-    color: 'lightBlue',
-  },
-  {
-    icon: 'user',
-    label: 'Edit Profile',
-    screen: 'EditProfile',
-    color: 'darkPink',
-  },
-  {
-    icon: 'clock',
-    label: 'Transactions History',
-    screen: 'TransactionHistory',
-    color: 'violet',
-  },
-  {
-    icon: 'settings',
-    label: 'Notification Settings',
-    screen: 'Settings',
-    color: 'darkBlue',
-  },
-  {
-    icon: 'log-out',
-    label: 'Logout',
-    onPress: async (navigation) => {
-      await axios.post('logout', {})
-        .then(() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [{ name: 'Authentication' }],
-            })
-          )
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    },
-    color: 'secondary',
-  },
-]
+export const assets = [require('../Drawer/assets/3.png')];
+const aspectRatio = 750 / 1125;
+const { width } = Dimensions.get('window');
+export const DRAWER_WIDTH = width * 0.8;
+const height = width * aspectRatio;
 
 const Drawer = () => {
-  const { user } = useContext(AuthContext)
+  const { user, userLogOut } = useContext(AuthContext);
+  const items: DrawerItemProps[] = [
+    {
+      icon: 'zap',
+      label: 'Outfit Ideas',
+      screen: 'OutfitIdeas',
+      color: 'orange',
+    },
+    {
+      icon: 'heart',
+      label: 'Favorites Outfit',
+      screen: 'FavoriteOutfits',
+      color: 'pink',
+    },
+    {
+      icon: 'layers',
+      label: 'Outfit Catalog',
+      screen: 'OutfitCatalog',
+      color: 'lightBlue',
+    },
+    {
+      icon: 'user',
+      label: 'Edit Profile',
+      screen: 'EditProfile',
+      color: 'darkPink',
+    },
+    {
+      icon: 'clock',
+      label: 'Transactions History',
+      screen: 'TransactionHistory',
+      color: 'violet',
+    },
+    {
+      icon: 'settings',
+      label: 'Notification Settings',
+      screen: 'Settings',
+      color: 'darkBlue',
+    },
+    {
+      icon: 'log-out',
+      label: 'Logout',
+      onPress: async (navigation) => {
+        await userLogOut();
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [{ name: 'Authentication' }],
+          })
+        );
+      },
+      color: 'secondary',
+    },
+  ];
 
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   return (
     <Box flex={1}>
       <Box flex={0.2} backgroundColor="white">
@@ -130,7 +124,7 @@ const Drawer = () => {
           />
           <Box marginVertical="s">
             <Text variant="title1" textAlign="center">
-              {user?.firstName} {user?.lastName}
+              {user.firstName} {user.lastName}
             </Text>
             <Text variant="body" textAlign="center">
               {user?.email}
@@ -158,7 +152,7 @@ const Drawer = () => {
         />
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default Drawer
+export default Drawer;

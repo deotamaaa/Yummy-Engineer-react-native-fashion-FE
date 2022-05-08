@@ -1,14 +1,14 @@
-import React from 'react'
+import React from 'react';
 
-import { Box, Text } from '../../../components/Theme'
+import { Box, Text } from '../../../components/Theme';
 
-import { Feather as Icon } from '@expo/vector-icons'
-import { BorderlessButton } from 'react-native-gesture-handler'
+import { Feather as Icon } from '@expo/vector-icons';
+import { BorderlessButton } from 'react-native-gesture-handler';
 
 interface CheckboxProps {
-  label: string
-  isChecked: boolean
-  onChange: (value: boolean) => void
+  label: string;
+  isChecked: boolean;
+  onChange: (value: boolean) => void;
 }
 
 const Checkbox = ({ label, onChange, isChecked }: CheckboxProps) => {
@@ -34,7 +34,7 @@ const Checkbox = ({ label, onChange, isChecked }: CheckboxProps) => {
         <Text variant="body">{label}</Text>
       </Box>
     </BorderlessButton>
-  )
-}
+  );
+};
 
-export default Checkbox
+export default Checkbox;

@@ -1,17 +1,17 @@
-import React from 'react'
-import { createStackNavigator } from '@react-navigation/stack'
-import { Routes } from '../components/Navigation'
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Routes } from '../components/Navigation';
 
-import Onboarding, { assets as onBoardingAssets } from './Onboarding'
-import Welcome, { assets as welcomeAssets } from './Welcome'
-import Login from '../Authentication/Login/Login'
-import Signup from '../Authentication/Signup/Signup'
-import ForgotPassword from '../Authentication/ForgotPassword/ForgotPassword'
-import ChangedPasswordSuccess from '../Authentication/ChangedPasswordSuccess/ChangedPasswordSuccess'
+import Onboarding, { assets as onBoardingAssets } from './Onboarding';
+import Welcome, { assets as welcomeAssets } from './Welcome';
+import Login from '../Authentication/Login/Login';
+import Signup from '../Authentication/Signup/Signup';
+import ForgotPassword from '../Authentication/ForgotPassword/ForgotPassword';
+import ChangedPasswordSuccess from '../Authentication/ChangedPasswordSuccess/ChangedPasswordSuccess';
 
-export const assets = [...onBoardingAssets, ...welcomeAssets]
+export const assets = [...onBoardingAssets, ...welcomeAssets];
 
-const AuthenticationStack = createStackNavigator<Routes>()
+const AuthenticationStack = createStackNavigator<Routes>();
 export const AuthenticationNavigator = () => {
   return (
     <AuthenticationStack.Navigator headerMode="none">
@@ -28,5 +28,5 @@ export const AuthenticationNavigator = () => {
         component={ChangedPasswordSuccess}
       />
     </AuthenticationStack.Navigator>
-  )
-}
+  );
+};

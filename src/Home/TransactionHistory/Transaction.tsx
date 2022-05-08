@@ -1,11 +1,11 @@
-import moment from 'moment'
-import React from 'react'
-import { Text } from '../../components'
-import { Box } from '../../components/Theme'
-import { DataPoint } from './Graph'
+import moment from 'moment';
+import React from 'react';
+import { Text } from '../../components';
+import { Box } from '../../components/Theme';
+import { DataPoint } from './Graph';
 
 interface TransactionProps {
-  transaction: DataPoint
+  transaction: DataPoint;
 }
 
 const Transaction = ({ transaction }: TransactionProps) => {
@@ -37,7 +37,7 @@ const Transaction = ({ transaction }: TransactionProps) => {
         </Text>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default Transaction
+export default Transaction;

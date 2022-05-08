@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import { ScrollView } from 'react-native-gesture-handler'
-import { Box, Text } from '../../components/Theme'
-import Card, { CardType } from './Card'
+import React, { useState } from 'react';
+import { ScrollView } from 'react-native-gesture-handler';
+import { Box, Text } from '../../components/Theme';
+import Card, { CardType } from './Card';
 
-import AddCard from './AddCard'
-import { CARD_HEIGHT } from './CardLayout'
-import { Button } from '../../components'
+import AddCard from './AddCard';
+import { CARD_HEIGHT } from './CardLayout';
+import { Button } from '../../components';
 interface CheckoutProps {
-  minHeight: number
+  minHeight: number;
 }
 
 const cards = [
@@ -41,32 +41,32 @@ const cards = [
     last4Digits: 6567,
     expiration: '03/22',
   },
-]
+];
 
 interface LineItemProps {
-  label: string
-  value: number
+  label: string;
+  value: number;
 }
 
 const LineItem = ({ label, value }: LineItemProps) => {
   return (
-    <Box flexDirection='row' paddingVertical='m' >
+    <Box flexDirection="row" paddingVertical="m">
       <Box flex={1}>
         <Text color="white">{label}</Text>
       </Box>
       <Box>
         <Text color="primary">${value}</Text>
       </Box>
-    </Box >
-  )
-}
+    </Box>
+  );
+};
 const Checkout = ({ minHeight }: CheckoutProps) => {
-  const [selectedCard, setSelectedCard] = useState(cards[0]?.id)
+  const [selectedCard, setSelectedCard] = useState(cards[0]?.id);
   return (
     <Box flex={1} backgroundColor="secondary" style={{ paddingTop: minHeight }}>
       <Box flex={1} padding="m">
         <Box height={CARD_HEIGHT}>
-          <ScrollView style={{ height: 160 }} horizontal>
+          <ScrollView style={{ height: 160 }} horizontal showsHorizontalScrollIndicator={false}>
             <AddCard />
             {cards.map((card) => (
               <Card
@@ -87,23 +87,29 @@ const Checkout = ({ minHeight }: CheckoutProps) => {
               <Text color="white">Unit 15, York Farm Business Centre</Text>
               <Text color="white">Watling St, Towcester</Text>
             </Box>
-            <Box
-              justifyContent="center"
-              alignItems="center"
-            >
+            <Box justifyContent="center" alignItems="center">
               <Text color="white">Change</Text>
             </Box>
           </Box>
           <LineItem label="Total Items (6)" value={189.94} />
           <LineItem label="Standard Delivery" value={12} />
           <LineItem label="Total Payment" value={189.94} />
-          <Box paddingVertical='m' alignItems='center' justifyContent='flex-end' flex={1}>
-            <Button label='Swipe To Pay $201.84' variant='primary' onPress={() => true} />
+          <Box
+            paddingVertical="m"
+            alignItems="center"
+            justifyContent="flex-end"
+            flex={1}
+          >
+            <Button
+              label="Swipe To Pay $201.84"
+              variant="primary"
+              onPress={() => true}
+            />
           </Box>
         </Box>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default Checkout
+export default Checkout;

@@ -1,24 +1,24 @@
-import React, { useState } from 'react'
-import { View, StyleSheet } from 'react-native'
-import { Text } from '../../components'
-import { Box } from '../../components/Theme'
-import { BorderlessButton } from 'react-native-gesture-handler'
+import React, { useState } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { Text } from '../../components';
+import { Box } from '../../components/Theme';
+import { BorderlessButton } from 'react-native-gesture-handler';
 
-const INNER_RADIUS = 30
-const OUTER_RADIUS = 34
+const INNER_RADIUS = 30;
+const OUTER_RADIUS = 34;
 
 interface CategoryProps {
   category: {
-    id: string
-    title: string
-    color: string
-  }
+    id: string;
+    title: string;
+    color: string;
+  };
 }
 
 const Category = ({
   category: { color: backgroundColor, title },
 }: CategoryProps) => {
-  const [selected, setSelected] = useState(false)
+  const [selected, setSelected] = useState(false);
   return (
     <BorderlessButton onPress={() => setSelected((prev) => !prev)}>
       <Box marginLeft="m" marginTop="s" alignItems="center">
@@ -52,7 +52,7 @@ const Category = ({
         </Text>
       </Box>
     </BorderlessButton>
-  )
-}
+  );
+};
 
-export default Category
+export default Category;

@@ -1,6 +1,6 @@
-import React from 'react'
-import { Dimensions, ImageRequireSource, StyleSheet } from 'react-native'
-import { PanGestureHandler } from 'react-native-gesture-handler'
+import React from 'react';
+import { Dimensions, ImageRequireSource, StyleSheet } from 'react-native';
+import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated, {
   Extrapolate,
   interpolate,
@@ -10,53 +10,56 @@ import Animated, {
   useDerivedValue,
   useSharedValue,
   withSpring,
-} from 'react-native-reanimated'
-import { mix, mixColor, snapPoint } from 'react-native-redash'
-import { Box } from '../../components/Theme'
+} from 'react-native-reanimated';
+import { mix, mixColor, snapPoint } from 'react-native-redash';
+import { Box } from '../../components/Theme';
 
-const { width: wWidth } = Dimensions.get('window')
-const width = wWidth * 0.75
-const height = width * (425 / 294)
-const borderRadius = 24
-const snapPoints = [-wWidth, 0, wWidth]
+const { width: wWidth } = Dimensions.get('window');
+const width = wWidth * 0.75;
+const height = width * (425 / 294);
+const borderRadius = 24;
+const snapPoints = [-wWidth, 0, wWidth];
 
 interface CardProps {
-  position: Animated.Node<number>
-  onSwipe: () => void
-  source: ImageRequireSource
-  step: number
-  index: number
-  aIndex: Animated.SharedValue<number>
+  position: Animated.Node<number>;
+  onSwipe: () => void;
+  source: ImageRequireSource;
+  step: number;
+  index: number;
+  aIndex: Animated.SharedValue<number>;
 }
 
 const Card = ({ onSwipe, source, step, index, aIndex }: CardProps) => {
-  const translateY = useSharedValue(0)
-  const translateX = useSharedValue(0)
-  const position = useDerivedValue(() => index * step - aIndex.value)
+  const translateY = useSharedValue(0);
+  const translateX = useSharedValue(0);
+  const position = useDerivedValue(() => index * step - aIndex.value);
 
   //@ts-ignore
   const onGestureEvent = useAnimatedGestureHandler<{ x: number; y: number }>({
     onStart: (_, ctx) => {
-      ctx.x = translateX.value
-      ctx.y = translateY.value
+      ctx.x = translateX.value;
+      ctx.y = translateY.value;
     },
     onActive: ({ translationX, translationY }, ctx) => {
-      translateX.value = translationX + ctx.x
-      translateY.value = translationY + ctx.y
+      translateX.value = translationX + ctx.x;
+      translateY.value = translationY + ctx.y;
     },
     onEnd: ({ velocityX, velocityY }) => {
-      const dest = snapPoint(translateY.value, velocityX, snapPoints)
+      const dest = snapPoint(translateY.value, velocityX, snapPoints);
       translateY.value = withSpring(0, {
         velocity: velocityY,
-      })
-      translateX.value = withSpring(dest, {
-        overshootClamping: dest === 0 ? false : true,
-        restSpeedThreshold: dest === 0 ? 0.01 : 100,
-        restDisplacementThreshold: dest === 0 ? 0.01 : 100,
-      },
-        () => dest !== 0 && runOnJS(onSwipe)())
+      });
+      translateX.value = withSpring(
+        dest,
+        {
+          overshootClamping: dest === 0 ? false : true,
+          restSpeedThreshold: dest === 0 ? 0.01 : 100,
+          restDisplacementThreshold: dest === 0 ? 0.01 : 100,
+        },
+        () => dest !== 0 && runOnJS(onSwipe)()
+      );
     },
-  })
+  });
 
   const imageStyle = useAnimatedStyle(() => ({
     transform: [
@@ -69,13 +72,12 @@ const Card = ({ onSwipe, source, step, index, aIndex }: CardProps) => {
         ),
       },
     ],
-  }))
+  }));
 
   const translateYOffset = mix(position.value, 0, -75);
 
   const cardStyle = useAnimatedStyle(() => {
-
-    const scale = mix(position.value, 1, 0.9)
+    const scale = mix(position.value, 1, 0.9);
     return {
       transform: [
         { translateY: translateYOffset },
@@ -83,8 +85,8 @@ const Card = ({ onSwipe, source, step, index, aIndex }: CardProps) => {
         { scale },
       ],
       backgroundColor: mixColor(position.value, '#C9E9E7', '#74BCB8'),
-    }
-  })
+    };
+  });
 
   return (
     <Box
@@ -119,7 +121,7 @@ const Card = ({ onSwipe, source, step, index, aIndex }: CardProps) => {
         </Animated.View>
       </PanGestureHandler>
     </Box>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;

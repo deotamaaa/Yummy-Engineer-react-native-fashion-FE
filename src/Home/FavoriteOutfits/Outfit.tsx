@@ -1,25 +1,25 @@
-import React, { useState } from 'react'
-import { BorderlessButton } from 'react-native-gesture-handler'
-import { RoundedIcon } from '../../components'
-import { Box } from '../../components/Theme'
+import React, { useState } from 'react';
+import { BorderlessButton } from 'react-native-gesture-handler';
+import { RoundedIcon } from '../../components';
+import { Box } from '../../components/Theme';
 
 interface OutfitProps {
   outfit: {
-    color: string
-    aspectRatio: number
-    id: number
-    selected: boolean
-  }
-  width: number
+    color: string;
+    aspectRatio: number;
+    id: number;
+    selected: boolean;
+  };
+  width: number;
 }
 
 const Outfit = ({ outfit, width }: OutfitProps) => {
-  const [selected, setSelected] = useState(false)
+  const [selected, setSelected] = useState(false);
   return (
     <BorderlessButton
       onPress={() => {
-        setSelected((prev) => !prev)
-        outfit.selected = !outfit.selected
+        setSelected((prev) => !prev);
+        outfit.selected = !outfit.selected;
       }}
     >
       <Box
@@ -43,7 +43,7 @@ const Outfit = ({ outfit, width }: OutfitProps) => {
         )}
       </Box>
     </BorderlessButton>
-  )
-}
+  );
+};
 
-export default Outfit
+export default Outfit;

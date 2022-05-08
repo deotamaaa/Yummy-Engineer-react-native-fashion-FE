@@ -1,22 +1,22 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
-import theme, { Box, Text } from '../../../components/Theme'
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import theme, { Box, Text } from '../../../components/Theme';
 
-import 'intl'
-import 'intl/locale-data/jsonp/en'
+import 'intl';
+import 'intl/locale-data/jsonp/en';
 
-import { lerp } from './Helper'
-import moment from 'moment'
+import { lerp } from './Helper';
+import moment from 'moment';
 
-const ROW_HEIGHT = 30
+const ROW_HEIGHT = 30;
 
 interface UnderlayProps {
-  dates: number[]
-  minY: number
-  maxY: number
-  step: number
-  startDate: number
-  numberOfMonths: number
+  dates: number[];
+  minY: number;
+  maxY: number;
+  step: number;
+  startDate: number;
+  numberOfMonths: number;
 }
 
 const Underlay = ({
@@ -26,7 +26,7 @@ const Underlay = ({
   startDate,
   numberOfMonths,
 }: UnderlayProps) => {
-  const minDate = moment(startDate)
+  const minDate = moment(startDate);
   return (
     <Box style={StyleSheet.absoluteFill}>
       <Box flex={1} justifyContent="space-between">
@@ -49,7 +49,7 @@ const Underlay = ({
                 opacity={0.3}
               />
             </Box>
-          )
+          );
         })}
       </Box>
       <Box
@@ -68,7 +68,7 @@ const Underlay = ({
           ))}
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default Underlay
+export default Underlay;

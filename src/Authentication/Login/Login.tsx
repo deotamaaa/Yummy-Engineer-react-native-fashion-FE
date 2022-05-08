@@ -1,25 +1,25 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
 
-import { Button, Container, Text } from '../../components'
-import { Box } from '../../components/Theme'
-import TextInput from '../components/Form/TextInput'
-import Checkbox from '../components/Form/Checkbox'
+import { Button, Container, Text } from '../../components';
+import { Box } from '../../components/Theme';
+import TextInput from '../components/Form/TextInput';
+import Checkbox from '../components/Form/Checkbox';
 
-import { useForm, Controller } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as Yup from 'yup'
-import Footer from '../components/Footer'
-import { AuthNavigationProps } from '../../components/Navigation'
-import { CommonActions } from '@react-navigation/native'
-import { AuthContext } from '../../context/AuthContext'
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
+import Footer from '../components/Footer';
+import { AuthNavigationProps } from '../../components/Navigation';
+import { CommonActions } from '@react-navigation/native';
+import { AuthContext } from '../../context/AuthContext';
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string().min(6, 'Too short').required('Required'),
-})
+});
 
 const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
-  const { userLogIn, logInError } = useContext(AuthContext)
+  const { userLogIn, logInError } = useContext(AuthContext);
 
   const footer = (
     <Footer
@@ -27,7 +27,7 @@ const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
       action="Sign Up Here"
       onPress={() => navigation.navigate('Signup')}
     />
-  )
+  );
 
   const {
     control,
@@ -41,19 +41,19 @@ const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
       remember: false,
     },
     resolver: yupResolver(LoginSchema),
-  })
+  });
 
   const onSubmit = async (data: any) => {
-    const logInSuccess = await userLogIn(data)
+    const logInSuccess = await userLogIn(data);
     if (logInSuccess) {
       navigation.dispatch(
         CommonActions.reset({
           index: 0,
           routes: [{ name: 'Home' }],
         })
-      )
+      );
     }
-  }
+  };
 
   return (
     <Container pattern={0} {...{ footer }}>
@@ -155,7 +155,7 @@ const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
         />
       </Box>
     </Container>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import { ScrollView, ScrollViewComponent, StyleSheet, View } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import { Card, Paragraph, List, FAB } from 'react-native-paper'
-import { Header } from '../../components'
-import { HomeNavigationProps } from '../../components/Navigation'
-import { Box } from '../../components/Theme'
-import { AntDesign } from '@expo/vector-icons'
-import axios from 'axios'
+import React, { useState } from 'react';
+import { StyleSheet } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Card, Paragraph, List, FAB } from 'react-native-paper';
+import { Header } from '../../components';
+import { HomeNavigationProps } from '../../components/Navigation';
+import { Box } from '../../components/Theme';
+import { AntDesign } from '@expo/vector-icons';
 
 const OutfitDetail = ({
   route,
   navigation,
 }: HomeNavigationProps<'OutfitDetail'>) => {
-  const [descriptionExpanded, setDescriptionExpanded] = useState(false)
-  const [sizeExpanded, setSizeExpanded] = useState(false)
-  const [favorite, setFavorite] = useState(false)
-  const { Id } = route.params
+  const [descriptionExpanded, setDescriptionExpanded] = useState(false);
+  const [sizeExpanded, setSizeExpanded] = useState(false);
+  const [favorite, setFavorite] = useState(false);
+  const { product, id } = route.params;
 
   const itemDetail = {
     id: 1,
@@ -48,40 +47,23 @@ const OutfitDetail = ({
       'Jaket bomber ringan dari kain tenun dengan kerah rib mandarin dan ritsleting di bagian depan. Saku samping dengan kancing tekan tersembunyi, dan satu saku dalam dengan kancing tekan. Motif garis yang lebar di bagian manset dan kelim. Dengan furing.',
     image:
       'https://d29c1z66frfv6c.cloudfront.net/pub/media/catalog/product/large/b9e72b5c08407ad53bb0ab71a65f2db48e476c31_xxl-1.jpg',
-  }
-
-  const [name, setName] = useState()
-  const [brand, setBrand] = useState()
-  const [image, setImage] = useState()
-  const [price, setPrice] = useState()
-  const [description, setDescription] = useState()
-  const [size, setSize] = useState([])
-
-  const getProduct = async () => {
-    const { data } = await axios.get(`/products/${Id}`)
-    setName(data.productName)
-    setBrand(data.productBrand)
-    setImage(data.productImage)
-    setPrice(data.productPrice)
-    setDescription(data.productDescription)
-  }
-
-  useEffect(() => {
-    getProduct()
-  }, [getProduct])
+  };
 
   return (
     <Box flex={1}>
       <Header
-        title={String(name)}
+        title={product.productName}
         left={{ icon: 'arrow-left', onPress: () => navigation.goBack() }}
       />
       <Card style={{ height: '100%' }}>
-        <Card.Cover source={{ uri: image }} style={{ height: '50%' }} />
+        <Card.Cover
+          source={{ uri: product.productImage }}
+          style={{ height: '50%' }}
+        />
         <Card.Title
-          title={name}
+          title={product.productName}
           titleStyle={styles.cardTitle}
-          subtitle={brand}
+          subtitle={product.productBrand}
           subtitleStyle={styles.cardSubtitle}
           right={() => (
             <TouchableOpacity>
@@ -98,7 +80,7 @@ const OutfitDetail = ({
           rightStyle={{ marginRight: 32 }}
         />
         <Card.Content style={{ marginTop: 10 }}>
-          <Paragraph style={styles.cardPrice}>{price}</Paragraph>
+          <Paragraph style={styles.cardPrice}>{product.productPrice}</Paragraph>
           <List.Accordion
             style={
               !descriptionExpanded
@@ -113,7 +95,7 @@ const OutfitDetail = ({
             onPress={() => setDescriptionExpanded(!descriptionExpanded)}
           >
             <Paragraph style={{ fontSize: 12, fontStyle: 'italic' }}>
-              {description}
+              {product.productDescription}
             </Paragraph>
           </List.Accordion>
 
@@ -139,8 +121,8 @@ const OutfitDetail = ({
         onPress={() => alert('anjay')}
       />
     </Box>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   cardTitle: {
@@ -161,5 +143,5 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
-})
-export default OutfitDetail
+});
+export default OutfitDetail;

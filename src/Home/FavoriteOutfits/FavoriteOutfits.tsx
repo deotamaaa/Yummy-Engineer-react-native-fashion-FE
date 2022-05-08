@@ -1,20 +1,20 @@
-import React, { useRef, useState } from 'react'
-import { Dimensions } from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
+import React, { useRef, useState } from 'react';
+import { Dimensions } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import {
   Transition,
   Transitioning,
   TransitioningView,
-} from 'react-native-reanimated'
-import { Header } from '../../components'
-import { HomeNavigationProps } from '../../components/Navigation'
-import theme, { Box } from '../../components/Theme'
+} from 'react-native-reanimated';
+import { Header } from '../../components';
+import { HomeNavigationProps } from '../../components/Navigation';
+import theme, { Box } from '../../components/Theme';
 
-import Footer from './Footer'
-import Outfit from './Outfit'
-import TopCurve from './TopCurve'
+import Footer from './Footer';
+import Outfit from './Outfit';
+import TopCurve from './TopCurve';
 
-const { width: wWidth } = Dimensions.get('window')
+const { width: wWidth } = Dimensions.get('window');
 
 const defaultOutfits = [
   {
@@ -65,7 +65,7 @@ const defaultOutfits = [
     aspectRatio: 160 / 145,
     selected: false,
   },
-]
+];
 
 const FavoritesOutfits = ({
   navigation,
@@ -75,11 +75,11 @@ const FavoritesOutfits = ({
       <Transition.Out type="fade" durationMs={1000} />
       <Transition.In type="fade" durationMs={1000} />
     </Transition.Together>
-  )
-  const list = useRef<TransitioningView>(null)
-  const [outfits, setOutfits] = useState(defaultOutfits)
-  const width = (wWidth - theme.spacing.m * 3) / 2
-  const [footerHeight, setFooterHeight] = useState(0)
+  );
+  const list = useRef<TransitioningView>(null);
+  const [outfits, setOutfits] = useState(defaultOutfits);
+  const width = (wWidth - theme.spacing.m * 3) / 2;
+  const [footerHeight, setFooterHeight] = useState(0);
 
   return (
     <Box flex={1} backgroundColor="white">
@@ -130,14 +130,14 @@ const FavoritesOutfits = ({
         <Footer
           label="Add to Favorites"
           onPress={() => {
-            list.current?.animateNextTransition()
+            list.current?.animateNextTransition();
 
-            setOutfits(outfits.filter((outfit) => !outfit.selected))
+            setOutfits(outfits.filter((outfit) => !outfit.selected));
           }}
         />
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default FavoritesOutfits
+export default FavoritesOutfits;

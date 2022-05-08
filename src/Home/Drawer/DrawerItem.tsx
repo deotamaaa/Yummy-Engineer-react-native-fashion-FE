@@ -1,30 +1,30 @@
-import { DrawerNavigationProp } from '@react-navigation/drawer'
-import { useNavigation } from '@react-navigation/native'
-import React from 'react'
-import { RectButton } from 'react-native-gesture-handler'
-import { RoundedIcon } from '../../components'
-import { HomeRoutes } from '../../components/Navigation'
-import { Box, Theme, Text } from '../../components/Theme'
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { useNavigation } from '@react-navigation/native';
+import React from 'react';
+import { RectButton } from 'react-native-gesture-handler';
+import { RoundedIcon } from '../../components';
+import { HomeRoutes } from '../../components/Navigation';
+import { Box, Theme, Text } from '../../components/Theme';
 
 interface BaseDrawerItem {
-  icon: string
-  color: keyof Theme['colors']
-  label: string
+  icon: string;
+  color: keyof Theme['colors'];
+  label: string;
 }
 
 interface ScreenDrawerItem extends BaseDrawerItem {
-  screen: keyof HomeRoutes
+  screen: keyof HomeRoutes;
 }
 
 interface OnPressDrawerItem extends BaseDrawerItem {
-  onPress: (navigation: ReturnType<typeof useNavigation>) => void
+  onPress: (navigation: ReturnType<typeof useNavigation>) => void;
 }
 
-export type DrawerItemProps = ScreenDrawerItem | OnPressDrawerItem
+export type DrawerItemProps = ScreenDrawerItem | OnPressDrawerItem;
 
 const DrawerItem = ({ icon, color, label, ...props }: DrawerItemProps) => {
   const navigation =
-    useNavigation<DrawerNavigationProp<HomeRoutes, 'OutfitIdeas'>>()
+    useNavigation<DrawerNavigationProp<HomeRoutes, 'OutfitIdeas'>>();
   return (
     <RectButton
       onPress={() =>
@@ -46,7 +46,7 @@ const DrawerItem = ({ icon, color, label, ...props }: DrawerItemProps) => {
         </Text>
       </Box>
     </RectButton>
-  )
-}
+  );
+};
 
-export default DrawerItem
+export default DrawerItem;

@@ -1,7 +1,7 @@
-import React from 'react'
-import { View } from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
-import Category from './Category'
+import React from 'react';
+import { View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import Category from './Category';
 
 const categories = [
   {
@@ -29,7 +29,7 @@ const categories = [
     title: 'Accessories',
     color: '#FFE8E9',
   },
-]
+];
 
 const Categories = () => {
   return (
@@ -40,7 +40,7 @@ const Categories = () => {
         ))}
       </ScrollView>
     </View>
-  )
-}
+  );
+};
 
-export default Categories
+export default Categories;

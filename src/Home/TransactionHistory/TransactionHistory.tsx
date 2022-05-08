@@ -1,17 +1,17 @@
-import React from 'react'
-import { Dimensions, Image, StyleSheet } from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
-import { Header, Text } from '../../components'
-import { HomeNavigationProps } from '../../components/Navigation'
-import { Box, makeStyles, Theme } from '../../components/Theme'
-import TopCurve from './TopCurve'
+import React from 'react';
+import { Dimensions, Image, StyleSheet } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import { Header, Text } from '../../components';
+import { HomeNavigationProps } from '../../components/Navigation';
+import { Box, makeStyles, Theme } from '../../components/Theme';
+import TopCurve from './TopCurve';
 
-import Graph, { DataPoint } from './Graph/Graph'
-import Transaction from './Transaction'
+import Graph, { DataPoint } from './Graph/Graph';
+import Transaction from './Transaction';
 
-const startDate = new Date('2021-05-10').getTime()
-const numberOfMonths = 6
-const footerHeight = Dimensions.get('window').width / 3.3
+const startDate = new Date('2021-05-10').getTime();
+const numberOfMonths = 6;
+const footerHeight = Dimensions.get('window').width / 3.3;
 
 const data: DataPoint[] = [
   {
@@ -50,12 +50,12 @@ const data: DataPoint[] = [
     color: 'darkBlue',
     id: 6,
   },
-]
+];
 
 const TransactionHistory = ({
   navigation,
 }: HomeNavigationProps<'TransactionHistory'>) => {
-  const styles = useStyles()
+  const styles = useStyles();
   return (
     <Box flex={1} backgroundColor="white">
       <Header
@@ -107,8 +107,8 @@ const TransactionHistory = ({
         />
       </Box>
     </Box>
-  )
-}
+  );
+};
 
 const useStyles = makeStyles((theme: Theme) => ({
   footer: {
@@ -120,6 +120,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   scrollView: {
     paddingBottom: footerHeight,
   },
-}))
+}));
 
-export default TransactionHistory
+export default TransactionHistory;

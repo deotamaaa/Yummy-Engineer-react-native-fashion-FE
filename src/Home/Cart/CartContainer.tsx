@@ -1,32 +1,32 @@
-import React, { FC, ReactNode } from 'react'
-import { View } from 'react-native'
-import { PanGestureHandler } from 'react-native-gesture-handler'
+import React, { FC, ReactNode } from 'react';
+import { View } from 'react-native';
+import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated, {
   useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
-} from 'react-native-reanimated'
-import { snapPoint, clamp } from 'react-native-redash'
-import theme, { aspectRatio, Box } from '../../components/Theme'
-import Checkout from './Checkout'
+} from 'react-native-reanimated';
+import { snapPoint, clamp } from 'react-native-redash';
+import theme, { aspectRatio, Box } from '../../components/Theme';
+import Checkout from './Checkout';
 
 interface CartProps {
-  children: ReactNode
-  checkoutComponent: FC<{ minHeight: number }>
+  children: ReactNode;
+  checkoutComponent: FC<{ minHeight: number }>;
 }
 
 const height = (830 * aspectRatio) / 1.125;
 const minHeight = 228 * aspectRatio;
-const snapPoints = [-(height - minHeight), 0,]
+const snapPoints = [-(height - minHeight), 0];
 
 const Cart = ({ children }: CartProps) => {
-  const translateY = useSharedValue(0)
+  const translateY = useSharedValue(0);
   //@ts-ignore
   const onGestureEvent = useAnimatedGestureHandler<{ y?: number }>({
     onStart: (event, ctx) => {
       //@ts-ignore
-      ctx.y = translateY.value
+      ctx.y = translateY.value;
     },
     onActive: ({ translationY }, ctx) => {
       //@ts-ignore
@@ -35,21 +35,17 @@ const Cart = ({ children }: CartProps) => {
         //@ts-ignore
         snapPoints[0],
         snapPoints[1]
-      )
+      );
     },
     onEnd: ({ velocityY }) => {
-      const dest = snapPoint(
-        translateY.value,
-        velocityY,
-        snapPoints
-      )
-      translateY.value = withSpring(dest, { overshootClamping: true })
+      const dest = snapPoint(translateY.value, velocityY, snapPoints);
+      translateY.value = withSpring(dest, { overshootClamping: true });
     },
-  })
+  });
 
   const style = useAnimatedStyle(() => ({
     transform: [{ translateY: translateY.value }],
-  }))
+  }));
   return (
     <Box flex={1}>
       <Checkout minHeight={minHeight} />
@@ -94,7 +90,7 @@ const Cart = ({ children }: CartProps) => {
         </Animated.View>
       </PanGestureHandler>
     </Box>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;

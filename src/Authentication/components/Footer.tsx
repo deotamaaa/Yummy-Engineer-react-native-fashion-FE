@@ -1,12 +1,12 @@
-import React from 'react'
-import Button from '../../components/Button'
-import { Box, Text } from '../../components/Theme'
-import SocialIcon from './SocialIcon'
+import React from 'react';
+import Button from '../../components/Button';
+import { Box, Text } from '../../components/Theme';
+import SocialIcon from './SocialIcon';
 
 interface FooterProps {
-  onPress: () => void
-  title: string
-  action: string
+  onPress: () => void;
+  title: string;
+  action: string;
 }
 
 const Footer = ({ onPress, title, action }: FooterProps) => {
@@ -20,7 +20,7 @@ const Footer = ({ onPress, title, action }: FooterProps) => {
         </Button>
       </Box>
     </>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

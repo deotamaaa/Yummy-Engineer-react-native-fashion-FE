@@ -1,21 +1,21 @@
-import { DrawerActions, useNavigation } from '@react-navigation/native'
-import React, { useContext } from 'react'
-import { Header } from '../../components'
-import theme, { Box, Text } from '../../components/Theme'
+import { DrawerActions, useNavigation } from '@react-navigation/native';
+import React, { useContext } from 'react';
+import { Header } from '../../components';
+import theme, { Box, Text } from '../../components/Theme';
 
-import Tabs from './Tabs'
-import Configuration from './Configuration'
-import PersonalInfo from './PersonalInfo'
-import { AuthContext } from '../../context/AuthContext'
+import Tabs from './Tabs';
+import Configuration from './Configuration';
+import PersonalInfo from './PersonalInfo';
+import { AuthContext } from '../../context/AuthContext';
 
 const tabs = [
   { id: 'configuration', title: 'Configuration' },
   { id: 'info', title: 'Personal Info' },
-]
+];
 
 const EditProfile = () => {
-  const { user } = useContext(AuthContext)
-  const navigation = useNavigation()
+  const { user } = useContext(AuthContext);
+  const navigation = useNavigation();
   return (
     <Box flex={1}>
       <Box flex={0.2} backgroundColor="white">
@@ -62,7 +62,7 @@ const EditProfile = () => {
         <PersonalInfo />
       </Tabs>
     </Box>
-  )
-}
+  );
+};
 
-export default EditProfile
+export default EditProfile;

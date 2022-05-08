@@ -1,20 +1,20 @@
-import React from 'react'
+import React from 'react';
 import {
   StyleSheet,
   TextInput as RNTextInput,
   TextInputProps as RNTextInputProps,
-} from 'react-native'
-import theme, { Box } from '../../../components/Theme'
-import { Feather as Icon } from '@expo/vector-icons'
-import { RoundedIcon } from '../../../components'
+} from 'react-native';
+import theme, { Box } from '../../../components/Theme';
+import { Feather as Icon } from '@expo/vector-icons';
+import { RoundedIcon } from '../../../components';
 
 interface TextInputProps extends RNTextInputProps {
-  placeholder: string
-  icon: string
-  touched?: boolean
-  error?: string
+  placeholder: string;
+  icon: string;
+  touched?: boolean;
+  error?: string;
 }
-const SIZE = theme.borderRadii.m * 2
+const SIZE = theme.borderRadii.m * 2;
 
 const TextInput = ({
   icon,
@@ -23,8 +23,8 @@ const TextInput = ({
   error,
   ...props
 }: TextInputProps) => {
-  const reColor = !touched ? 'black' : error ? 'danger' : 'primary'
-  const color = theme.colors[reColor]
+  const reColor = !touched ? 'black' : error ? 'danger' : 'primary';
+  const color = theme.colors[reColor];
   return (
     <Box
       flexDirection="row"
@@ -55,7 +55,7 @@ const TextInput = ({
         />
       )}
     </Box>
-  )
-}
+  );
+};
 
-export default TextInput
+export default TextInput;

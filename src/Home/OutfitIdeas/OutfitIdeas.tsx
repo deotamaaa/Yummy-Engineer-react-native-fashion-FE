@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import { sub, useDerivedValue } from 'react-native-reanimated'
-import { useTiming } from 'react-native-redash'
-import { Header } from '../../components'
-import { HomeNavigationProps } from '../../components/Navigation'
-import { Box } from '../../components/Theme'
+import React, { useState } from 'react';
+import { sub, useDerivedValue } from 'react-native-reanimated';
+import { useTiming } from 'react-native-redash';
+import { Header } from '../../components';
+import { HomeNavigationProps } from '../../components/Navigation';
+import { Box } from '../../components/Theme';
 
-import Background from './Background'
-import Card from './Card'
-import Categories from './Categories'
+import Background from './Background';
+import Card from './Card';
+import Categories from './Categories';
 
 const cards = [
   {
@@ -26,13 +26,13 @@ const cards = [
     index: 0,
     source: require('../../../assets/1.png'),
   },
-]
+];
 
-const step = 1 / (cards.length - 1)
+const step = 1 / (cards.length - 1);
 
 const OutfitIdeas = ({ navigation }: HomeNavigationProps<'OutfitIdeas'>) => {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const aIndex = useTiming(currentIndex)
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const aIndex = useTiming(currentIndex);
   // const position = useDerivedValue(() => )
   return (
     <>
@@ -61,7 +61,7 @@ const OutfitIdeas = ({ navigation }: HomeNavigationProps<'OutfitIdeas'>) => {
         </Box>
       </Box>
     </>
-  )
-}
+  );
+};
 
-export default OutfitIdeas
+export default OutfitIdeas;

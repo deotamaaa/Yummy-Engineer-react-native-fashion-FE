@@ -1,16 +1,16 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
 
-import { Button, Container, Text } from '../../components'
-import { Box } from '../../components/Theme'
-import TextInput from '../components/Form/TextInput'
+import { Button, Container, Text } from '../../components';
+import { Box } from '../../components/Theme';
+import TextInput from '../components/Form/TextInput';
 
-import { useForm, Controller } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as Yup from 'yup'
-import Footer from '../components/Footer'
-import { AuthNavigationProps } from '../../components/Navigation'
-import { ScrollView } from 'react-native-gesture-handler'
-import { AuthContext } from '../../context/AuthContext'
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
+import Footer from '../components/Footer';
+import { AuthNavigationProps } from '../../components/Navigation';
+import { ScrollView } from 'react-native-gesture-handler';
+import { AuthContext } from '../../context/AuthContext';
 
 const LoginSchema = Yup.object().shape({
   firstName: Yup.string().required('First name is required'),
@@ -20,10 +20,10 @@ const LoginSchema = Yup.object().shape({
   passwordConfirm: Yup.string()
     .equals([Yup.ref('password')], "'Password didn't match!")
     .required('Required'),
-})
+});
 
 const Signup = ({ navigation }: AuthNavigationProps<'Signup'>) => {
-  const { userSignUp, signUpError } = useContext(AuthContext)
+  const { userSignUp, signUpError } = useContext(AuthContext);
 
   const footer = (
     <Footer
@@ -31,7 +31,7 @@ const Signup = ({ navigation }: AuthNavigationProps<'Signup'>) => {
       action="Log in Here"
       onPress={() => navigation.navigate('Login')}
     />
-  )
+  );
 
   const {
     control,
@@ -46,14 +46,14 @@ const Signup = ({ navigation }: AuthNavigationProps<'Signup'>) => {
       passwordConfirm: '',
     },
     resolver: yupResolver(LoginSchema),
-  })
+  });
 
   const submitSignUp = async (data: any) => {
     const signUpSuccess = await userSignUp(data);
     if (signUpSuccess) {
       navigation.navigate('Login');
     }
-  }
+  };
 
   return (
     <Container pattern={1} {...{ footer }}>
@@ -205,7 +205,9 @@ const Signup = ({ navigation }: AuthNavigationProps<'Signup'>) => {
             <Text color="danger">{errors.passwordConfirm?.message}</Text>
           )}
           {signUpError ? (
-            <Text style={{ color: 'red', alignSelf: 'stretch', fontSize: 13 }}>{signUpError}</Text>
+            <Text style={{ color: 'red', alignSelf: 'stretch', fontSize: 13 }}>
+              {signUpError}
+            </Text>
           ) : null}
           <Box paddingVertical="m" alignItems="center">
             <Button
@@ -218,7 +220,7 @@ const Signup = ({ navigation }: AuthNavigationProps<'Signup'>) => {
         </Box>
       </ScrollView>
     </Container>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;

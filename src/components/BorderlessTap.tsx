@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react'
-import { State, TapGestureHandler } from 'react-native-gesture-handler'
+import React, { ReactNode } from 'react';
+import { State, TapGestureHandler } from 'react-native-gesture-handler';
 import Animated, {
   call,
   eq,
@@ -14,22 +14,22 @@ import Animated, {
   clockRunning,
   not,
   neq,
-} from 'react-native-reanimated'
-import { useClock, useTapGestureHandler, useValue } from 'react-native-redash'
+} from 'react-native-reanimated';
+import { useClock, useTapGestureHandler, useValue } from 'react-native-redash';
 
 interface BorderlessTapProps {
-  onPress: () => void
-  children: ReactNode
+  onPress: () => void;
+  children: ReactNode;
 }
 
 const BorderlessTap = ({ children, onPress }: BorderlessTapProps) => {
-  const { gestureHandler, state } = useTapGestureHandler()
+  const { gestureHandler, state } = useTapGestureHandler();
 
-  const clock = useClock()
+  const clock = useClock();
 
-  const start = useValue(0)
+  const start = useValue(0);
 
-  const opacity = useValue(0)
+  const opacity = useValue(0);
 
   useCode(
     () => [
@@ -49,13 +49,13 @@ const BorderlessTap = ({ children, onPress }: BorderlessTapProps) => {
       ),
     ],
     []
-  )
+  );
 
   return (
     <TapGestureHandler {...gestureHandler}>
       <Animated.View style={{ opacity }}>{children}</Animated.View>
     </TapGestureHandler>
-  )
-}
+  );
+};
 
-export default BorderlessTap
+export default BorderlessTap;

@@ -1,4 +1,4 @@
-import { State } from 'react-native-gesture-handler'
+import { State } from 'react-native-gesture-handler';
 import Animated, {
   add,
   block,
@@ -9,15 +9,15 @@ import Animated, {
   spring,
   startClock,
   stopClock,
-} from 'react-native-reanimated'
-import { snapPoint, useClock, useValue } from 'react-native-redash'
+} from 'react-native-reanimated';
+import { snapPoint, useClock, useValue } from 'react-native-redash';
 
 interface WithSpringParams {
-  value: Animated.Node<number>
-  velocity: Animated.Node<number>
-  state: Animated.Node<State>
-  snapPoints: number[]
-  onSnap?: (values: readonly number[]) => void
+  value: Animated.Node<number>;
+  velocity: Animated.Node<number>;
+  state: Animated.Node<State>;
+  snapPoints: number[];
+  onSnap?: (values: readonly number[]) => void;
 }
 
 export const useSpring = ({
@@ -27,14 +27,14 @@ export const useSpring = ({
   snapPoints,
   onSnap,
 }: WithSpringParams) => {
-  const offset = useValue(0)
-  const clock = useClock()
+  const offset = useValue(0);
+  const clock = useClock();
   const state = {
     position: useValue(0),
     finished: useValue(0),
     time: useValue(0),
     velocity: useValue(0),
-  }
+  };
   const config = {
     toValue: useValue(0),
     damping: 6,
@@ -43,7 +43,7 @@ export const useSpring = ({
     overshootClamping: useValue(0),
     restSpeedThreshold: useValue(0.1),
     restDisplacementThreshold: useValue(0.1),
-  }
+  };
 
   return block([
     cond(eq(gestureState, State.BEGAN), [
@@ -82,5 +82,5 @@ export const useSpring = ({
       ]),
     ]),
     state.position,
-  ])
-}
+  ]);
+};

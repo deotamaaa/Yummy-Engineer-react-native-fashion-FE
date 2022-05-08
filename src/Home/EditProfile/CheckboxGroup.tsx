@@ -1,19 +1,19 @@
-import React, { useState } from 'react'
-import Button from '../../components/Button'
-import theme, { Box } from '../../components/Theme'
+import React, { useState } from 'react';
+import Button from '../../components/Button';
+import theme, { Box } from '../../components/Theme';
 
 interface CheckboxGroupProps {
-  options: { value: string; label: string }[]
-  radio?: boolean
+  options: { value: string; label: string }[];
+  radio?: boolean;
 }
 
 const CheckboxGroup = ({ options, radio }: CheckboxGroupProps) => {
-  const [selectedValues, setSelectedValues] = useState<string[]>([])
+  const [selectedValues, setSelectedValues] = useState<string[]>([]);
   return (
     <Box flexDirection="row" flexWrap="wrap">
       {options.map(({ label, value }) => {
-        const index = selectedValues.indexOf(value)
-        const isSelected = index !== -1
+        const index = selectedValues.indexOf(value);
+        const isSelected = index !== -1;
 
         return (
           <Button
@@ -21,14 +21,14 @@ const CheckboxGroup = ({ options, radio }: CheckboxGroupProps) => {
             variant={isSelected ? 'primary' : 'default'}
             onPress={() => {
               if (radio) {
-                setSelectedValues([value])
+                setSelectedValues([value]);
               } else {
                 if (isSelected) {
-                  selectedValues.splice(index, 1)
+                  selectedValues.splice(index, 1);
                 } else {
-                  selectedValues.push(value)
+                  selectedValues.push(value);
                 }
-                setSelectedValues([...selectedValues])
+                setSelectedValues([...selectedValues]);
               }
             }}
             label={label}
@@ -40,10 +40,10 @@ const CheckboxGroup = ({ options, radio }: CheckboxGroupProps) => {
               marginRight: theme.spacing.s,
             }}
           />
-        )
+        );
       })}
     </Box>
-  )
-}
+  );
+};
 
-export default CheckboxGroup
+export default CheckboxGroup;

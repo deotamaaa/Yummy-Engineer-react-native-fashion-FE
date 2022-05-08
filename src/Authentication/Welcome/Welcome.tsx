@@ -1,16 +1,16 @@
-import React from 'react'
-import { Dimensions, Image, StyleSheet } from 'react-native'
-import { Button } from '../../components'
-import { AuthNavigationProps } from '../../components/Navigation'
-import theme, { Box, Text } from '../../components/Theme'
+import React from 'react';
+import { Dimensions, Image, StyleSheet } from 'react-native';
+import { Button } from '../../components';
+import { AuthNavigationProps } from '../../components/Navigation';
+import theme, { Box, Text } from '../../components/Theme';
 
-const { width } = Dimensions.get('window')
+const { width } = Dimensions.get('window');
 const picture = {
   src: require('../../../assets/5.png'),
   width: 3383,
   height: 5074,
-}
-export const assets = [picture.src]
+};
+export const assets = [picture.src];
 
 const Welcome = ({ navigation }: AuthNavigationProps<'Welcome'>) => {
   return (
@@ -73,13 +73,13 @@ const Welcome = ({ navigation }: AuthNavigationProps<'Welcome'>) => {
         </Box>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   picture: {
     borderBottomRightRadius: 29,
   },
-})
+});
 
-export default Welcome
+export default Welcome;

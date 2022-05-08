@@ -1,14 +1,14 @@
-import React from 'react'
-import { Feather as Icon } from '@expo/vector-icons'
-import { Box, Text, Theme } from './Theme'
+import React from 'react';
+import { Feather as Icon } from '@expo/vector-icons';
+import { Box, Text, Theme } from './Theme';
 
 export interface RoundedIconProps {
-  name: string
-  size: number
-  color: keyof Theme['colors']
-  backgroundColor?: keyof Theme['colors']
-  iconRatio: number
-  align?: 'center' | 'flex-start' | 'flex-end'
+  name: string;
+  size: number;
+  color: keyof Theme['colors'];
+  backgroundColor?: keyof Theme['colors'];
+  iconRatio: number;
+  align?: 'center' | 'flex-start' | 'flex-end';
 }
 
 const RoundedIcon = ({
@@ -18,7 +18,7 @@ const RoundedIcon = ({
   backgroundColor,
   iconRatio,
 }: RoundedIconProps) => {
-  const iconSize = size * iconRatio
+  const iconSize = size * iconRatio;
   return (
     <Box
       borderRadius="xl"
@@ -33,11 +33,11 @@ const RoundedIcon = ({
         <Icon size={iconSize} {...{ name, color }} />
       </Text>
     </Box>
-  )
-}
+  );
+};
 
 RoundedIcon.defaultProps = {
   iconRatio: 0.7,
-}
+};
 
-export default RoundedIcon
+export default RoundedIcon;

@@ -6,9 +6,11 @@ export class Product {
     public productPrice = '',
     public productDescription = '',
     public productImage = '',
-    public sizes = [{
-      sizeId: 0,
-      sizeName: '',
-    }]
-  ) { }
+    public sizes = [
+      {
+        sizeId: 0,
+        sizeName: '',
+      },
+    ]
+  ) {}
 }

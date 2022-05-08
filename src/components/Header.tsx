@@ -1,26 +1,26 @@
-import React from 'react'
-import RoundedIconButton from './RoundedIconButton'
-import { Box, Text } from '../components/Theme'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { View } from 'react-native'
+import React from 'react';
+import RoundedIconButton from './RoundedIconButton';
+import { Box, Text } from '../components/Theme';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { View } from 'react-native';
 
 interface HeaderProps {
   left: {
-    icon: string
-    onPress: () => void
-  }
-  title: string
+    icon: string;
+    onPress: () => void;
+  };
+  title: string;
   right?: {
-    icon: string
-    onPress: () => void
-  }
-  dark?: boolean
+    icon: string;
+    onPress: () => void;
+  };
+  dark?: boolean;
 }
 
 const Header = ({ title, left, right, dark }: HeaderProps) => {
-  const insets = useSafeAreaInsets()
-  const color = dark ? 'white' : 'secondary'
-  const backgroundColor = dark ? 'secondary' : 'lightGrey'
+  const insets = useSafeAreaInsets();
+  const color = dark ? 'white' : 'secondary';
+  const backgroundColor = dark ? 'secondary' : 'lightGrey';
   return (
     <Box
       flexDirection="row"
@@ -52,10 +52,10 @@ const Header = ({ title, left, right, dark }: HeaderProps) => {
         <View style={{ width: 44 }} />
       )}
     </Box>
-  )
-}
+  );
+};
 
 Header.defaultProps = {
   dark: false,
-}
-export default Header
+};
+export default Header;

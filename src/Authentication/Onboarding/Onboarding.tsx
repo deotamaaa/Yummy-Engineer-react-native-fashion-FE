@@ -1,5 +1,5 @@
-import React, { useRef, } from 'react'
-import { View, StyleSheet, Dimensions, Image } from 'react-native'
+import React, { useRef } from 'react';
+import { View, StyleSheet, Dimensions, Image } from 'react-native';
 import Animated, {
   Extrapolate,
   interpolate,
@@ -7,16 +7,16 @@ import Animated, {
   useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
-} from 'react-native-reanimated'
-import { interpolateColor } from 'react-native-redash'
-import Slide, { SLIDE_HEIGHT } from './Slide'
-import Subslide from './Subslide'
-import Dot from './Dot'
-import { AuthNavigationProps } from '../../components/Navigation'
-import { theme } from '../../components'
+} from 'react-native-reanimated';
+import { interpolateColor } from 'react-native-redash';
+import Slide, { SLIDE_HEIGHT } from './Slide';
+import Subslide from './Subslide';
+import Dot from './Dot';
+import { AuthNavigationProps } from '../../components/Navigation';
+import { theme } from '../../components';
 
-const BORDER_RADIUS = 75
-const { width } = Dimensions.get('window')
+const BORDER_RADIUS = 75;
+const { width } = Dimensions.get('window');
 
 const slides = [
   {
@@ -66,20 +66,20 @@ const slides = [
       height: 2551,
     },
   },
-]
+];
 
-export const assets = slides.map((slide) => slide.picture.src)
+export const assets = slides.map((slide) => slide.picture.src);
 
 const Onboarding = ({ navigation }: AuthNavigationProps<'Onboarding'>) => {
-  const scroll = useRef<Animated.ScrollView>(null)
+  const scroll = useRef<Animated.ScrollView>(null);
 
-  const x = useSharedValue(0)
+  const x = useSharedValue(0);
 
   const onScroll = useAnimatedScrollHandler({
     onScroll: ({ contentOffset }) => {
-      x.value = contentOffset.x
+      x.value = contentOffset.x;
     },
-  })
+  });
 
   const backgroundColor = useDerivedValue(() =>
     interpolateColor(
@@ -87,20 +87,20 @@ const Onboarding = ({ navigation }: AuthNavigationProps<'Onboarding'>) => {
       slides.map((_, i) => i * width),
       slides.map((slide) => slide.color)
     )
-  )
+  );
 
   const slider = useAnimatedStyle(() => ({
     backgroundColor: backgroundColor.value,
-  }))
+  }));
 
   const background = useAnimatedStyle(() => ({
     backgroundColor: backgroundColor.value,
-  }))
+  }));
 
-  const currentIndex = useDerivedValue(() => x.value / width)
+  const currentIndex = useDerivedValue(() => x.value / width);
   const footerStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: -x.value }],
-  }))
+  }));
 
   return (
     <View style={styles.container}>
@@ -111,16 +111,18 @@ const Onboarding = ({ navigation }: AuthNavigationProps<'Onboarding'>) => {
               x.value,
               [(index - 0.5) * width, index * width, (index + 0.5) * width],
               [0, 1, 0],
-              Extrapolate.CLAMP,
+              Extrapolate.CLAMP
             ),
-          }))
+          }));
           return (
             <Animated.View style={[styles.underlay, style]} key={index}>
               <Image
                 source={picture.src}
                 style={{
                   width: width - theme.borderRadii.xl,
-                  height: ((width - theme.borderRadii.xl) * picture.height) / picture.width,
+                  height:
+                    ((width - theme.borderRadii.xl) * picture.height) /
+                    picture.width,
                 }}
               />
             </Animated.View>
@@ -164,28 +166,31 @@ const Onboarding = ({ navigation }: AuthNavigationProps<'Onboarding'>) => {
             ]}
           >
             {slides.map(({ subtitle, description }, index) => {
-              const last = index === slides.length - 1
+              const last = index === slides.length - 1;
               return (
                 <Subslide
                   key={index}
                   onPress={() => {
                     if (last) {
-                      navigation.navigate('Welcome')
+                      navigation.navigate('Welcome');
                     } else {
-                      scroll.current?.scrollTo({ x: width * (index + 1), animated: true })
+                      scroll.current?.scrollTo({
+                        x: width * (index + 1),
+                        animated: true,
+                      });
                     }
                   }}
                   last={index === slides.length - 1}
                   {...{ subtitle, description }}
                 />
-              )
+              );
             })}
           </Animated.View>
         </View>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -218,6 +223,6 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: theme.borderRadii.xl,
     overflow: 'hidden',
   },
-})
+});
 
-export default Onboarding
+export default Onboarding;

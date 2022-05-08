@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
-import { Switch } from 'react-native'
-import { Box, Text } from '../../components/Theme'
+import React, { useState } from 'react';
+import { Switch } from 'react-native';
+import { Box, Text } from '../../components/Theme';
 
 interface NotificationProps {
-  title: string
-  description: string
+  title: string;
+  description: string;
 }
 
 const Notification = ({ title, description }: NotificationProps) => {
-  const [toggled, setToggled] = useState(false)
+  const [toggled, setToggled] = useState(false);
 
   return (
     <Box flexDirection="row" marginBottom="m">
@@ -20,7 +20,7 @@ const Notification = ({ title, description }: NotificationProps) => {
         <Switch value={toggled} onValueChange={setToggled} />
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default Notification
+export default Notification;

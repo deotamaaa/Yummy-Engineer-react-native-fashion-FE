@@ -1,13 +1,13 @@
-import React from 'react'
-import Svg, { Path } from 'react-native-svg'
-import { theme } from '../../components'
+import React from 'react';
+import Svg, { Path } from 'react-native-svg';
+import { theme } from '../../components';
 
 interface TopCurveProps {
-  footerHeight: number
+  footerHeight: number;
 }
 
 const TopCurve = ({ footerHeight }: TopCurveProps) => {
-  const size = theme.borderRadii.xl
+  const size = theme.borderRadii.xl;
   return (
     <Svg
       width={size}
@@ -21,7 +21,7 @@ const TopCurve = ({ footerHeight }: TopCurveProps) => {
     >
       <Path d="M 0 1 A 0 0, 0, 0, 0, 1 0 L 1 1" fill={theme.colors.pink}></Path>
     </Svg>
-  )
-}
+  );
+};
 
-export default TopCurve
+export default TopCurve;

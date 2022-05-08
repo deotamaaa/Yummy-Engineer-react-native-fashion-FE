@@ -1,10 +1,10 @@
-import React from 'react'
-import { Button, Container, RoundedIconButton, Text } from '../../components'
-import { AuthNavigationProps } from '../../components/Navigation'
-import { Box } from '../../components/Theme'
-import { Feather as Icon } from '@expo/vector-icons'
+import React from 'react';
+import { Button, Container, RoundedIconButton, Text } from '../../components';
+import { AuthNavigationProps } from '../../components/Navigation';
+import { Box } from '../../components/Theme';
+import { Feather as Icon } from '@expo/vector-icons';
 
-const SIZE = 80
+const SIZE = 80;
 const ChangedPasswordSuccess = ({
   navigation,
 }: AuthNavigationProps<'ChangedPasswordSuccess'>) => {
@@ -52,7 +52,7 @@ const ChangedPasswordSuccess = ({
         </Box>
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default ChangedPasswordSuccess
+export default ChangedPasswordSuccess;

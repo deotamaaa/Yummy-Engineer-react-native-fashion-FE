@@ -1,20 +1,20 @@
-import { yupResolver } from '@hookform/resolvers/yup'
-import React from 'react'
-import { useForm, Controller } from 'react-hook-form'
-import { Linking } from 'react-native'
-import { Button, Container, Text } from '../../components'
-import { AuthNavigationProps } from '../../components/Navigation'
-import Footer from '../components/Footer'
-import * as Yup from 'yup'
-import { Box } from '../../components/Theme'
-import TextInput from '../components/Form/TextInput'
+import { yupResolver } from '@hookform/resolvers/yup';
+import React from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { Linking } from 'react-native';
+import { Button, Container, Text } from '../../components';
+import { AuthNavigationProps } from '../../components/Navigation';
+import Footer from '../components/Footer';
+import * as Yup from 'yup';
+import { Box } from '../../components/Theme';
+import TextInput from '../components/Form/TextInput';
 
 const ForgotPasswordSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
-})
+});
 
 interface FormData {
-  email: string
+  email: string;
 }
 
 const ForgotPassword = ({
@@ -26,7 +26,7 @@ const ForgotPassword = ({
       action="Try another way"
       onPress={() => Linking.openURL('https://www.google.com')}
     />
-  )
+  );
 
   const {
     control,
@@ -37,8 +37,8 @@ const ForgotPassword = ({
       email: '',
     },
     resolver: yupResolver(ForgotPasswordSchema),
-  })
-  const onSubmit = () => navigation.navigate('ChangedPasswordSuccess')
+  });
+  const onSubmit = () => navigation.navigate('ChangedPasswordSuccess');
 
   return (
     <>
@@ -85,7 +85,7 @@ const ForgotPassword = ({
         </Box>
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default ForgotPassword
+export default ForgotPassword;

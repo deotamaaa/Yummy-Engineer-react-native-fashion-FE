@@ -1,9 +1,9 @@
-import React from 'react'
-import theme, { Box, Text } from '../../components/Theme'
-import SwipeableRow from './SwipeableRow'
+import React from 'react';
+import theme, { Box, Text } from '../../components/Theme';
+import SwipeableRow from './SwipeableRow';
 
 interface ItemProps {
-  onDelete: () => void
+  onDelete: () => void;
 }
 
 const Item = ({ onDelete }: ItemProps) => {
@@ -40,9 +40,9 @@ const Item = ({ onDelete }: ItemProps) => {
             </Text>
           </Box>
         </Box>
-      </Box >
+      </Box>
     </SwipeableRow>
-  )
-}
+  );
+};
 
-export default Item
+export default Item;

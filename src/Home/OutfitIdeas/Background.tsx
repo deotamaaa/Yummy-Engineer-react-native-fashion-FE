@@ -1,10 +1,10 @@
-import { useTheme } from '@shopify/restyle'
-import React from 'react'
-import { View, StyleSheet, Image } from 'react-native'
-import { Box } from '../../components/Theme'
+import { useTheme } from '@shopify/restyle';
+import React from 'react';
+import { View, StyleSheet, Image } from 'react-native';
+import { Box } from '../../components/Theme';
 
 const Background = () => {
-  const theme = useTheme()
+  const theme = useTheme();
   return (
     <View style={StyleSheet.absoluteFill}>
       <Box flex={1 / 3} backgroundColor="orange">
@@ -28,7 +28,7 @@ const Background = () => {
         <Box flex={1} backgroundColor="secondary" borderTopLeftRadius="xl" />
       </Box>
     </View>
-  )
-}
+  );
+};
 
-export default Background
+export default Background;
