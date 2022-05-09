@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { ScrollView } from 'react-native-gesture-handler';
 import TextInput from '../../Authentication/components/Form/TextInput';
@@ -7,6 +7,7 @@ import { Button } from '../../components';
 import { AuthContext } from '../../context/AuthContext';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AuthNavigationProps } from '../../components/Navigation';
 
 const genders = [
   { value: 'male', label: 'Male' },
@@ -21,7 +22,7 @@ interface FormData {
 }
 
 const PersonalInfo = () => {
-  const { user } = useContext(AuthContext);
+  const { user, userLogOut } = useContext(AuthContext);
 
   const {
     control,
@@ -36,7 +37,7 @@ const PersonalInfo = () => {
     },
   });
 
-  const updateUser = async (data: FormData) => {
+  const updateUser = async (navigation: AuthNavigationProps<'Login'>, data: FormData) => {
     const userId = user.id;
     const token = await AsyncStorage.getItem('userToken');
     await axios
@@ -46,10 +47,11 @@ const PersonalInfo = () => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((result) => {
+      .then(async (result) => {
         const userResponse = result.data;
-        console.log(userResponse)
-        return userResponse;
+        if (userResponse) {
+          alert('User updated successfully, please login again');
+        }
       });
   };
 

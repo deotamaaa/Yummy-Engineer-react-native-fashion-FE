@@ -1,21 +1,8 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-
 import { Card, Paragraph } from 'react-native-paper';
 
-interface OutfitCatalogProps {
-  outfit: {
-    productId: number;
-    productName: string;
-    productBrand: string;
-    productPrice: string;
-    productDescription: string;
-    productImage: string;
-  };
-}
-
-const OutfitCard = ({ outfit }: OutfitCatalogProps) => {
+const OutfitCard = ({ outfit }: any) => {
   return (
     <Card style={{ marginHorizontal: 16, marginVertical: 14, width: 170 }}>
       <Card.Cover source={{ uri: outfit.productImage }} />

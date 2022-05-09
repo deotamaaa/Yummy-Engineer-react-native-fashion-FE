@@ -1,45 +1,34 @@
 import axios from 'axios';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Header from '../../components/Header';
 import { HomeNavigationProps } from '../../components/Navigation';
 import { Box } from '../../components/Theme';
-import { Product } from './models/product';
+import { ProductContext } from '../../context/ProductContext';
+
 
 import OutfitCard from './OutfitCard';
 
-const wait = (timeout: any) => {
-  return new Promise((resolve) => setTimeout(resolve, timeout));
-};
 
 const OutfitCatalog = ({
   navigation,
 }: HomeNavigationProps<'OutfitCatalog'>) => {
-  const [product, getProduct] = useState<Product[]>([]);
+  const { products, onRefresh, refreshing } = useContext(ProductContext);
+  // const [product, getProduct] = useState<Product[]>([]);
 
-  const [refreshing, setRefreshing] = useState(false);
 
-  const getAllProduct = async () => {
-    await axios
-      .get('/products')
-      .then((response) => {
-        const allProduct = response.data;
-        getProduct(allProduct);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    wait(2000).then(() => (getAllProduct(), setRefreshing(false)));
-  }, []);
-
-  useEffect(() => {
-    getAllProduct();
-  }, []);
+  // const getAllProduct = async () => {
+  //   await axios
+  //     .get('/products')
+  //     .then((response) => {
+  //       const allProduct = response.data;
+  //       getProduct(allProduct);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   return (
     <Box flex={1}>
@@ -55,14 +44,15 @@ const OutfitCatalog = ({
           flexWrap: 'wrap',
           backgroundColor: 'white',
         }}
-        data={product}
+        data={products}
         renderItem={({ item }) => (
           <TouchableOpacity
-            onPress={() =>
+            onPress={() => {
               navigation.navigate('OutfitDetail', {
-                id: item.productId,
                 product: item,
               })
+              console.log('sizes = ', item.sizes)
+            }
             }
           >
             <OutfitCard outfit={item} />

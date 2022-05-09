@@ -11,6 +11,7 @@ import { AppRoutes } from './src/components/Navigation'
 
 import axios from 'axios'
 import AuthContextProvider from './src/context/AuthContext'
+import ProductContextProvider from './src/context/ProductContext'
 
 //Base url nya IP komputer
 axios.defaults.baseURL = 'http://192.168.100.31:8000/api/';
@@ -31,12 +32,14 @@ export default function App() {
     <ThemeProvider {... { theme }}>
       <LoadAssets {...{ fonts, assets }}>
         <AuthContextProvider>
-          <SafeAreaProvider>
-            <AppStack.Navigator headerMode="none">
-              <AppStack.Screen name="Authentication" component={AuthenticationNavigator} />
-              <AppStack.Screen name="Home" component={HomeNavigator} />
-            </AppStack.Navigator>
-          </SafeAreaProvider>
+          <ProductContextProvider>
+            <SafeAreaProvider>
+              <AppStack.Navigator headerMode="none">
+                <AppStack.Screen name="Authentication" component={AuthenticationNavigator} />
+                <AppStack.Screen name="Home" component={HomeNavigator} />
+              </AppStack.Navigator>
+            </SafeAreaProvider>
+          </ProductContextProvider>
         </AuthContextProvider>
       </LoadAssets>
     </ThemeProvider >

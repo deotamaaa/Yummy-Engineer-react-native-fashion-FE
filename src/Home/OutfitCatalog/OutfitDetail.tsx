@@ -6,6 +6,7 @@ import { Header } from '../../components';
 import { HomeNavigationProps } from '../../components/Navigation';
 import { Box } from '../../components/Theme';
 import { AntDesign } from '@expo/vector-icons';
+import RoundedCheckboxGroup from '../EditProfile/RoundedCheckboxGroup';
 
 const OutfitDetail = ({
   route,
@@ -14,40 +15,11 @@ const OutfitDetail = ({
   const [descriptionExpanded, setDescriptionExpanded] = useState(false);
   const [sizeExpanded, setSizeExpanded] = useState(false);
   const [favorite, setFavorite] = useState(false);
-  const { product, id } = route.params;
+  const { product } = route.params;
 
-  const itemDetail = {
-    id: 1,
-    name: 'Bomber Super Cool',
-    brand: 'H&M',
-    size: [
-      {
-        sizeId: 1,
-        name: 's',
-        quantity: '10',
-      },
-      {
-        sizeId: 2,
-        name: 'm',
-        quantity: '10',
-      },
-      {
-        sizeId: 3,
-        name: 'l',
-        quantity: '10',
-      },
-      {
-        sizeId: 4,
-        name: 'xl',
-        quantity: '10',
-      },
-    ],
-    price: '$100',
-    description:
-      'Jaket bomber ringan dari kain tenun dengan kerah rib mandarin dan ritsleting di bagian depan. Saku samping dengan kancing tekan tersembunyi, dan satu saku dalam dengan kancing tekan. Motif garis yang lebar di bagian manset dan kelim. Dengan furing.',
-    image:
-      'https://d29c1z66frfv6c.cloudfront.net/pub/media/catalog/product/large/b9e72b5c08407ad53bb0ab71a65f2db48e476c31_xxl-1.jpg',
-  };
+  const AvailSize = product.sizes.map((item: any) => {
+    return { value: item, label: item };
+  });
 
   return (
     <Box flex={1}>
@@ -110,7 +82,7 @@ const OutfitDetail = ({
             expanded={sizeExpanded}
             onPress={() => setSizeExpanded(!sizeExpanded)}
           >
-            <List.Item title={'Size'} />
+            <RoundedCheckboxGroup options={AvailSize} radio />
           </List.Accordion>
         </Card.Content>
       </Card>
